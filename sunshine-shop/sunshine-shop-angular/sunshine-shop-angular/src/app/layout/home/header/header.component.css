@@ -1,0 +1,54 @@
+
+.container-fluid {
+    padding-left: 0ex;
+    padding-right: 0px;
+}
+.navbar {
+    position: relative;
+}
+
+.nav-item {
+    padding-left: 1em;
+    padding-right: 1em;
+}
+.nav-content{
+    padding-left: 15em;
+}
+
+nav .navbar-nav li a{
+    color: white;
+}
+
+.navbar-brand {
+    padding-left: 4em;
+}
+
+.img-fluid {
+    max-width: 50%;
+    height: auto;
+}
+
+/* associate bar */
+.associate-bar {
+    padding-top: 2.5em;
+    position: relative;
+    height: 1.0em;
+    /* width: 100%; */
+    text-align: left;
+    vertical-align: middle;
+    background-color:#fb5a0f;
+    list-style-type: none;
+}
+.navbar-hover > li {
+    display: inline-block;
+    text-align:center; 
+    margin-bottom: 2em;
+}
+
+.navbar-hover > li > a:hover{
+    background-color:rgb(232, 74, 6);
+}
+
+#first-one {
+    margin-left: 4.0em;
+}
