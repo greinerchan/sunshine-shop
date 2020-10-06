@@ -39,10 +39,18 @@ nav .navbar-nav li a{
     background-color:#fb5a0f;
     list-style-type: none;
 }
+
 .navbar-hover > li {
     display: inline-block;
     text-align:center; 
     margin-bottom: 2em;
+}
+
+#first-one:hover {
+    display: inline-block;
+    text-align:center; 
+    margin-bottom: 2em;
+    background-color:rgb(232, 74, 6);
 }
 
 .navbar-hover > li > a:hover{

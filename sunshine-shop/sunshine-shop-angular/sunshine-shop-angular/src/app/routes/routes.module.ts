@@ -3,12 +3,20 @@ import { CommonModule } from '@angular/common';
 import { SignUpComponent } from './navbar/sign-up/sign-up.component';
 import { LoginComponent } from './navbar/login/login.component';
 import { CartComponent } from './navbar/cart/cart.component';
+import { CategoryComponent } from './navbar/category/category.component';
+import { LayoutModule } from '../layout/layout.module';
+import {OnlineOnlyComponent} from "./navbar/online-only/online-only.component";
+import {BackhomeComponent} from "./navbar/backhome/backhome.component";
+import { OnSaleComponent } from "./navbar/on-sale/on-sale.component";
 
 
 @NgModule({
-  declarations: [SignUpComponent, LoginComponent, CartComponent],
+  declarations: [SignUpComponent, LoginComponent, CartComponent, CategoryComponent, BackhomeComponent, OnlineOnlyComponent, OnSaleComponent],
   imports: [
-    CommonModule
+    CommonModule,
+    LayoutModule
+  ],
+  exports: [
   ]
 })
 export class RoutesModule { }

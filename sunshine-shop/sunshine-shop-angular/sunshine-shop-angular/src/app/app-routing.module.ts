@@ -5,13 +5,19 @@ import {HomeComponent} from './layout/home/home.component';
 import {LoginComponent} from './routes/navbar/login/login.component';
 import {SignUpComponent} from './routes/navbar/sign-up/sign-up.component';
 import {CartComponent} from './routes/navbar/cart/cart.component';
+import {CategoryComponent} from './routes/navbar/category/category.component'
+import {OnSaleComponent} from './routes/navbar/on-sale/on-sale.component'
+import {OnlineOnlyComponent} from './routes/navbar/online-only/online-only.component'
 
 const routes: Routes = [
   // if path matches, show those component
-  {path:"home", component:HomeComponent, pathMatch:"full"},
+  {path:"", component:HomeComponent, pathMatch:"full"},
   {path:"login", component:LoginComponent},
   {path:"register", component:SignUpComponent},
-  {path:"cart", component:CartComponent}
+  {path:"cart", component:CartComponent},
+  {path:"category",component:CategoryComponent},
+  {path:"onsale",component:OnSaleComponent},
+  {path:"online-shop",component:OnlineOnlyComponent}
 ];
 
 @NgModule({
