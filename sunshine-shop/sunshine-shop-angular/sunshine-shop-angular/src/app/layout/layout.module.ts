@@ -4,15 +4,20 @@ import { RouterModule, RouterLink } from '@angular/router';
 
 import { HeaderComponent } from './home/header/header.component';
 import { HomeComponent } from './home/home.component';
+import { CarouselComponent } from './home/carousel/carousel.component';
+import { CarouselModule } from 'ngx-owl-carousel-o';
+
+
 
 // import { LayoutRoutingModule } from './layout-routing-ab.module';
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent],
   imports: [
     CommonModule,
     RouterModule,
+    CarouselModule
     //LayoutRoutingModule
   ],
   exports: [
