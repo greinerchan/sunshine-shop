@@ -10,6 +10,8 @@ import { RoutesModule } from './routes/routes.module';
 import { SharedModule } from './shared/shared.module';
 import { CoreModule } from './core/core.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 
 @NgModule({
@@ -21,7 +23,9 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     SharedModule,
     CoreModule,
     BrowserModule,
-    NgbModule
+    NgbModule,
+    MDBBootstrapModule.forRoot(),
+    BrowserAnimationsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

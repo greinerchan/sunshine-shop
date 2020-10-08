@@ -10,6 +10,7 @@ import {BackhomeComponent} from "./navbar/backhome/backhome.component";
 import { OnSaleComponent } from "./navbar/on-sale/on-sale.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
+
 @NgModule({
   declarations: [SignUpComponent, LoginComponent, CartComponent, CategoryComponent, BackhomeComponent, OnlineOnlyComponent, OnSaleComponent],
   imports: [

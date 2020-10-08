@@ -24,6 +24,13 @@
               "src/assets"
             ],
             "styles": [
+              "./node_modules/animate.css/animate.css",
+              "./node_modules/@fortawesome/fontawesome-free/scss/brands.scss",
+              "./node_modules/@fortawesome/fontawesome-free/scss/regular.scss",
+              "./node_modules/@fortawesome/fontawesome-free/scss/solid.scss",
+              "./node_modules/@fortawesome/fontawesome-free/scss/fontawesome.scss",
+              "./node_modules/angular-bootstrap-md/assets/scss/mdb.scss",
+              "./node_modules/angular-bootstrap-md/assets/scss/bootstrap/bootstrap.scss",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "node_modules/@fortawesome/fontawesome-free",
               "node_modules/ngx-owl-carousel-o/lib/styles/prebuilt-themes/owl.carousel.min.css",
@@ -31,7 +38,10 @@
               "node_modules/@ng-bootstrap/ng-bootstrap",
               "src/styles.css"
             ],
-            "scripts": []
+            "scripts": [
+              "./node_modules/chart.js/dist/Chart.js",
+              "./node_modules/hammerjs/hammer.min.js"
+            ]
           },
           "configurations": {
             "production": {
@@ -124,6 +134,7 @@
           }
         }
       }
-    }},
+    }
+  },
   "defaultProject": "sunshine-shop-angular"
 }
