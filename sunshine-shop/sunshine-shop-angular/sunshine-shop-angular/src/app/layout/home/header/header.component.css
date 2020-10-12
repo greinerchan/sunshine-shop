@@ -27,12 +27,18 @@ nav .navbar-nav li a{
 
 .icon {
     position: relative;
-    left: -10px;
+    left: -8px !important; 
 }
+
+/* search button */
+.ml-n5, .mx-n5 {
+    margin-left: -2.3rem!important;
+}
+
 /* associate bar */
 .associate-bar {
     padding-top: 2.5em;
-    margin-top: 4.2em;
+    margin-top: 4.81em;
     height: 1.0em;
     /* width: 100%; */
     text-align: left;
@@ -59,5 +65,9 @@ nav .navbar-nav li a{
 }
 
 #first-one {
-    margin-left: 4.0em;
+    margin-left: 5.0em;
+}
+
+.input-group-text {
+    border:0px solid transparent;
 }

@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import * as $ from 'jquery';
+
 
 @Component({
   selector: 'app-recommends',
@@ -33,31 +35,13 @@ export class RecommendsComponent implements OnInit {
     },
     {
       title: 'Card Title 5',
-      description: 'Some quick example text toe up the bulk of the card content',
+      description: 'Some quick example texand make up the bulk of the card content',
       buttonText: 'Button',
       img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
     },
     {
       title: 'Card Title 6',
-      description: 'Some quick example text to  the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 7',
-      description: 'Some quick example text to builhe card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 8',
-      description: 'Some quick example textnd make up the bulk of the card content',
-      buttonText: 'Button',
-      img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
-    },
-    {
-      title: 'Card Title 9',
-      description: 'Some quick example text toe up the bulk of the card content',
+      description: 'Some quick example texand make up the bulk of the card content',
       buttonText: 'Button',
       img: 'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'
     },
@@ -74,7 +58,7 @@ export class RecommendsComponent implements OnInit {
   //constructor() { }
 
   ngOnInit(): void {
-    this.slides = this.chunk(this.cards, 6);
+    this.slides = this.chunk(this.cards, 1);
   }
 
 }

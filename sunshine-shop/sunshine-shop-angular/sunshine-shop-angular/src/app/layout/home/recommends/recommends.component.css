@@ -1,6 +1,54 @@
-.my-1 {
+/* .my-1 {
     width: 12em;
-    height: 20em;
+    height: 23em;
     margin: 0em 7em 0em 7em;
+} */
+
+
+.content { 
+    padding: 16px; 
+  }
+  
+.content > mat-card { 
+    width: 200px; 
+  }
+
+.home-header {
+    font-size: 140%;
+    font-weight: 400;
+    color: #2b2b2b;
+    margin: 1em 0em 0em 8.2em;
+    padding: 6px 0 2px, 0;
+    text-transform: uppercase;
 }
+
+.content {
+  padding-left: 11.3em;
+}
+
+.btn-default-icon {
+  line-height: 0.2em;
+  background: #FF6534;
+  border-color: #FF6534;
+  position: relative;
+  vertical-align: middle;
+  text-transform: uppercase;
+  text-align: center;
+  color: #fff;
+  background-color: #FF6534;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.add-cart {
+  text-shadow: none;
+  font-size: 9pt;
+  padding: 11px 12px;
+  height: 36px;
+  line-height: 35px;
+  font-size: 12px;
+  font-weight: 400;
+  margin-left: 1.8em;
+}
+
 

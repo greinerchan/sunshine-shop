@@ -1,0 +1,49 @@
+#footer {
+    background-color: #FA5B0F;
+    padding: 2em 0 3em;
+    color: #fff;
+    font-size: 10pt;
+}
+
+.footer-list{
+    list-style-type: none;
+    margin-left: -3em;
+}
+#footer a {
+    color: #fff;
+    opacity: 0.9;
+    cursor: pointer;
+    display: inline-block;
+}
+
+#footer .payment-methods img{
+    text-align: right;
+    width: 22.3333%;
+}
+
+h3 {
+    display: block;
+    font-size: 1.17em;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 1px;
+    margin-inline-end: 0px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+p {
+    margin: 13px 0 10px;
+}
+
+.new-container {
+    margin: 0 auto;
+    max-width: 1150px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+#footer .copyright {
+    font-size: 8pt;
+    text-align: center;
+}

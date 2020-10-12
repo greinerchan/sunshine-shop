@@ -11,19 +11,30 @@ import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { RecommendsComponent } from './home/recommends/recommends.component'; 
 
+// new card pakage
+import { BrowserModule } from "@angular/platform-browser";
+import { MatCardModule } from "@angular/material/card";
+import { MatToolbarModule } from "@angular/material/toolbar";
+import { MatButtonModule } from "@angular/material/button";
+import { FlexLayoutModule } from "@angular/flex-layout";
+import { FooterComponent } from './home/footer/footer.component';
 
-// import { LayoutRoutingModule } from './layout-routing-ab.module';
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent],
   imports: [
     CommonModule,
     RouterModule,
     CarouselModule,
     MDBBootstrapModule.forRoot(),
-    BrowserAnimationsModule
-    //LayoutRoutingModule
+    BrowserAnimationsModule,
+    BrowserModule,
+    MatCardModule,
+    MatToolbarModule,
+    MatButtonModule,
+    FlexLayoutModule
+    // LayoutRoutingModule
   ],
   exports: [
     RouterModule,

@@ -1,1 +1,41 @@
 /* You can add global styles to this file, and also import other style files */
+
+html, body { height: 100%; }
+body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+.btn-default {
+    background: #FF6534;
+    border-color: #FF6534;
+    position: relative;
+    vertical-align: middle;
+    min-width: 114px;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background-color: #FF6534;
+    border-radius: 4px;
+    overflow: hidden;
+  }
+
+  .btn {
+    text-shadow: none;
+    font-size: 9pt;
+    padding: 5px 8px;
+    height: 36px;
+    line-height: 35px;
+    font-size: 12px;
+    font-weight: 400;
+    margin-bottom: 0.2em;
+  }
+
+.new-container {
+    margin: 0 auto;
+    max-width: 1150px;
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+.page-container {
+    padding: 1em 0 2em;
+    min-height: 400px;
+}
