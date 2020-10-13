@@ -1,15 +1,28 @@
-<table class="table">
-    <thead class="thead-dark">
-        <th>Name</th>
-        <th>Price</th>
-        <th>Title</th>
-    </thead>
 
-    <tbody>
-        <tr *ngFor = "let product of products">
-            <td>{{product.product_name}} </td>
-            <td>{{product.product_price | currency:'USD'}}</td>
-            <td>{{product.product_title}}</td>
-        </tr>
-    </tbody>
-</table>
+<app-header></app-header>
+<app-header-asst></app-header-asst>
+<section>
+    <h1 class="home-header">Fresh product</h1>
+    <div class="content" fxLayout="row wrap" fxLayoutGap="8px grid">
+        <div fxFlex="14.8%" fxFlex.md="33.33%" fxFlex.sm="50%" fxFlex.xs="100%">
+            <mat-card class="mat-elevation-z4" *ngFor="let product of products">
+                <mat-card-header>
+                    <mat-card-title>{{product.product_name}}</mat-card-title>
+                </mat-card-header>
+                <img mat-card-image [src]="card.img" />
+                <mat-card-content>
+                    <p>{{product.product_price | currency:'USD'}}</p>
+                </mat-card-content>
+                <mat-card-actions>
+                    <a href="#" class="btn btn-default-icon">
+                        <span><i class="material-icons">favorite_border</i></span>
+                    </a>
+                    <a href="#" class="add-cart btn-default">
+                        <span>Add to Cart</span>
+                    </a>
+                </mat-card-actions>
+            </mat-card>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>

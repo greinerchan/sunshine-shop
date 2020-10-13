@@ -8,6 +8,7 @@ import { CarouselComponent } from './home/carousel/carousel.component';
 import { FooterComponent } from './home/footer/footer.component';
 import { SubImagesComponent } from './home/sub-images/sub-images.component';
 import { RecommendsComponent } from './home/recommends/recommends.component'; 
+import { HeaderAsstComponent } from './home/header-asst/header-asst.component';
 
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -29,7 +30,7 @@ import { ProductListComponent } from './home/product-list/product-list.component
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -46,7 +47,7 @@ import { ProductListComponent } from './home/product-list/product-list.component
   exports: [
     RouterModule,
     HomeComponent,
-    HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent
+    HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent
   ]
 })
 export class LayoutModule { }
