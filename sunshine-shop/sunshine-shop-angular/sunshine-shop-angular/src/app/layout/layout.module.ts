@@ -5,11 +5,17 @@ import { RouterModule, RouterLink } from '@angular/router';
 import { HeaderComponent } from './home/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './home/carousel/carousel.component';
-import { CarouselModule } from 'ngx-owl-carousel-o';
+import { FooterComponent } from './home/footer/footer.component';
 import { SubImagesComponent } from './home/sub-images/sub-images.component';
+import { RecommendsComponent } from './home/recommends/recommends.component'; 
+
+
+import { CarouselModule } from 'ngx-owl-carousel-o';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { RecommendsComponent } from './home/recommends/recommends.component'; 
+
+
+
 
 // new card pakage
 import { BrowserModule } from "@angular/platform-browser";
@@ -17,12 +23,13 @@ import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { FooterComponent } from './home/footer/footer.component';
+import { ProductListComponent } from './home/product-list/product-list.component';
+
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent],
   imports: [
     CommonModule,
     RouterModule,
@@ -38,7 +45,8 @@ import { FooterComponent } from './home/footer/footer.component';
   ],
   exports: [
     RouterModule,
-    HomeComponent
+    HomeComponent,
+    HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent
   ]
 })
 export class LayoutModule { }

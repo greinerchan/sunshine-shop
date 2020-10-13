@@ -1,5 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { HttpClientModule } from '@angular/common/http';
+
 
 
 
@@ -10,6 +12,8 @@ import { RoutesModule } from './routes/routes.module';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { MDBBootstrapModule } from 'angular-bootstrap-md';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ProductService } from './services/product.service';
+
 
 
 @NgModule({
@@ -19,11 +23,12 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     LayoutModule,
     RoutesModule,
     BrowserModule,
+    HttpClientModule,
     NgbModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule
   ],
-  providers: [],
+  providers: [ProductService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

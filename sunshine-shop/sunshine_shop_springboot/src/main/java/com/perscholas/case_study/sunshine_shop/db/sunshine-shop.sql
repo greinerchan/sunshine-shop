@@ -26,7 +26,7 @@ CREATE TABLE `admin`  (
 DROP TABLE IF EXISTS `category`;
 CREATE TABLE `category` (
     `id` BIGINT(10) NOT NULL AUTO_INCREMENT,
-    `caregory_name` VARCHAR(255) NULL DEFAULT NULL,
+    `category_name` VARCHAR(255) NULL DEFAULT NULL,
     PRIMARY KEY (`id`))
     ENGINE = InnoDB
     AUTO_INCREMENT=1;
@@ -41,7 +41,8 @@ CREATE TABLE `product` (
     `product_name`        varchar(100)   DEFAULT NULL,
     `product_title`       varchar(100)   DEFAULT NULL,
     `product_price`       decimal(13, 2) NULL DEFAULT NULL,
-    `product_create_date` datetime(6)    NOT NULL,
+    `product_create_date` datetime(6)    DEFAULT NULL,
+    `product_last_updated` datetime(6)   DEFAULT NULL,
     `category_id`         BIGINT(10)     NOT NULL,
     `product_image_url`   varchar(255)   DEFAULT NULL,
     `product_active`      bit(1)         DEFAULT 1,
@@ -116,7 +117,36 @@ CREATE TABLE `user`  (
 SET FOREIGN_KEY_CHECKS = 1;
 
 
+-- -----------------------------------------------------
+-- Add sample data
+-- -----------------------------------------------------
 
+INSERT INTO category(category_name) VALUES ('BOOKS');
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1000', 'JavaScript - The Fun Parts', 3324,
+NOW(),1,'#',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1001', 'JavaScript - The Fun Parts', 34,
+NOW(),1,'#',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1002', 'JavaScript - The Fun Parts', 23,
+NOW(),1,'#',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1003', 'JavaScript - The Fun Parts', 32,
+NOW(),1,'#',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1004', 'JavaScript - The Fun Parts', 34,
+NOW(),1,'#',1);
 
 
 
