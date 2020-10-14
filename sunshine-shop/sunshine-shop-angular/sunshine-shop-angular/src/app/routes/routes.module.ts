@@ -9,6 +9,8 @@ import {OnlineOnlyComponent} from "./navbar/online-only/online-only.component";
 import {BackhomeComponent} from "./navbar/backhome/backhome.component";
 import { OnSaleComponent } from "./navbar/on-sale/on-sale.component";
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { MDBBootstrapModule } from 'angular-bootstrap-md';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 
 
 @NgModule({
@@ -16,7 +18,10 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   imports: [
     CommonModule,
     LayoutModule,
-    NgbModule
+    NgbModule,
+    MDBBootstrapModule,
+    FormsModule, 
+    ReactiveFormsModule
   ],
   exports: [
   ]
