@@ -30,4 +30,10 @@ h1 {
 .control-label, .checkbox label, .radio label {
     font-size: 9pt;
     font-weight: 320;
+    font-weight: 400;
+}
+
+#terms {
+    color: #EF5411;
+    font-weight: 700;
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import * as $ from 'jquery';
 import { Product } from 'src/app/common/product';
 import { ProductService } from 'src/app/services/product.service';
@@ -12,16 +13,26 @@ import { ProductService } from 'src/app/services/product.service';
 export class RecommendsComponent implements OnInit {
 
   products: Product[];
-  constructor(private productService: ProductService) { }
+  currentCategoryId:number;
+  constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   //constructor() { }
 
   ngOnInit() {
-    this.listProducts();;
+    this.route.paramMap.subscribe(() => {
+      this.listProducts();
+    })
   }
   
   listProducts() {
-    this.productService.getProductList().subscribe(
+    const hasCategotyId: boolean = this.route.snapshot.paramMap.has('id');
+
+    if (hasCategotyId) {
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+    } else {
+      this.currentCategoryId = 1;
+    }
+    this.productService.getProductList(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
       }
