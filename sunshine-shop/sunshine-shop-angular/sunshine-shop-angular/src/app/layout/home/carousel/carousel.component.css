@@ -3,3 +3,7 @@ img {
     max-width: 78%;
     margin: 0.5em auto;
 }
+
+.carousel-container{
+    background-color: #f8f7f4;
+}

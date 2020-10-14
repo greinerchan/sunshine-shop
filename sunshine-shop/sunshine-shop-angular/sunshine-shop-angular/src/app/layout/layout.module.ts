@@ -9,6 +9,7 @@ import { FooterComponent } from './home/footer/footer.component';
 import { SubImagesComponent } from './home/sub-images/sub-images.component';
 import { RecommendsComponent } from './home/recommends/recommends.component'; 
 import { HeaderAsstComponent } from './home/header-asst/header-asst.component';
+import { ProductListComponent } from './home/product-list/product-list.component';
 
 
 import { CarouselModule } from 'ngx-owl-carousel-o';
@@ -24,7 +25,6 @@ import { MatCardModule } from "@angular/material/card";
 import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
-import { ProductListComponent } from './home/product-list/product-list.component';
 
 
 

@@ -126,29 +126,52 @@ INSERT INTO category(category_name) VALUES ('BOOKS');
 INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
 category_id, product_image_url,product_active)
 VALUES ('BOOK-TECH-1000', 'JavaScript - The Fun Parts', 3324,
-NOW(),1,'#',1);
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
 INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
 category_id, product_image_url,product_active)
 VALUES ('BOOK-TECH-1001', 'JavaScript - The Fun Parts', 34,
-NOW(),1,'#',1);
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
 INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
 category_id, product_image_url,product_active)
 VALUES ('BOOK-TECH-1002', 'JavaScript - The Fun Parts', 23,
-NOW(),1,'#',1);
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
 INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
 category_id, product_image_url,product_active)
 VALUES ('BOOK-TECH-1003', 'JavaScript - The Fun Parts', 32,
-NOW(),1,'#',1);
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
 INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
 category_id, product_image_url,product_active)
 VALUES ('BOOK-TECH-1004', 'JavaScript - The Fun Parts', 34,
-NOW(),1,'#',1);
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1000', 'JavaScript - The Fun Parts', 3324,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1001', 'JavaScript - The Fun Parts', 34,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1002', 'JavaScript - The Fun Parts', 23,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1003', 'JavaScript - The Fun Parts', 32,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
+category_id, product_image_url,product_active)
+VALUES ('BOOK-TECH-1004', 'JavaScript - The Fun Parts', 34,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1);
 
 
 

@@ -2,14 +2,44 @@
 <app-header></app-header>
 <app-header-asst></app-header-asst>
 <section>
-    <h1 class="home-header">Fresh product</h1>
+    <h1 class="category-header">FRESH VEGETABLES</h1>
+    <div class="main-content content">
+        <div class="section-content section-content-p30">
+            <div class="product-block">
+                <div class="row">
+                    <div *ngFor="let product of products" class="col-md-2">
+                        <div class="product-box">
+                            <img src= "{{product.product_image_url}}"
+                                class="img-responsive outline">
+                            <h4>{{ product.product_name }}</h4>
+                            <div class="price">{{ product.product_price  | currency:'USD' }}</div>
+                            <a href="#" class="btn btn-default-icon">
+                                <span><i class="material-icons" style="font-size:18px">favorite_border</i></span>
+                            </a>
+                            <a href="#" class="add-cart btn-default">
+                                <span>Add to Cart</span>
+                            </a>
+                        </div>
+                        <br>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<app-footer></app-footer>
+
+
+
+<!-- <section class="list-container">
+    <h1 class="category-header">FRESH VEGETABLES</h1>
     <div class="content" fxLayout="row wrap" fxLayoutGap="8px grid">
-        <div fxFlex="14.8%" fxFlex.md="33.33%" fxFlex.sm="50%" fxFlex.xs="100%">
-            <mat-card class="mat-elevation-z4" *ngFor="let product of products">
+        <div fxFlex="14.8%" fxFlex.md="33.33%" fxFlex.sm="50%" fxFlex.xs="100%"  *ngFor="let product of products">
+            <mat-card class="mat-elevation-z4 outline">
                 <mat-card-header>
                     <mat-card-title>{{product.product_name}}</mat-card-title>
                 </mat-card-header>
-                <img mat-card-image [src]="card.img" />
+                <img mat-card-image [src]="'https://mdbootstrap.com/img/Photos/Horizontal/Nature/4-col/img%20(34).jpg'"/>
                 <mat-card-content>
                     <p>{{product.product_price | currency:'USD'}}</p>
                 </mat-card-content>
@@ -24,5 +54,4 @@
             </mat-card>
         </div>
     </div>
-</section>
-<app-footer></app-footer>
+</section> -->
