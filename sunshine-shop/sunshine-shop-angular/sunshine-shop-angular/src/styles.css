@@ -36,7 +36,10 @@ body {
     font-size: 12px;
     font-weight: 400;
   }
-
+.btn:hover {
+  background-color: #f13d01;
+  color: white;
+}
 .new-container {
     margin: 0 auto;
     max-width: 1150px;
