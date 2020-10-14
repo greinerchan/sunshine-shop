@@ -1,1 +1,32 @@
-<p>sign-up works!</p>
+<section class="page-container">
+    <div class="new-container">
+        <div class="row">
+            <div class="col-md-4 offset-md-4">
+                <h1 class="text-center">Sign Up</h1>
+                <div class="clearfix"><br></div>
+                <form method="post" accept-charset="utf-8" role="form" action="/signup">
+                    <div style="display:none;"><input type="hidden" name="_method" class="form-control" value="POST">
+                    </div>
+                    <div class="form-group email required"><input type="email" name="email" class="form-control"
+                            placeholder="email@domain.com" required="required" maxlength="255" id="email"></div>
+                    <div class="form-group password"><input type="password" name="password" class="form-control"
+                            placeholder="Key in your preferred password" id="password"></div>
+                    <div class="form-group password"><input type="password" name="confirm_password" class="form-control"
+                            placeholder="Retype your password" id="confirm-password"></div>
+                    <div class="form-group"><input type="submit" class="btn btn-default btn-fullwidth" value="Sign Up">
+                    </div>
+                    <div class="checkbox "><input type="hidden" name="accept_terms" class="form-control"
+                            value="0"><label class="label-tnc" for="accept-terms"><input type="checkbox"
+                                name="accept_terms" value="1" required="required" id="accept-terms">By submitting this
+                            form, I confirm that I have read and agree to SunshineOnline's <a
+                                href="/pages/terms-conditions" target="_blank"><em>Terms &amp;
+                                    Conditions</em></a></label></div> <label class="text-center control-label">Already
+                        have an account? <a href="login">Log in</a></label>
+                    <div style="display:none;"><input type="hidden" name="_Token[fields]" class="form-control"
+                            value="c5c47710d50ba82e1b9933967babe0bf319ad0d7%3A"><input type="hidden"
+                            name="_Token[unlocked]" class="form-control" value=""></div>
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
