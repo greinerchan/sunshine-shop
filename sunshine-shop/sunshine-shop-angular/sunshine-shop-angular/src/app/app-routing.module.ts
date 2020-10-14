@@ -18,8 +18,13 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: SignUpComponent },
   { path: "cart", component: CartComponent },
+
+  // for category funtion routes
+  { path: "category/:id", component: ProductListComponent},
   { path: "category", component: CategoryComponent},
-  { path: "category/fresh-product", component: ProductListComponent},
+  { path: "", redirectTo:"/home", pathMatch: "full"},
+  { path: "**", redirectTo:"/home", pathMatch: "full"},
+
   { path: "onsale", component: OnSaleComponent },
   { path: "online-shop", component: OnlineOnlyComponent }
 ];

@@ -50,4 +50,5 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent
   ]
 })
-export class LayoutModule { }
+export class LayoutModule { 
+}

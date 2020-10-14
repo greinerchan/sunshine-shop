@@ -1,6 +1,14 @@
+<app-header></app-header>
+
+<div *ngIf="path === '/category'; else elseBlock">
+    <div [ngClass]="{'disabled':true}">
+        <app-header-asst></app-header-asst>
+    </div>
+</div>
+<ng-template #elseBlock><app-header-asst></app-header-asst></ng-template>
+
+
 <router-outlet></router-outlet>
-
-
-
+<app-footer></app-footer>
 
 
