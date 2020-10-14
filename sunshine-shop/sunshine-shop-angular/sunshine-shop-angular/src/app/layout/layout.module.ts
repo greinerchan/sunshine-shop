@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLink } from '@angular/router';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { HeaderComponent } from './home/header/header.component';
 import { HomeComponent } from './home/home.component';
@@ -41,7 +42,9 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     MatCardModule,
     MatToolbarModule,
     MatButtonModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    FormsModule, 
+    ReactiveFormsModule
     // LayoutRoutingModule
   ],
   exports: [
