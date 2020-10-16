@@ -11,21 +11,24 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class ProductListComponent implements OnInit {
 
+  subProducts: Product[];
   products: Product[];
   currentCategoryId:number;
   categoryTitle:string;
   categoryItem:ProductCategory;
 
+
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
-      this.listProducts();
+      this.listSubProducts();
+      this.listProduct();
     })
     this.categoryTitle;
   }
 
-  listProducts() {
+  listSubProducts() {
     const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
 
     if (hasCategoryId) {
@@ -38,9 +41,11 @@ export class ProductListComponent implements OnInit {
 
     this.productService.getSubProductList(this.currentCategoryId).subscribe(
       data => {
-        this.products = data;
+        this.subProducts = data;
       }
     )
+
+  
 
     this.productService.getCategoryItem(this.currentCategoryId).subscribe(
       data => {
@@ -50,5 +55,12 @@ export class ProductListComponent implements OnInit {
 
   }
 
-
+  listProduct() {
+    this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+    this.productService.getProductList(this.currentCategoryId).subscribe(
+      data => {
+        this.products = data;
+      }
+    );
+  }
 }
