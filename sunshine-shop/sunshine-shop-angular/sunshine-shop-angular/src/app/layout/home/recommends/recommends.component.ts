@@ -32,7 +32,7 @@ export class RecommendsComponent implements OnInit {
     } else {
       this.currentCategoryId = 1;
     }
-    this.productService.getProductList(this.currentCategoryId).subscribe(
+    this.productService.getSubProductList(this.currentCategoryId).subscribe(
       data => {
         this.products = data;
       }

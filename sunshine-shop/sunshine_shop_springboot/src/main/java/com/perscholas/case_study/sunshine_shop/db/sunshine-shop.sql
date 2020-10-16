@@ -137,7 +137,7 @@ SET FOREIGN_KEY_CHECKS = 1;
 -- -----------------------------------------------------
 
 INSERT INTO category(category_name) VALUES ('Fresh Produce');
-INSERT INTO category(category_name) VALUES ('Dairy &amp; Chilled');
+INSERT INTO category(category_name) VALUES ('Dairy & Chilled');
 INSERT INTO category(category_name) VALUES ('Barkery');
 INSERT INTO category(category_name) VALUES ('Frozen');
 INSERT INTO category(category_name) VALUES ('Beverage');

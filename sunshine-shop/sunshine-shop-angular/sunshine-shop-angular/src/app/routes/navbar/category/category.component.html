@@ -1,8 +1,8 @@
 <div class="container">
-    <div class="row" *ngFor = "let category of productCategory">
+    <div class="row">
         <div class="col-md-6">
-            <h4><span><a routerLink="/category/{{ category.id }}" outerLinkActive="active">
-                {{category.category_name}}</a></span></h4>
+            <h4><span><a routerLink="/category/1" outerLinkActive="active">
+                Fresh Produce</a></span></h4>
             <div class="row">
                 <div class="col-md-4 item">
                     <a href="#">Vegetables</a>
@@ -15,11 +15,9 @@
                 </div>
             </div>
         </div>
-    </div>
-</div>
-
-        <!-- <div class="col-md-6">
-            <h4><span><a routerLink="/category/category.id" outerLinkActive="active">Dairy &amp; Chilled</a></span></h4>
+        
+        <div class="col-md-6">
+            <h4><span><a routerLink="/category/2" outerLinkActive="active">Dairy &amp; Chilled</a></span></h4>
             <div class="row">
                 <div class="col-md-6 item">
                     <a href="#">Cheese</a>
@@ -40,7 +38,7 @@
     <br><br>
     <div class="row">
         <div class="col-md-6">
-            <h4><span><a href="/fresh-produce">Barkery</a></span></h4>
+            <h4><span><a routerLink="/category/3" outerLinkActive="active">Barkery</a></span></h4>
             <div class="row">
                 <div class="col-md-6 item">
                     <a href="#">Bread</a>
@@ -51,7 +49,7 @@
             </div>
         </div>
         <div class="col-md-6">
-            <h4><span><a href="/dairy-chilled">Frozen</a></span></h4>
+            <h4><span><a routerLink="/category/4" outerLinkActive="active">Frozen</a></span></h4>
             <div class="row">
                 <div class="col-md-4 item">
                     <a href="#">Convenience Food</a>
@@ -75,7 +73,7 @@
     <br>
     <div class="row">
         <div class="col-md-6">
-            <h4><span><a href="/beverage">Beverage</a></span></h4>
+            <h4><span><a routerLink="/category/5" outerLinkActive="active">Beverage</a></span></h4>
             <div class="row">
                 <div class="col-md-4 item">
                     <a href="#">Tea</a>
@@ -107,4 +105,4 @@
         </div>
     </div>
 </div>
-<br><br> -->
+<br><br>
