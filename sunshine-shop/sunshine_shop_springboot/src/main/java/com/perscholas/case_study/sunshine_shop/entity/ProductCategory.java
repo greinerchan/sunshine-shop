@@ -7,20 +7,21 @@ import javax.persistence.*;
 import java.util.Set;
 
 @Entity
-@Table(name="category")
+@Table(name = "category")
 @Getter
 @Setter
-
 public class ProductCategory {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
-    private Long id;
+    private long id;
 
     @Column(name = "category_name")
     private String category_name;
 
-    @OneToMany(cascade = CascadeType.ALL, mappedBy = "category")
-    private Set<Product> products;
+    @OneToMany(mappedBy = "productCategory",  cascade= {CascadeType.PERSIST, CascadeType.MERGE,
+            CascadeType.DETACH, CascadeType.REFRESH}
+            )
+    private Set<ProductSubCategory> productSubCategories;
 }
-

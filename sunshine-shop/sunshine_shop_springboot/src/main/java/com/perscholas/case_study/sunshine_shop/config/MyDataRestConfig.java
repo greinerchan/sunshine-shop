@@ -2,6 +2,7 @@ package com.perscholas.case_study.sunshine_shop.config;
 
 import com.perscholas.case_study.sunshine_shop.entity.Product;
 import com.perscholas.case_study.sunshine_shop.entity.ProductCategory;
+import com.perscholas.case_study.sunshine_shop.entity.ProductSubCategory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.data.rest.core.config.RepositoryRestConfiguration;
@@ -35,6 +36,10 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(disableActions));
 
         config.getExposureConfiguration().forDomainType(ProductCategory.class)
+                .withItemExposure((metdata, httpMethods) -> httpMethods.disable(disableActions))
+                .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(disableActions));
+
+        config.getExposureConfiguration().forDomainType(ProductSubCategory.class)
                 .withItemExposure((metdata, httpMethods) -> httpMethods.disable(disableActions))
                 .withCollectionExposure((metdata, httpMethods) -> httpMethods.disable(disableActions));
 
