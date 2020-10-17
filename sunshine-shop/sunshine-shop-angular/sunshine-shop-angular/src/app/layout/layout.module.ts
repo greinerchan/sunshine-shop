@@ -27,12 +27,13 @@ import { MatToolbarModule } from "@angular/material/toolbar";
 import { MatButtonModule } from "@angular/material/button";
 import { FlexLayoutModule } from "@angular/flex-layout";
 import { SubProductListComponent } from './home/sub-product-list/sub-product-list.component';
+import { ProductDetailComponent } from './home/product-detail/product-detail.component';
 
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent, SubProductListComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent, SubProductListComponent, ProductDetailComponent],
   imports: [
     CommonModule,
     RouterModule,

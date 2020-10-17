@@ -27,7 +27,7 @@ nav .navbar-nav li a{
 
 .icon {
     position: relative;
-    left: -30px !important; 
+    left: -8px !important; 
 }
 
 /* search button */
@@ -101,4 +101,9 @@ h1 {
     font-size: 12px;
     font-weight: 400;
     margin-bottom: 0.2em;
+}
+
+.btn:hover {
+    background-color: #f13d01;
+    color: white;
 }

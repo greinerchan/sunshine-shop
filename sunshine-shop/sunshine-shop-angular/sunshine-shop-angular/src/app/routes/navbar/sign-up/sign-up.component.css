@@ -37,3 +37,10 @@ h1 {
     color: #EF5411;
     font-weight: 700;
 }
+
+.btn:hover {
+    background-color: #f13d01;
+    color: white;
+}
+
+
