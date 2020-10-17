@@ -7,10 +7,10 @@
                 <div class="row">
                     <div *ngFor="let product of subCategoryProducts" class="col-md-2">
                         <div class="product-box">
-                            <img src= "{{product.product_image_url}}"
+                            <img src= "{{product.productImageUrl}}"
                                 class="img-responsive outline">
-                            <h4>{{ product.product_name }}</h4>
-                            <div class="price">{{ product.product_price  | currency:'USD' }}</div>
+                            <h4>{{ product.productName }}</h4>
+                            <div class="price">{{ product.productPrice  | currency:'USD' }}</div>
                             <a href="#" class="btn btn-default-icon">
                                 <span><i class="material-icons" style="font-size:18px">favorite_border</i></span>
                             </a>

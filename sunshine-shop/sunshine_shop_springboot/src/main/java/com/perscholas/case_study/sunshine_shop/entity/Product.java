@@ -24,25 +24,26 @@ public class Product {
     private ProductSubCategory productSubCategory;
 
     @Column(name = "product_name")
-    private String product_name;
+    private String productName;
 
     @Column(name = "product_title")
-    private String product_title;
+    private String productTitle;
 
     @Column(name = "product_price")
-    private BigDecimal product_price;
+    private BigDecimal productPrice;
 
     @Column(name = "product_create_date")
     @CreationTimestamp
-    private Date product_create_date;
+    private Date productCreateDate;
 
     @Column(name = "product_last_updated")
     @UpdateTimestamp
-    private Date product_last_updated;
+    private Date productLastUpdated;
 
     @Column(name = "product_image_url")
-    private String product_image_url;
+    private String productImageUrl;
 
     @Column(name = "product_active")
-    private boolean product_active;
+    private boolean productActive;
+
 }

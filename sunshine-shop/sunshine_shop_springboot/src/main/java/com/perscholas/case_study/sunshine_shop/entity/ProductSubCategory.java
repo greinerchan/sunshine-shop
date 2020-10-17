@@ -17,7 +17,7 @@ public class ProductSubCategory {
     private Long id;
 
     @Column(name = "sub_category_name")
-    private String sub_category_name;
+    private String subCategoryName;
 
 
     @ManyToOne(cascade=CascadeType.ALL)
