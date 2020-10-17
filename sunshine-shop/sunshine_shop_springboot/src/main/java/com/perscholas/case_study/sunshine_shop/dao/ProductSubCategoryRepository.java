@@ -10,4 +10,5 @@ import org.springframework.web.bind.annotation.RequestParam;
 @CrossOrigin("http://localhost:4200")
 public interface ProductSubCategoryRepository extends JpaRepository<ProductSubCategory, Long> {
     Page<ProductSubCategory> findByProductCategoryId(@RequestParam("id") Long id, Pageable pageable);
+    Page<ProductSubCategory> findById(@RequestParam("id") Long id, Pageable pageable);
 }

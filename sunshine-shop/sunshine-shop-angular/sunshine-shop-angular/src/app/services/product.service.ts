@@ -53,7 +53,7 @@ export class ProductService {
       map(response => response._embedded.productSubCategories)
     );
   }
-
+  
   getProductCategory() {
 
     return this.httpClient.get<GetResponseProductCategory>(this.categoryUrl).pipe(
@@ -72,6 +72,13 @@ export class ProductService {
     const searchSubCategoryUrl = `${this.categoryUrl}/search/findById?id=${theCategoryId}`;
     return this.httpClient.get<GetResponseCategoryItem>(searchSubCategoryUrl).pipe(
       map(response => response._embedded.productCategory)
+    );
+  }
+
+  getSubCategoryItem(theSubCategoryId: number) {
+    const searchSubCategoryUrl2 = `${this.categorySubUrl}/search/findById?id=${theSubCategoryId}`;
+    return this.httpClient.get<GetResponseSubCategoryItem>(searchSubCategoryUrl2).pipe(
+      map(response => response._embedded.productSubCategories)
     );
   }
 
@@ -99,5 +106,11 @@ interface GetResponseProductSubCategory {
 interface GetResponseCategoryItem {
   _embedded: {
     productCategory:ProductCategory;
+  }
+}
+
+interface GetResponseSubCategoryItem {
+  _embedded: {
+    productSubCategories:ProductSubCategory;
   }
 }
