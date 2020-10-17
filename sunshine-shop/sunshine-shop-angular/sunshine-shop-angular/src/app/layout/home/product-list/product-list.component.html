@@ -20,6 +20,14 @@
                         </div>
                         <br>
                     </div>
+
+                    <!-- no product search results -->
+                    <div *ngIf = "products?.length == 0">
+                        <div id="NotFoundText">
+                        There are no search results for <span id="keyword">'{{keyword}}'</span>.<br><br>
+                        Make space between words or use another search word.</div>
+                        <img id="NotFound" src="../../../../assets/other/NotFound.png" alt="">
+                    </div>
                 </div>
             </div>
         </div>

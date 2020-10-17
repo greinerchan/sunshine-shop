@@ -21,6 +21,7 @@ const routes: Routes = [
   { path: "cart", component: CartComponent },
 
   // for category funtion routes
+  { path: "search/:keyword", component: ProductListComponent},
   { path: "category/:id", component: ProductListComponent},
   { path: "category/sub/:id", component: SubProductListComponent},
   { path: "category", component: CategoryComponent},

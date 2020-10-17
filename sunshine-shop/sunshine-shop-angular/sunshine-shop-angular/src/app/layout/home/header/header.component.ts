@@ -1,5 +1,7 @@
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -11,7 +13,7 @@ import { FormControl, FormGroup, Validators } from "@angular/forms";
 export class HeaderComponent implements OnInit {
   validatingForm: FormGroup;
 
-  constructor() { }
+  constructor(private router: Router) { }
   ngOnInit() {
     this.validatingForm = new FormGroup({
       loginFormModalEmail: new FormControl('', Validators.email),
@@ -25,5 +27,9 @@ export class HeaderComponent implements OnInit {
 
   get loginFormModalPassword() {
     return this.validatingForm.get('loginFormModalPassword');
+  }
+
+  doSearch(value: string) {
+    this.router.navigateByUrl(`/search/${value}`);
   }
 }

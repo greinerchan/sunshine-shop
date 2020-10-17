@@ -15,7 +15,7 @@ import java.util.List;
 public interface ProductRepository extends JpaRepository<Product, Long> {
     Page<Product> findByProductSubCategoryId(@RequestParam("id") Long id, Pageable pageable);
 
-    Page<Product> findByProductNameContaining(@RequestParam("name") String name, Pageable pageable);
+    Page<Product> findByProductNameContaining(@RequestParam("keyword") String keyword, Pageable pageable);
 
     @Query(value = "SELECT * from product inner join sub_category sc on product.sub_category_id = sc.id " +
             "inner join category c on c.id = sc.category_id where c.id =:id", nativeQuery = true)

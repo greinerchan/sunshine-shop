@@ -16,7 +16,8 @@ export class ProductListComponent implements OnInit {
   currentCategoryId:number;
   categoryTitle:string;
   categoryItem:ProductCategory;
-
+  searchMode:boolean;
+  keyword: string;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -26,30 +27,31 @@ export class ProductListComponent implements OnInit {
       this.listProduct();
     })
     this.categoryTitle;
+    this.keyword;
   }
 
   listSubProducts() {
-    const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
-
-    if (hasCategoryId) {
-      this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
-    } else {
-      this.currentCategoryId = 1;
-    }
-
-    // console.log(this.currentCategoryId);
-
-    this.productService.getSubProductList(this.currentCategoryId).subscribe(
-      data => {
-        this.subProducts = data;
-      }
-    )
-
-  
-
+    this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
     this.productService.getCategoryItem(this.currentCategoryId).subscribe(
       data => {
-        this.categoryTitle = data[0].category_name;
+        this.categoryTitle = data[0].categoryName;
+      }
+    )
+    this.searchMode = this.route.snapshot.paramMap.has('keyword');
+    if (this.searchMode) {
+      this.handleSearchProducts();
+      this.categoryTitle = "";
+    } else {
+      this.handleListProducts();
+    }
+  }
+
+  handleSearchProducts() {
+    const keyword:string = this.route.snapshot.paramMap.get('keyword');
+    this.keyword = keyword;
+    this.productService.searchProducts(keyword).subscribe(
+      data => {
+        this.products = data;
       }
     )
 
@@ -62,5 +64,25 @@ export class ProductListComponent implements OnInit {
         this.products = data;
       }
     );
+  }
+
+  handleListProducts() {
+
+    const hasCategoryId: boolean = this.route.snapshot.paramMap.has('id');
+
+    if (hasCategoryId) {
+      this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
+    } else {
+      this.currentCategoryId = 1;
+    }
+
+    // console.log(this.currentCategoryId);
+
+
+    this.productService.getSubProductList(this.currentCategoryId).subscribe(
+      data => {
+        this.subProducts = data;
+      }
+    )
   }
 }

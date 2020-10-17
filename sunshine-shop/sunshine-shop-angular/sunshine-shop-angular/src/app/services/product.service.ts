@@ -84,13 +84,23 @@ export class ProductService {
 
   getRecommendProducts() {
     const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductRecommend?isRecommend=1`;
-    return this.httpClient.get<GetResponseProduct>(searchRecommendCategoryUrl).pipe(
-      map(response => response._embedded.products)
-    );
+    
+    return this.getProducts(searchRecommendCategoryUrl);
   }
 
   getBestSellProducts() {
     const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductBestSell?isBestSell=1`;
+
+    return this.getProducts(searchRecommendCategoryUrl);
+  }
+
+  searchProducts(keyword: string): Observable<Product[]> {
+    const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductNameContaining?name=${keyword}`;
+
+    return this.getProducts(searchRecommendCategoryUrl);
+  }
+
+  private getProducts(searchRecommendCategoryUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProduct>(searchRecommendCategoryUrl).pipe(
       map(response => response._embedded.products)
     );

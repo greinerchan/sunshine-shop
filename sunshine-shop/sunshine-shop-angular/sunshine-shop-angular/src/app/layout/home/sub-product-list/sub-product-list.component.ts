@@ -41,7 +41,7 @@ export class SubProductListComponent implements OnInit {
 
     this.productService.getSubCategoryItem(this.currentCategoryId).subscribe(
       data => {
-        this.subCategoryTitle = data[0].sub_category_name;
+        this.subCategoryTitle = data[0].subCategoryName;
       }
     )
   }
