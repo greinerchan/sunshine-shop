@@ -82,6 +82,19 @@ export class ProductService {
     );
   }
 
+  getRecommendProducts() {
+    const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductRecommend?isRecommend=1`;
+    return this.httpClient.get<GetResponseProduct>(searchRecommendCategoryUrl).pipe(
+      map(response => response._embedded.products)
+    );
+  }
+
+  getBestSellProducts() {
+    const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductBestSell?isBestSell=1`;
+    return this.httpClient.get<GetResponseProduct>(searchRecommendCategoryUrl).pipe(
+      map(response => response._embedded.products)
+    );
+  }
 }
 
 interface GetResponseProduct {

@@ -21,6 +21,9 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
             "inner join category c on c.id = sc.category_id where c.id =:id", nativeQuery = true)
     public List<Product> FindAllWithDescriptionQuery(@Param("id") Long id);
 
+    Page<Product> findByProductRecommend(@RequestParam("isRecommend") Boolean isRecommend, Pageable pageable);
+
+    Page<Product> findByProductBestSell(@RequestParam("isBestSell") Boolean isBestSell, Pageable pageable);
 
 }
 

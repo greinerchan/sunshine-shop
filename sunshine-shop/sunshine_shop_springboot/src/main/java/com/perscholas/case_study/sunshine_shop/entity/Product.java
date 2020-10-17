@@ -46,4 +46,10 @@ public class Product {
     @Column(name = "product_active")
     private boolean productActive;
 
+    @Column(name = "product_recommend")
+    private boolean productRecommend;
+
+    @Column(name = "product_best_sell")
+    private boolean productBestSell;
+
 }

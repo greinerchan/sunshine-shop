@@ -14,28 +14,33 @@ export class RecommendsComponent implements OnInit {
 
   products: Product[];
   currentCategoryId:number;
+  bestSellproducts: Product[];
+  recommendProducts: Product[];
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
   //constructor() { }
 
   ngOnInit() {
     this.route.paramMap.subscribe(() => {
-      this.listProducts();
+      this.listBestSellProducts();
+      this.listRecommendProducts();
     })
   }
   
-  listProducts() {
-    const hasCategotyId: boolean = this.route.snapshot.paramMap.has('id');
-
-    if (hasCategotyId) {
-      this.currentCategoryId = +this.route.snapshot.paramMap.get('id');
-    } else {
-      this.currentCategoryId = 1;
-    }
-    this.productService.getSubProductList(this.currentCategoryId).subscribe(
+  listRecommendProducts() {
+    this.productService.getRecommendProducts().subscribe(
       data => {
-        this.products = data;
+        this.recommendProducts = data;
       }
     )
   }
+
+  listBestSellProducts() {
+    this.productService.getBestSellProducts().subscribe(
+      data => {
+        this.bestSellproducts = data;
+      }
+    )
+  }
+
 }
