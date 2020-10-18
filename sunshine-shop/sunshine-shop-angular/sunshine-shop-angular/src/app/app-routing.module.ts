@@ -10,6 +10,7 @@ import { OnSaleComponent } from './routes/navbar/on-sale/on-sale.component'
 import { OnlineOnlyComponent } from './routes/navbar/online-only/online-only.component'
 import { ProductListComponent } from "./layout/home/product-list/product-list.component";
 import { SubProductListComponent } from "./layout/home/sub-product-list/sub-product-list.component";
+import { ProductDetailComponent } from './layout/home/product-detail/product-detail.component';
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
 
   // for category funtion routes
   { path: "search/:keyword", component: ProductListComponent},
+  { path: "products/:id", component: ProductDetailComponent},
   { path: "category/:id", component: ProductListComponent},
   { path: "category/sub/:id", component: SubProductListComponent},
   { path: "category", component: CategoryComponent},
