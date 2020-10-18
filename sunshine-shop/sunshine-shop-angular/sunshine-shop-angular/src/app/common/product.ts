@@ -3,9 +3,13 @@ export class Product {
     productName: string;
     productTitle: string;
     productPrice: number;
+    productDiscountPrice: number;
     productCreateDate: Date;
     productLastDate: Date;
     categoryId: number;
     productImageUrl: string;
-    product: boolean;
+    productActive: boolean;
+    productRecommend: boolean;
+    productBestSell: boolean;
+    productDiscount: boolean;
 }

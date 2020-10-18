@@ -56,13 +56,16 @@ CREATE TABLE `product` (
     `product_name`        varchar(100)   DEFAULT NULL,
     `product_title`       varchar(100)   DEFAULT NULL,
     `product_price`       decimal(13, 2) NULL DEFAULT NULL,
+    `product_discount_price` decimal(13, 2)  NULL DEFAULT NULL,
     `product_create_date` datetime(6)    DEFAULT NULL,
     `product_last_updated` datetime(6)   DEFAULT NULL,
-    `sub_category_id`         BIGINT(10)     NOT NULL,
+    `sub_category_id`      BIGINT(10)     NOT NULL,
     `product_image_url`   varchar(255)   DEFAULT NULL,
     `product_active`      bit(1)         DEFAULT 1,
-    `product_recommend`      bit(1)         DEFAULT 0,
-    `product_best_sell`      bit(1)         DEFAULT 0,
+    `product_recommend`   bit(1)         DEFAULT 0,
+    `product_best_sell`   bit(1)         DEFAULT 0,
+    `product_discount`    bit(1)         DEFAULT 0,
+
     PRIMARY KEY (`id`),
     KEY `fk_sub_category` (`sub_category_id`),
     CONSTRAINT `fk_sub_category` FOREIGN KEY (`sub_category_id`) REFERENCES `sub_category` (`id`)
@@ -171,145 +174,145 @@ INSERT INTO sub_category(sub_category_name,category_id) VALUES ('Soft Drink',5);
 INSERT INTO sub_category(sub_category_name,category_id) VALUES ('Oat & Cereal',5);
 INSERT INTO sub_category(sub_category_name,category_id) VALUES ('Chocolate Drink',5);
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Vegetables1', 'JavaScript - The Fun Parts', 3324,
-NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Vegetables1', 'JavaScript - The Fun Parts', 3324, 3000,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1,1);
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Vegetables2', 'JavaScript - The Fun Parts', 34,
-NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Vegetables2', 'JavaScript - The Fun Parts', 22, 30,
+NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0,1);
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Fruits1', 'JavaScript - The Fun Parts', 3324,
-NOW(),2,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,1);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Fruits1', 'JavaScript - The Fun Parts', 3324,3324,
+NOW(),2,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,1,0);
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Fruits2', 'JavaScript - The Fun Parts', 34,
-NOW(),2,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Meats1', 'JavaScript - The Fun Parts', 3324,
-NOW(),3,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Meats2', 'JavaScript - The Fun Parts', 34,
-NOW(),3,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Cheese1', 'JavaScript - The Fun Parts', 3324,
-NOW(),4,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,1);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Cheese2', 'JavaScript - The Fun Parts', 34,
-NOW(),4,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Yogurt1', 'JavaScript - The Fun Parts', 34,
-NOW(),5,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Yogurt2', 'JavaScript - The Fun Parts', 34,
-NOW(),5,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Milk', 'JavaScript - The Fun Parts', 34,
-NOW(),6,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Other', 'JavaScript - The Fun Parts', 34,
-NOW(),7,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Bread', 'JavaScript - The Fun Parts', 34,
-NOW(),8,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Cake', 'JavaScript - The Fun Parts', 34,
-NOW(),9,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Convenience Food', 'JavaScript - The Fun Parts', 34,
-NOW(),10,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Seafood', 'JavaScript - The Fun Parts', 34,
-NOW(),11,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Vegetarian', 'JavaScript - The Fun Parts', 34,
-NOW(),12,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Ice-Cream', 'JavaScript - The Fun Parts', 34,
-NOW(),13,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Meat', 'JavaScript - The Fun Parts', 34,
-NOW(),14,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Tea', 'JavaScript - The Fun Parts', 34,
-NOW(),15,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Coffee', 'JavaScript - The Fun Parts', 34,
-NOW(),16,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,1);
-
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Juice', 'JavaScript - The Fun Parts', 34,
-NOW(),17,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Fruits2', 'JavaScript - The Fun Parts', 32, 34,
+NOW(),2,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,1);
 
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Soy Milk', 'JavaScript - The Fun Parts', 34,
-NOW(),18,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Meats1', 'JavaScript - The Fun Parts', 3324, 3310,
+NOW(),3,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0,1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Meats2', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),3,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Cheese1', 'JavaScript - The Fun Parts', 3324, 3324,
+NOW(),4,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,1,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Cheese2', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),4,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Yogurt1', 'JavaScript - The Fun Parts', 23, 34,
+NOW(),5,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1,1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Yogurt2', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),5,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Milk', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),6,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Other', 'JavaScript - The Fun Parts', 3, 19,
+NOW(),7,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Bread', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),8,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Cake', 'JavaScript - The Fun Parts', 34, 22,
+NOW(),9,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Convenience Food', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),10,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Seafood', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),11,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Vegetarian', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),12,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Ice-Cream', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),13,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Meat', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),14,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Tea', 'JavaScript - The Fun Parts', 34, 22,
+NOW(),15,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,1);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Coffee', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),16,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,1,0);
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Juice', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),17,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
 
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Mineral', 'JavaScript - The Fun Parts', 34,
-NOW(),19,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Soy Milk', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),18,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
 
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Soft Drink', 'JavaScript - The Fun Parts', 34,
-NOW(),20,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Mineral', 'JavaScript - The Fun Parts', 34, 12,
+NOW(),19,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,1);
 
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Oat & Cereal', 'JavaScript - The Fun Parts', 34,
-NOW(),21,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Soft Drink', 'JavaScript - The Fun Parts', 34, 11,
+NOW(),20,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,1);
+
+
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Oat & Cereal', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),21,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,0,0);
 
 
 
-INSERT INTO PRODUCT (product_name, product_title, product_price, product_create_date,
-sub_category_id, product_image_url,product_active, product_recommend, product_best_sell)
-VALUES ('Chocolate Drink', 'JavaScript - The Fun Parts', 34,
-NOW(),22,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0);
+INSERT INTO PRODUCT (product_name, product_title, product_price, product_discount_price, product_create_date,
+sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
+VALUES ('Chocolate Drink', 'JavaScript - The Fun Parts', 34, 34,
+NOW(),22,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,0,0,0);
 

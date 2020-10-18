@@ -32,6 +32,9 @@ public class Product {
     @Column(name = "product_price")
     private BigDecimal productPrice;
 
+    @Column(name = "product_discount_price")
+    private BigDecimal productDiscountPrice;
+
     @Column(name = "product_create_date")
     @CreationTimestamp
     private Date productCreateDate;
@@ -52,4 +55,6 @@ public class Product {
     @Column(name = "product_best_sell")
     private boolean productBestSell;
 
+    @Column(name = "product_discount")
+    private BigDecimal productDiscount;
 }
