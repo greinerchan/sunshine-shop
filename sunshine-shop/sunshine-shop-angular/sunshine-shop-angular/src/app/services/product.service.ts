@@ -95,8 +95,7 @@ export class ProductService {
   }
 
   searchProducts(keyword: string): Observable<Product[]> {
-    const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductNameContaining?name=${keyword}`;
-
+    const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductNameContaining?keyword=${keyword}`;
     return this.getProducts(searchRecommendCategoryUrl);
   }
 

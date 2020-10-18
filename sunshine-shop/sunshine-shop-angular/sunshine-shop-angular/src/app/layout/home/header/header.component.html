@@ -9,7 +9,7 @@
           <input #myInput class="form-control form-control-md rounded-pill bg-white" size="50" type="search" (keyup.enter) = "doSearch(myInput.value)"
             placeholder="I'm looking for...">
           <div class="input-group-append">
-            <button (click) = "doSearch(myInput.value)" class="btn input-group-text bg-transparent ml-n5 shadow-none" type="submit">
+            <button (click) = "doSearch(myInput.value)" class="btn input-group-text bg-transparent ml-n5 shadow-none" id="icon" type="submit">
               <i class="fa fa-search icon"></i></button>
           </div>
         </div>
