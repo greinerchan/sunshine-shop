@@ -1,7 +1,7 @@
 export class Product {
     productName: string;
     productTitle: string;
-    prodcutPrice: number;
+    productPrice: number;
     productCreateDate: Date;
     productLastDate: Date;
     categoryId: number;
