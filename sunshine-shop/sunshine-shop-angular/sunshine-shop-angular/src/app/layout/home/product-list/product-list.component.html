@@ -7,11 +7,11 @@
                     <div *ngFor="let product of products" class="col-md-2">
                         <div class="product-box">
 
-                            <a routerLink="/products/{{ product.id }}">
+                            <a id="link" routerLink="/products/{{ product.id }}">
                                 <img src="{{product.productImageUrl}}" class="img-responsive outline">
                             </a>
 
-                            <a routerLink="/products/{{ product.id }}">
+                            <a id="link" routerLink="/products/{{ product.id }}">
                                 <h4>{{ product.productName }}</h4>
                             </a>
 
@@ -38,12 +38,11 @@
             <!-- pagination area -->
             <div class="footer-pagination">
                 <div class="row">
+                    <div class="col-md-6"></div>
                     <div class="col-md-6">
-
-                    </div>
-                    <div class="col-md-6">
+                        <br>
                         <div class="row">
-                            <div class="col-md-9" style="padding-left: 70%">
+                            <div class="col-md-9" style="padding-left: 63%">
 
                                 <ngb-pagination [(page)] = "pageNumber"
                                                 [pageSize] = "pageSize"

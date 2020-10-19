@@ -1,20 +1,9 @@
-/* .my-1 {
-    width: 12em;
-    height: 23em;
-    margin: 0em 7em 0em 7em;
-} */
 
 .content { 
   margin: 16px; 
 }
 
-/* .content > mat-card { 
-  width: 200px; 
-} */
 
-/* .content {
-  margin-left: 11.3em;
-} */
 a h4 {
   font-size: 10pt;
   margin-top: 0.6em;
@@ -123,3 +112,20 @@ img {
 #keyword {
   color: #f13d01;
 }
+
+
+
+
+/* .content > mat-card { 
+  width: 200px; 
+} */
+
+/* .content {
+  margin-left: 11.3em;
+} */
+
+/* .my-1 {
+    width: 12em;
+    height: 23em;
+    margin: 0em 7em 0em 7em;
+} */
