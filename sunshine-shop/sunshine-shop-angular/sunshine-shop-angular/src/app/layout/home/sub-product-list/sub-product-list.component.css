@@ -102,4 +102,10 @@
     font-weight: 700;
     margin-bottom: 10px;
   }
+
+  #pagination-format {
+    display: block;
+    margin-left: 45em;
+    margin-right: auto;
+  }
   

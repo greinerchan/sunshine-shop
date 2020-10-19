@@ -113,7 +113,15 @@ img {
   color: #f13d01;
 }
 
+.size-select {
+  margin-right: 3em;
+}
 
+#pagination-format {
+  display: block;
+  margin-left: 45em;
+  margin-right: auto;
+}
 
 
 /* .content > mat-card { 

@@ -17,7 +17,7 @@ export class SubProductListComponent implements OnInit {
   currentCategoryId: number = 1;
   previousCategoryId: number = 1; 
   pageNumber: number = 1;
-  pageSize: number = 12;
+  pageSize: number = 6;
   totalElements: number = 0;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
@@ -79,5 +79,11 @@ export class SubProductListComponent implements OnInit {
       this.totalElements = data.page.totalElements;
     };
   }
+
+  updatePageSize(pageSize:number) {
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listSubProducts();
+  } 
 
 }

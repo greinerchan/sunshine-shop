@@ -23,7 +23,7 @@ export class ProductListComponent implements OnInit {
   currentCategoryId: number = 1;
   previousCategoryId: number = 1; 
   pageNumber: number = 1;
-  pageSize: number = 12;
+  pageSize: number = 6;
   totalElements: number = 0;
 
 
@@ -108,6 +108,12 @@ export class ProductListComponent implements OnInit {
       this.totalElements = data.page.totalElements;
     };
   }
+
+  updatePageSize(pageSize:number) {
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listSubProducts();
+  } 
 }
 
     // this.productService.getSubProductList(this.currentCategoryId).subscribe(

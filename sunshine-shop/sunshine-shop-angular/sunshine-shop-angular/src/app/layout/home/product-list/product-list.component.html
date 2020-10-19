@@ -38,12 +38,10 @@
             <!-- pagination area -->
             <div class="footer-pagination">
                 <div class="row">
-                    <div class="col-md-6"></div>
-                    <div class="col-md-6">
+
                         <br>
                         <div class="row">
-                            <div class="col-md-9" style="padding-left: 63%">
-
+                            <div id="pagination-format" >
                                 <ngb-pagination [(page)] = "pageNumber"
                                                 [pageSize] = "pageSize"
                                                 [collectionSize] = "totalElements"
@@ -51,8 +49,19 @@
                                 </ngb-pagination>
 
                             </div>
+
+                            <div class="mt-2" style="text-align: left;">
+                                <span class="mr-2 size-select">Page Size</span>
+
+                                <select (change)="updatePageSize($event.target.value)">
+                                    <option selected="true">6</option>
+                                    <option>12</option>
+                                    <option>18</option>
+                                    <option>24</option>
+                                </select>
+                            </div>
+
                         </div>
-                    </div>
 
                 </div>
             </div>
