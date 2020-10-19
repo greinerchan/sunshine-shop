@@ -32,7 +32,13 @@
               Login</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" routerLink="/cart" routerLinkActive="active"><i class="far fa-gem fa-lg"></i> Cart</a>
+            <!-- <a class="nav-link" routerLink="/cart" routerLinkActive="active"><i class="far fa-gem fa-lg"></i> Cart</a> -->
+            <a href="shopping-detail.html">
+              <i class="fa fa-shopping-cart" aria-hidden="true"></i>
+              <div class="total">{{ totalPrice | currency: 'USD' }}
+                  | <span>{{ totalQuantity }}</span> 
+              </div> 
+           </a>
           </li>
         </ul>
       </div>

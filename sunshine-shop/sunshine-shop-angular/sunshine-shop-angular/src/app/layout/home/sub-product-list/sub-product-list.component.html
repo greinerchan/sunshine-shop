@@ -16,9 +16,9 @@
                             <a href="#" class="btn btn-default-icon">
                                 <span><i class="material-icons" style="font-size:18px">favorite_border</i></span>
                             </a>
-                            <a href="#" class="add-cart btn-default">
+                            <button (click)="addToCart(product)" class="add-cart btn-default">
                                 <span>Add to Cart</span>
-                            </a>
+                            </button>
                         </div>
                         <br>
                     </div>
@@ -28,34 +28,28 @@
             <div class="footer-pagination">
                 <div class="row">
 
-                        <br>
-                        <div class="row">
-                            <div id="pagination-format" >
-                                <ngb-pagination [(page)] = "pageNumber"
-                                                [pageSize] = "pageSize"
-                                                [collectionSize] = "totalElements"
-                                                (pageChange) = "listSubProducts()">
-                                </ngb-pagination>
-
-                            </div>
-
-                            <div class="mt-2" style="text-align: left;">
-                                <span class="mr-2 size-select">Page Size</span>
-
-                                <select (change)="updatePageSize($event.target.value)">
-                                    <option selected="true">6</option>
-                                    <option>12</option>
-                                    <option>18</option>
-                                    <option>24</option>
-                                </select>
-                            </div>
+                    <br>
+                    <div class="row">
+                        <div id="pagination-format">
+                            <ngb-pagination [(page)]="pageNumber" [pageSize]="pageSize" [collectionSize]="totalElements"
+                                (pageChange)="listSubProducts()">
+                            </ngb-pagination>
 
                         </div>
 
+                        <div class="mt-2" style="text-align: left;">
+                            <span class="mr-2 size-select">Page Size</span>
+
+                            <select (change)="updatePageSize($event.target.value)">
+                                <option selected="true">6</option>
+                                <option>12</option>
+                                <option>18</option>
+                                <option>24</option>
+                            </select>
+                        </div>
+                    </div>
                 </div>
             </div>
-
-
         </div>
     </div>
 </section>

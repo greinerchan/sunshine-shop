@@ -2,6 +2,7 @@ import { Route } from '@angular/compiler/src/core';
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from "@angular/forms";
 import { Router } from '@angular/router';
+import { CartService } from 'src/app/services/cart.service';
 
 
 @Component({
@@ -13,12 +14,27 @@ import { Router } from '@angular/router';
 export class HeaderComponent implements OnInit {
   validatingForm: FormGroup;
 
-  constructor(private router: Router) { }
+  totalPrice: number= 0.00;
+  totalQuantity: number = 0;
+
+  constructor(private router: Router, private cartService:CartService) { }
+  
   ngOnInit() {
     this.validatingForm = new FormGroup({
       loginFormModalEmail: new FormControl('', Validators.email),
       loginFormModalPassword: new FormControl('', Validators.required)
     });
+    this.updateCartStatus();
+  }
+
+  updateCartStatus() {
+    this.cartService.totalPrice.subscribe(
+      data => this.totalPrice = data
+    );
+
+    this.cartService.totalQuantity.subscribe(
+      data => this.totalQuantity = data
+    );
   }
 
   get loginFormModalEmail() {
