@@ -29,6 +29,8 @@ import { FlexLayoutModule } from "@angular/flex-layout";
 import { SubProductListComponent } from './home/sub-product-list/sub-product-list.component';
 import { ProductDetailComponent } from './home/product-detail/product-detail.component';
 
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
+
 
 
 
@@ -46,7 +48,8 @@ import { ProductDetailComponent } from './home/product-detail/product-detail.com
     MatButtonModule,
     FlexLayoutModule,
     FormsModule, 
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgbModule
     // LayoutRoutingModule
   ],
   exports: [

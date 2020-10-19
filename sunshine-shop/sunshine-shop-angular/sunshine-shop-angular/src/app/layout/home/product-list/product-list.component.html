@@ -35,6 +35,28 @@
                     </div>
                 </div>
             </div>
+            <!-- pagination area -->
+            <div class="footer-pagination">
+                <div class="row">
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-6">
+                        <div class="row">
+                            <div class="col-md-9" style="padding-left: 70%">
+
+                                <ngb-pagination [(page)] = "pageNumber"
+                                                [pageSize] = "pageSize"
+                                                [collectionSize] = "totalElements"
+                                                (pageChange) = "listSubProducts()">
+                                </ngb-pagination>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
         </div>
     </div>
 </section>

@@ -10,8 +10,15 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class SubProductListComponent implements OnInit {
   subCategoryTitle: string;
-  currentCategoryId: number;
   subCategoryProducts: Product[];
+
+  // for pagination
+  products: Product[] = [];
+  currentCategoryId: number = 1;
+  previousCategoryId: number = 1; 
+  pageNumber: number = 1;
+  pageSize: number = 12;
+  totalElements: number = 0;
 
   constructor(private productService: ProductService, private route: ActivatedRoute) { }
 
@@ -32,18 +39,45 @@ export class SubProductListComponent implements OnInit {
     }
 
 
-    this.productService.getProductCategoryList(this.currentCategoryId).subscribe(
+    // this.productService.getProductCategoryList(this.currentCategoryId).subscribe(
 
-      data => {
-        this.subCategoryProducts = data;
-      }
-    )
+    //   data => {
+    //     this.subCategoryProducts = data;
+    //   }
+    // )
 
     this.productService.getSubCategoryItem(this.currentCategoryId).subscribe(
       data => {
         this.subCategoryTitle = data[0].subCategoryName;
       }
     )
+
+    // this.productService.getProductList(this.currentCategoryId).subscribe(
+    //   data => {
+    //     this.products = data;
+    //   }
+    // );
+
+    if (this.previousCategoryId != this.currentCategoryId) {
+      this.pageNumber = 1;
+    }
+
+
+
+    this.previousCategoryId = this.currentCategoryId;
+    this.productService.getProductCategoryListPaginate(this.pageNumber - 1, 
+                                               this.pageSize, 
+                                               this.currentCategoryId)
+                                               .subscribe(this.processResult());
+  }
+
+  processResult() {
+    return data => { 
+      this.subCategoryProducts = data._embedded.products;
+      this.pageNumber = data.page.number + 1;
+      this.pageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    };
   }
 
 }
