@@ -12,6 +12,7 @@ import { ProductListComponent } from "./layout/home/product-list/product-list.co
 import { SubProductListComponent } from "./layout/home/sub-product-list/sub-product-list.component";
 import { ProductDetailComponent } from './layout/home/product-detail/product-detail.component';
 import { CartDetailComponent } from "./layout/home/cart-detail/cart-detail.component";
+import { CheckoutFormComponent } from "./layout/home/checkout-form/checkout-form.component";
 
 
 const routes: Routes = [
@@ -22,6 +23,7 @@ const routes: Routes = [
   { path: "register", component: SignUpComponent },
   { path: "cart", component: CartComponent },
   { path: "cart-detail", component: CartDetailComponent },
+  { path: "checkout-form", component: CheckoutFormComponent },
 
   // for category funtion routes
   { path: "search/:keyword", component: ProductListComponent},

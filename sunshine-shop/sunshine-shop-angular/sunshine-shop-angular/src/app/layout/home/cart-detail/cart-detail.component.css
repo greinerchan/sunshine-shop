@@ -50,6 +50,24 @@
     padding: 10px 34px;
 }
 
+.btn-default-icon3 {
+    line-height: 0.2em;
+    background: #FF6534;
+    border-color: #FF6534;
+    position: relative;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background-color: #FF6534;
+    border-radius: 4px;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    padding: 6px 34px;
+    text-decoration: none;
+}
+
 table, th, td {
     /* border: #e64600; */
     border: 1px solid #e64600;

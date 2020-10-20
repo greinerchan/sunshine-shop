@@ -32,11 +32,12 @@ import { ProductDetailComponent } from './home/product-detail/product-detail.com
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 import { CartDetailComponent } from "./home/cart-detail/cart-detail.component";
+import { CheckoutFormComponent } from './home/checkout-form/checkout-form.component';
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent, SubProductListComponent, ProductDetailComponent, CartDetailComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent, SubProductListComponent, ProductDetailComponent, CartDetailComponent, CheckoutFormComponent],
   imports: [
     CommonModule,
     RouterModule,
