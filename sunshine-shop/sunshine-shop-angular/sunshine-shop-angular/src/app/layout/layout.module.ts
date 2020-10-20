@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
+
 import { HeaderComponent } from './home/header/header.component';
 import { HomeComponent } from './home/home.component';
 import { CarouselComponent } from './home/carousel/carousel.component';
@@ -30,13 +31,12 @@ import { SubProductListComponent } from './home/sub-product-list/sub-product-lis
 import { ProductDetailComponent } from './home/product-detail/product-detail.component';
 
 import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
-
-
+import { CartDetailComponent } from "./home/cart-detail/cart-detail.component";
 
 
 
 @NgModule({
-  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent, SubProductListComponent, ProductDetailComponent],
+  declarations: [HeaderComponent, HomeComponent, CarouselComponent, SubImagesComponent, RecommendsComponent, FooterComponent, ProductListComponent, HeaderAsstComponent, SubProductListComponent, ProductDetailComponent, CartDetailComponent],
   imports: [
     CommonModule,
     RouterModule,

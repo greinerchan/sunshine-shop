@@ -30,7 +30,7 @@ export class CartService {
     } else {
       this.cartItems.push(cartItem);
     }
-
+    console.log(this.cartItems);
     this.computeTotal();
 
   }

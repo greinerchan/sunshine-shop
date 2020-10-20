@@ -11,6 +11,7 @@ import { OnlineOnlyComponent } from './routes/navbar/online-only/online-only.com
 import { ProductListComponent } from "./layout/home/product-list/product-list.component";
 import { SubProductListComponent } from "./layout/home/sub-product-list/sub-product-list.component";
 import { ProductDetailComponent } from './layout/home/product-detail/product-detail.component';
+import { CartDetailComponent } from "./layout/home/cart-detail/cart-detail.component";
 
 
 const routes: Routes = [
@@ -20,6 +21,7 @@ const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "register", component: SignUpComponent },
   { path: "cart", component: CartComponent },
+  { path: "cart-detail", component: CartDetailComponent },
 
   // for category funtion routes
   { path: "search/:keyword", component: ProductListComponent},
