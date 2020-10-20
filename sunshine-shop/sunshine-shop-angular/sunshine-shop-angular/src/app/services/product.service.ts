@@ -12,9 +12,9 @@ import { ProductSubCategory } from '../common/product-sub-category';
 })
 export class ProductService {
 
-  private productUrl = "http://localhost:8080/api/products";
-  private categorySubUrl = "http://localhost:8080/api/productSubCategories"
-  private categoryUrl = "http://localhost:8080/api/product-category"
+  private productUrl = "http://localhost:8080/sunshine/products";
+  private categorySubUrl = "http://localhost:8080/sunshine/productSubCategories"
+  private categoryUrl = "http://localhost:8080/sunshine/product-category"
 
 
   constructor(private httpClient: HttpClient) { }
