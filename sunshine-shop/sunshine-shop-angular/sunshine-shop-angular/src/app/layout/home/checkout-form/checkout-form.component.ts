@@ -17,14 +17,41 @@ export class CheckoutFormComponent implements OnInit {
       customer: this.formBuilder.group({
         firstName: [''],
         lastName: [''],
-        address: [''],
+        email:[''],
+        phone: ['']
+      }),
+
+      billingAddress: this.formBuilder.group({
         postcode: [''],
         city: [''],
         state: [''],
-        email:[''],
-        phone: ['']
+        address: ['']
+      }),
+
+      shippingAddress: this.formBuilder.group({
+        address: [''],
+        postcode: [''],
+        city: [''],
+        state: ['']
+      }),
+
+      creditCard: this.formBuilder.group({
+        cardType: [''],
+        nameOnCard: [''],
+        cardNumber: [''],
+        securityCode: [''],
+        expirationMonth: [''],
+        expirationYear: ['']
       })
     });
+  }
+
+  copyShippingToBilling(event) {
+    if (event.target.checked) {
+      this.checkoutFormGroup.controls.billingAddress.setValue(this.checkoutFormGroup.controls.shippingAddress.value);
+    } else {
+      this.checkoutFormGroup.controls.billingAddress.reset();
+    }
   }
 
   onSubmit() {

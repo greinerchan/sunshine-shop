@@ -4,14 +4,12 @@
             <form [formGroup]="checkoutFormGroup" (ngSubmit)="onSubmit()">
                 <div class="row">
                     <div id="left" class="col-md-5">
-
                         <div formGroupName="customer" class="form-area col-md-12">
                             <h2>Step 2: Delivery & Billing <br>
                                 <small>Select your delivery method and billing address. Shipping cost will be added into
-                                    the
-                                    payment details if applicable.
+                                    the payment details if applicable.
                                 </small></h2>
-                            <h3>Delivery Address</h3>
+                            <h3>Customer Information</h3>
                             <div class="row">
                                 <div class="col-md-2"><label>First Name</label></div>
                                 <div class="col-md-9">
@@ -30,6 +28,27 @@
                                 </div>
                             </div>
 
+                            <div class="row">
+                                <div class="col-md-2"><label>Email</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-space">
+                                        <input formControlName="email" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"><label>Phone</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-space">
+                                        <input formControlName="phone" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div formGroupName="shippingAddress" class="form-area col-md-12">
+                            <h3>Delivery Address</h3>
                             <div class="row">
                                 <div class="col-md-2"><label>Address</label></div>
                                 <div class="col-md-9">
@@ -65,23 +84,12 @@
                                     </div>
                                 </div>
                             </div>
-
-                            <div class="row">
-                                <div class="col-md-2"><label>Email</label></div>
-                                <div class="col-md-9">
-                                    <div class="input-space">
-                                        <input formControlName="email" type="text">
-                                    </div>
-                                </div>
-                            </div>
-
-                            <div class="row">
-                                <div class="col-md-2"><label>Phone</label></div>
-                                <div class="col-md-9">
-                                    <div class="input-space">
-                                        <input formControlName="phone" type="text">
-                                    </div>
-                                </div>
+                            <!-- Add check box to copy shipping to billing -->
+                            <div class="copy-checkbox">
+                                <label class="au-checkbox">
+                                    <input type="checkbox" (change)="copyShippingToBilling($event)">
+                                    <span class="au-checkmark"></span> Billing Address same as Shipping Address
+                                </label>
                             </div>
                         </div>
                     </div>
@@ -91,10 +99,49 @@
 
                     <div id="right" class="col-md-5">
 
+                        <div formGroupName="billingAddress" class="form-area col-md-12">
+                            <h3>Billing Address</h3>
+                            <div class="row">
+                                <div class="col-md-2"><label>Address</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-space">
+                                        <input formControlName="address" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"><label>Postcode</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-space">
+                                        <input formControlName="postcode" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"><label>City</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-space">
+                                        <input formControlName="city" type="text">
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="col-md-2"><label>State</label></div>
+                                <div class="col-md-9">
+                                    <div class="input-space">
+                                        <input formControlName="state" type="text">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+
                         <!-- Credit Card -->
                         <div formGroupName="creditCard" class="form-area payment col-md-12">
                             <h3>Credit Card</h3>
-
                             <div class="row">
                                 <div class="col-md-2"> <label>Card Type</label></div>
                                 <div class="col-md-9">
@@ -156,12 +203,13 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="btn">
-                            <a routerLink="/checkout-form" class="btn-default-icon3">Continue</a>
-                        </div>
                     </div>
                 </div>
             </form>
+
+            <div class="btn">
+                <a routerLink="/checkout-form" class="btn-default-icon3">Continue</a>
+            </div>
         </div>
     </div>
 </div>
