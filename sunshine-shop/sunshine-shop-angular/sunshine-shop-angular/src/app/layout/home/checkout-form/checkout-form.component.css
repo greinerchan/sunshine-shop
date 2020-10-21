@@ -1,0 +1,127 @@
+.table{
+    margin:0
+}
+table.table.table-bordered{
+    border:1px solid #ccc;
+    background:#fff
+}
+.table-bordered td,.table-bordered th{
+    border:1px solid #dee2e6
+}
+table.table.table-bordered th{
+    BACKGROUND:#0da8e4;
+    color:#fff;
+    font-size:14px;
+    padding:7px
+}
+.table-responsive{
+    padding-right:1px
+}
+.items select{
+    width:100px;
+    height:40px;
+    border-radius:40px;
+    padding-left:15px;
+    margin-bottom:10px;
+    outline:0;
+    margin-left:5px
+}
+
+
+.main-content{
+    min-height:100vh;
+}
+
+.main-content.page-m{
+    margin: 1% 0% 3% 8%
+}
+
+.section-content{
+    position:relative;
+    margin:0 auto;
+    z-index:1;
+}
+
+.section-content-p30{
+    padding:0 30px;
+}
+
+.form-area{
+    position:relative;
+    margin-bottom:45px;
+    padding:20px 20px;
+    border:1px solid #e64600; ;
+}
+
+.header-tag {
+    color: #333333;
+    font:14px,Raleway,sans-serif;
+    background: #f8f7f4;
+    padding: 0px 15px 0px 0px;
+}
+
+.input-space{
+    margin-bottom:20px
+}
+.input-space label{
+    padding-left:31px;
+    font-size:14px;
+    margin-bottom:50px
+}
+.input-space input[type=text]{
+    width:100%;
+    height:32px;
+    outline:0;
+    border:1px solid #ccc;
+}
+.input-space select{
+    width:100%;
+    height:40px;
+    border-radius:30px;
+    outline:0;
+    padding:0 10px;
+    border:1px solid #ccc;
+}
+
+h3 {
+    font-weight: 400;
+}
+
+small {
+    font-weight: 400;
+    line-height: 1;
+    color: #777;
+    line-height: 1.5em !important;
+}
+
+.btn-default-icon3 {
+    line-height: 0.2em;
+    background: #FF6534;
+    border-color: #FF6534;
+    position: relative;
+    vertical-align: middle;
+    text-transform: uppercase;
+    text-align: center;
+    color: #fff;
+    background-color: #FF6534;
+    border-radius: 4px;
+    overflow: hidden;
+    border: none;
+    outline: none;
+    padding: 10px 10em;
+    text-decoration: none;
+
+    margin-left: 35%;
+}
+
+.btn {
+    color: white;
+}
+
+.btn-default-icon3:hover {
+    background-color: #f13d01;
+    color: white;
+}
+
+
+

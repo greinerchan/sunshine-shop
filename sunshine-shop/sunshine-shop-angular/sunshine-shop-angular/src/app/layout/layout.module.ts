@@ -2,6 +2,7 @@ import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule, RouterLink } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { GoogleMapsModule } from '@angular/google-maps';
 
 
 import { HeaderComponent } from './home/header/header.component';
@@ -49,9 +50,10 @@ import { CheckoutFormComponent } from './home/checkout-form/checkout-form.compon
     MatToolbarModule,
     MatButtonModule,
     FlexLayoutModule,
-    FormsModule, 
+    FormsModule,
     ReactiveFormsModule,
-    NgbModule
+    NgbModule,
+    GoogleMapsModule
     // LayoutRoutingModule
   ],
   exports: [

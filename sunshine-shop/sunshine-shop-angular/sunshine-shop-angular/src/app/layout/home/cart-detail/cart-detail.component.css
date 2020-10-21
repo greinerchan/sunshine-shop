@@ -1,3 +1,15 @@
+
+.section-content{
+    position:relative;
+    margin:0 auto;
+    z-index:1;
+}
+
+.section-content-p30{
+    padding:0 30px;
+}
+
+
 #EmptyCart {
     width: 110px;
     height: 500px;
@@ -47,7 +59,7 @@
     overflow: hidden;
     border: none;
     outline: none;
-    padding: 10px 34px;
+    padding: 10px 23.8px;
 }
 
 .btn-default-icon3 {
@@ -64,12 +76,28 @@
     overflow: hidden;
     border: none;
     outline: none;
-    padding: 6px 34px;
+    padding: 10px 10em;
     text-decoration: none;
+
+    margin-left: 35%;
+}
+
+.btn-default-icon3:hover {
+    background-color: #f13d01;
+    color: white;
 }
 
 table, th, td {
     /* border: #e64600; */
     border: 1px solid #e64600;
 
+}
+
+h3 {
+    margin: .5em 0 .5em;
+    font-weight: 600;
+    /* line-height: 1.5em; */
+    -webkit-column-span: all;
+    column-span: all;
+    color: #484848;
 }

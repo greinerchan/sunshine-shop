@@ -1,14 +1,16 @@
 <br>
 <div class="main-content">
-    <div class="section-content section-content-p30">
-        <div class="container-fluid">
+    <!-- <div class="section-content section-content-p30"> -->
+        <div class="new-container">
             <div *ngIf="cartItems.length > 0">
-
+                <h2>Step 1: Order Summary <br>
+                    <small>Price stated below are shown in US Dollars (USD)</small>
+                </h2>
                 <table class="table table-bordered">
                     <tr>
-                        <th width="20%">Product </th>
-                        <th width="50%">Product Price</th>
-                        <th width="30%"></th>
+                        <th width="20%">Description </th>
+                        <th width="50%">Price</th>
+                        <th width="30%">Total Price</th>
                     </tr>
 
                     <tr *ngFor="let item of cartItems">
@@ -54,11 +56,10 @@
                             <p>Total Quantity: {{ totalQuantity }}</p>
                             <p>Shipping: Consult Customer Service</p>
                             <p>Total Price: {{ totalPrice | currency: 'USD' }}</p>
-                            <a routerLink="/checkout-form" class="btn-default-icon3">Checkout</a>
                         </td>
                     </tr>
-
                 </table>
+                <a routerLink="/checkout-form" class="btn-default-icon3">Continue</a>
             </div>
             <div *ngIf="cartItems.length == 0">
                 <!-- <div id="EmptyCartText">
@@ -68,6 +69,6 @@
                 <img id="EmptyCart" src="../../../../assets/other/empty-cart-png-Transparent-Images.png" alt="">
             </div>
             <br>
-        </div>
+        <!-- </div> -->
     </div>
 </div>
