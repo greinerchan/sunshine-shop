@@ -149,6 +149,8 @@
                                         <select formControlName="cardType">
                                             <option>Visa</option>
                                             <option>Mastercard</option>
+                                            <option>Discover</option>
+                                            <option>American Express</option>
                                         </select>
                                     </div>
                                 </div>
@@ -186,7 +188,7 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <select formControlName="expirationMonth">
-                                            <option>TO DO</option>
+                                            <option *ngFor = "let month of creditCardMonths">{{month}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -197,7 +199,7 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <select formControlName="expirationYear">
-                                            <option>TO DO</option>
+                                            <option *ngFor="let year of creditCardYears">{{year}}</option>
                                         </select>
                                     </div>
                                 </div>
@@ -206,6 +208,14 @@
                     </div>
                 </div>
             </form>
+
+            <div class="form-area col-md-10">
+                <div class="review">
+                    <h3>Order Review</h3>
+                    <p>Total Quantity: {{ totalQuanity }}</p>
+                    <p>Total Price: {{ totalPrice | currency: 'USD'}}</p>
+                </div>
+            </div>
 
             <div class="btn">
                 <a routerLink="/checkout-form" class="btn-default-icon3">Continue</a>
