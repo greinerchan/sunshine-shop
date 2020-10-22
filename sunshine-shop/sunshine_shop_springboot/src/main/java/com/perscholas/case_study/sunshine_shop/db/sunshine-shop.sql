@@ -134,6 +134,28 @@ CREATE TABLE `user`  (
   PRIMARY KEY (`id`) USING BTREE
 ) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
 
+
+# Add country code
+#
+DROP TABLE IF EXISTS `country`;
+
+CREATE TABLE `country`(
+    `id` smallint unsigned PRIMARY KEY NOT NULL,
+    `code` varchar(2) DEFAULT NULL,
+    `name` varchar(255) DEFAULT NULL
+) ENGINE = InnoDB;
+
+# Add state code
+
+DROP TABLE IF EXISTS `state`;
+
+CREATE TABLE `state`(
+    `id` smallint unsigned primary key not null auto_increment,
+    `name` varchar(255) DEFAULT NULL,
+    `country_id` smallint unsigned not null,
+    CONSTRAINT `fk_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT=1;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -404,4 +426,49 @@ INSERT INTO PRODUCT (product_name, product_title, product_price, product_discoun
 sub_category_id, product_image_url,product_active, product_recommend, product_best_sell, product_discount)
 VALUES ('Vegetables1', 'JavaScript - The Fun Parts', 3324, 3000,
 NOW(),1,'../../../../assets/product-images/beverage/juice/vegetable-juices-1725835_640.jpg',1,1,1,1);
+
+--
+-- Data for table `country`
+--
+
+INSERT INTO `country` VALUES
+(1,'US','United States'),
+(2,'CN','China'),
+(3,'CA','Canada');
+
+
+
+INSERT INTO `state` VALUES
+(1,'Alabama',1),
+(2,'Alaska',1),
+(3,'Arizona',1),
+(4,'Arkansas',1),
+(5,'California',1),
+(6,'Colorado',1),
+(7,'Connecticut',1),
+(8,'Delaware',1),
+(9,'District Of Columbia',1),
+(10,'Florida',1),
+
+(11,'Anhui',2),
+(12,'Beijing',2),
+(13,'Chongqing',2),
+(14,'Fujian',2),
+(15,'Guangdong',2),
+(16,'Gansu',2),
+(17,'Guangxi',2),
+(18,'Guizhou',2),
+(19,'Henan',2),
+(20,'Hubei',2),
+
+(21,'Alberta',3),
+(22,'British',3),
+(23,'Columbia',3),
+(24,'Manitoba',3),
+(25,'New Brunswick',3),
+(26,'Newfoundland',3),
+(27,'Nova Scotia',3),
+(28,'Ontario',3),
+(29,'Quebec',3),
+(30,'Saskatchewan',3);
 
