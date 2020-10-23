@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { map } from 'rxjs/operators';
+import { City } from '../common/city';
 import { Country } from '../common/country';
 import { State } from '../common/state';
 
@@ -12,6 +13,8 @@ export class CheckoutformService {
 
   private countryUrl = "http://localhost:8080/sunshine/countries";
   private stateUrl = "http://localhost:8080/sunshine/states";
+  private cityUrl = "http://localhost:8080/sunshine/cities";
+  
   constructor(private httpClient: HttpClient) { }
 
   getCountries(): Observable<Country[]> {
@@ -24,6 +27,13 @@ export class CheckoutformService {
     const searchStateUrl = `${this.stateUrl}/search/findByCountryName?name=${name}`;
     return this.httpClient.get<GetReponseStates>(searchStateUrl).pipe(
       map(response => response._embedded.states)
+    );
+  }
+
+  getCities(stateName: string): Observable<City[]> {
+    const searchCityUrl = `${this.cityUrl}/search/findByStateName?name=${stateName}`;
+    return this.httpClient.get<GetResponseCities>(searchCityUrl).pipe(
+      map(response => response._embedded.cities)
     );
   }
 
@@ -62,5 +72,11 @@ interface GetReponseCountries {
 interface GetReponseStates {
   _embedded: {
     states: State[];
+  }
+}
+
+interface GetResponseCities {
+  _embedded: {
+    cities: City[];
   }
 }

@@ -3,25 +3,22 @@ package com.perscholas.case_study.sunshine_shop.entity;
 import lombok.Data;
 
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "state")
+@Table(name = "city")
 @Data
-public class State {
+public class City {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "Id")
+    @Column(name = "id")
     private int id;
 
     @Column(name = "name")
     private String name;
 
     @ManyToOne
-    @JoinColumn(name = "country_id")
-    private Country country;
+    @JoinColumn(name = "state_id")
+    private State state;
 
-    @OneToMany(mappedBy = "state")
-    private List<City> cities;
 }

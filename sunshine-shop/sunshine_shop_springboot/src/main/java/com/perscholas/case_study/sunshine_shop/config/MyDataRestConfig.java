@@ -33,6 +33,7 @@ public class MyDataRestConfig implements RepositoryRestConfigurer {
         disableHttpMethods(ProductSubCategory.class, config, disableActions);
         disableHttpMethods(Country.class, config, disableActions);
         disableHttpMethods(State.class, config, disableActions);
+        disableHttpMethods(City.class, config, disableActions);
 
         exposeId(config);
     }

@@ -156,6 +156,16 @@ CREATE TABLE `state`(
     CONSTRAINT `fk_country` FOREIGN KEY (`country_id`) REFERENCES `country` (`id`)
 ) ENGINE = InnoDB AUTO_INCREMENT=1;
 
+# add city code
+DROP TABLE IF EXISTS `city`;
+
+CREATE TABLE `city`(
+    `id` smallint unsigned primary key not null auto_increment,
+    `name` varchar(255) DEFAULT NULL,
+    `state_id` smallint unsigned not null,
+    CONSTRAINT `fk_state` FOREIGN KEY (`state_id`) REFERENCES `state` (`id`)
+) ENGINE = InnoDB AUTO_INCREMENT=1;
+
 SET FOREIGN_KEY_CHECKS = 1;
 
 
@@ -472,3 +482,65 @@ INSERT INTO `state` VALUES
 (29,'Quebec',3),
 (30,'Saskatchewan',3);
 
+INSERT INTO `city` VALUES
+
+(1,'sdfdsfsd',1),
+(2,'sdfd',1),
+(3,'sdfsd',2),
+(4,'sdfsd',2),
+(5,'sdfsdf',3),
+(6,'sdfsd',3),
+(7,'sdf',4),
+(8,'sdf',4),
+(9,'Ddsfef',5),
+(10,'sdfsd',5),
+(11,'sdfdsfsd',6),
+(12,'sdfd',6),
+(13,'sdfsd',7),
+(14,'sdfsd',7),
+(15,'sdfsdf',8),
+(16,'sdfsd',8),
+(17,'sdf',9),
+(18,'sdf',9),
+(19,'Ddsfef',10),
+(20,'sdfsd',10),
+(21,'sdfdsfsd',11),
+(22,'sdfd',11),
+(23,'sdfsd',12),
+(24,'sdfsd',12),
+(25,'sdfsdf',13),
+(26,'sdfsd',13),
+(27,'sdf',14),
+(28,'sdf',14),
+(29,'Ddsfef',15),
+(30,'sdfsd',15),
+(31,'sdfdsfsd',16),
+(32,'sdfd',16),
+(33,'sdfsd',17),
+(34,'sdfsd',17),
+(35,'sdfsdf',18),
+(36,'sdfsd',18),
+(37,'sdf',19),
+(38,'sdf',19),
+(39,'Ddsfef',20),
+(40,'sdf',20),
+(41,'sdfdsfsd',21),
+(42,'sdfd',21),
+(43,'sdfsd',22),
+(44,'sdfsd',22),
+(45,'sdfsdf',23),
+(46,'sdfsd',23),
+(47,'sdf',24),
+(48,'sdf',24),
+(49,'Ddsfef',25),
+(50,'sdf',25),
+(51,'sdfdsfsd',26),
+(52,'sdfd',26),
+(53,'sdfsd',27),
+(54,'sdfsd',27),
+(55,'sdfsdf',28),
+(56,'sdfsd',28),
+(57,'sdf',29),
+(58,'sdf',29),
+(59,'Ddsfef',30),
+(60,'Florida',30);
