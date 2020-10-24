@@ -15,6 +15,17 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="firstName" type="text">
+                                        <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="firstName.errors.required
+                                            || firstName.errors.spaceCheck">
+                                                Please enter your first name
+                                            </div>
+
+                                            <div *ngIf="firstName.errors.minlength">
+                                                Please enter more than one character
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -24,6 +35,17 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="lastName" type="text">
+                                        <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="lastName.errors.required 
+                                            || lastName.errors.spaceCheck">
+                                                Please enter your last name
+                                            </div>
+
+                                            <div *ngIf="lastName.errors.minlength">
+                                                Please enter more than one character
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -33,6 +55,16 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="email" type="text">
+                                        <div *ngIf="email.invalid && (email.dirty || email.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="email.errors.required">
+                                                Please enter the email address
+                                            </div>
+
+                                            <div *ngIf="email.errors.pattern">
+                                                Please enter the valid email address
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -55,6 +87,12 @@
                                     <div class="input-space">
                                         <input formControlName="address" type="text">
                                     </div>
+                                    <div *ngIf="shippingAddressAddress.invalid && (shippingAddressAddress.dirty || shippingAddressAddress.touched)"
+                                        class="alert alert-danger mt-1">
+                                        <div *ngIf="shippingAddressAddress.errors.required">
+                                            Please enter your address
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -63,6 +101,15 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="postcode" type="text">
+                                    </div>
+                                    <div *ngIf="shippingAddressPostcode.invalid && (shippingAddressPostcode.dirty || shippingAddressPostcode.touched)"
+                                        class="alert alert-danger mt-1">
+                                        <div *ngIf="shippingAddressPostcode.errors.required">
+                                            Please enter your postcode
+                                        </div>
+                                        <div *ngIf="shippingAddressPostcode.errors.minlength">
+                                            Please enter more than five character
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -76,6 +123,12 @@
                                                 {{city.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="shippingAddressCity.errors.required">
+                                                Please enter your city
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -89,6 +142,12 @@
                                                 {{state.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="shippingAddressState.invalid && (shippingAddressState.dirty || shippingAddressState.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="shippingAddressState.errors.required">
+                                                Please enter your state
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -102,6 +161,14 @@
                                                 {{country.name}}
                                             </option>
                                         </select>
+
+                                        <div *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="shippingAddressCountry.errors.required">
+                                                Please enter your country
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -128,6 +195,12 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="address" type="text">
+                                        <div *ngIf="billingAddressAddress.invalid && (billingAddressAddress.dirty || billingAddressAddress.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="billingAddressAddress.errors.required">
+                                                Please enter your Address
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -137,6 +210,15 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="postcode" type="text">
+                                        <div *ngIf="billingAddressPostcode.invalid && (billingAddressPostcode.dirty || billingAddressPostcode.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="billingAddressPostcode.errors.required">
+                                                Please enter your postcode
+                                            </div>
+                                            <div *ngIf="billingAddressPostcode.errors.minlength">
+                                                Please enter more than five character
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -150,6 +232,12 @@
                                                 {{city.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="billingAddressCity.invalid && (billingAddressCity.dirty || billingAddressCity.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="billingAddressCity.errors.required">
+                                                Please enter your city
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -163,6 +251,12 @@
                                                 {{state.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="billingAddressState.invalid && (billingAddressState.dirty || billingAddressState.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="billingAddressState.errors.required">
+                                                Please enter your state
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -176,6 +270,13 @@
                                                 {{country.name}}
                                             </option>
                                         </select>
+                                        <div *ngIf="billingAddressCountry.invalid && (billingAddressCountry.dirty || billingAddressCountry.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="billingAddressCountry.errors.required">
+                                                Please enter your country
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -196,6 +297,13 @@
                                             <option>Discover</option>
                                             <option>American Express</option>
                                         </select>
+
+                                        <div *ngIf="creditCardType.invalid && (creditCardType.dirty || creditCardType.touched)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="creditCardType.errors.required">
+                                                Please enter your credit card type
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -206,6 +314,12 @@
                                     <div class="input-space">
                                         <input formControlName="nameOnCard" type="text">
                                     </div>
+                                    <div *ngIf="creditCardNameOnCard.invalid && (creditCardNameOnCard.dirty || creditCardNameOnCard.touched)"
+                                        class="alert alert-danger mt-1">
+                                        <div *ngIf="creditCardNameOnCard.errors.required">
+                                            Please enter your name on credit card
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -215,6 +329,16 @@
                                     <div class="input-space">
                                         <input formControlName="cardNumber" type="text">
                                     </div>
+
+                                    <div *ngIf="creditCardNumber.invalid && (creditCardNumber.dirty || creditCardNumber.touched)"
+                                        class="alert alert-danger mt-1">
+                                        <div *ngIf="creditCardNumber.errors.required">
+                                            Please enter your name on credit card
+                                        </div>
+                                        <div *ngIf="creditCardNumber.errors.pattern">
+                                            Please enter valid credit card
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
 
@@ -223,6 +347,15 @@
                                 <div class="col-md-9">
                                     <div class="input-space">
                                         <input formControlName="securityCode" type="text">
+                                    </div>
+                                    <div *ngIf="creditCardSecurityCode.invalid && (creditCardSecurityCode.dirty || creditCardSecurityCode.touched)"
+                                        class="alert alert-danger mt-1">
+                                        <div *ngIf="creditCardSecurityCode.errors.required">
+                                            Please enter your name on credit card
+                                        </div>
+                                        <div *ngIf="creditCardSecurityCode.errors.pattern">
+                                            Please enter valid security code
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -234,6 +367,12 @@
                                         <select formControlName="expirationMonth">
                                             <option *ngFor="let month of creditCardMonths">{{month}}</option>
                                         </select>
+                                        <div *ngIf="creditCardExpirationMonth.invalid && (creditCardExpirationMonth.dirty)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="creditCardExpirationMonth.errors.required">
+                                                Please enter your credit card expiration month
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -245,25 +384,33 @@
                                         <select formControlName="expirationYear" (change)="startFromOne()">
                                             <option *ngFor="let year of creditCardYears">{{year}}</option>
                                         </select>
+                                        <div *ngIf="creditCardExpirationYear.invalid && (creditCardExpirationYear.dirty)"
+                                            class="alert alert-danger mt-1">
+                                            <div *ngIf="creditCardExpirationYear.errors.required">
+                                                Please enter your credit card expiration year
+                                            </div>
+                                        </div>
+
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
+                <div class="form-area col-md-10">
+                    <div class="review">
+                        <h3>Order Review</h3>
+                        <p>Total Quantity: {{ totalQuanity }}</p>
+                        <p>Total Price: {{ totalPrice | currency: 'USD'}}</p>
+                    </div>
+                </div>
+
+                <div class="btn">
+                    <button type="submit" class="btn-default-icon3">Continue</button>
+                </div>
             </form>
 
-            <div class="form-area col-md-10">
-                <div class="review">
-                    <h3>Order Review</h3>
-                    <p>Total Quantity: {{ totalQuanity }}</p>
-                    <p>Total Price: {{ totalPrice | currency: 'USD'}}</p>
-                </div>
-            </div>
 
-            <div class="btn">
-                <a routerLink="/checkout-form" class="btn-default-icon3">Continue</a>
-            </div>
         </div>
     </div>
 </div>
