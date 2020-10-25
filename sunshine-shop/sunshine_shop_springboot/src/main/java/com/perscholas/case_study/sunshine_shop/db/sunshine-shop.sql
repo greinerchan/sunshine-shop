@@ -120,19 +120,22 @@ CREATE TABLE `orderitem`  (
 -- Table structure for user
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
-CREATE TABLE `user`  (
-  `id` BIGINT(10) NOT NULL AUTO_INCREMENT,
-  `user_name` varchar(25) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `user_nickname` varchar(50) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_password` varchar(50) CHARACTER SET utf8 COLLATE utf8_bin NOT NULL,
-  `user_realname` varchar(20) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  `user_gender` tinyint(1) NOT NULL,
-  `user_birthday` date NOT NULL,
-  `user_address` char(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_homeplace` char(6) CHARACTER SET utf8 COLLATE utf8_general_ci NOT NULL,
-  `user_profile_picture_src` varchar(100) CHARACTER SET utf8 COLLATE utf8_general_ci NULL DEFAULT NULL,
-  PRIMARY KEY (`id`) USING BTREE
-) ENGINE = InnoDB AUTO_INCREMENT = 113 CHARACTER SET = utf8 COLLATE = utf8_general_ci ROW_FORMAT = Dynamic;
+CREATE TABLE `user` (
+    `id` bigint(20) NOT NULL,
+    `user_active` bit(1) NOT NULL,
+    `user_authorities` tinyblob DEFAULT NULL,
+    `user_is_non_locked` bit(1) NOT NULL,
+    `user_join_date` datetime(6) DEFAULT NULL,
+    `user_last_login_date` datetime(6) DEFAULT NULL,
+    `user_last_login_date_display` datetime(6) DEFAULT NULL,
+    `user_roles` tinyblob DEFAULT NULL,
+    `user_email` varchar(255) DEFAULT NULL,
+    `user_first_name` varchar(255) DEFAULT NULL,
+    `user_last_name` varchar(255) DEFAULT NULL,
+    `user_password` varchar(255) DEFAULT NULL,
+    `user_profile_image_url` varchar(255) DEFAULT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 
 # Add country code

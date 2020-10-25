@@ -9,6 +9,8 @@ export class MyValidators {
             return { 'spaceCheck': true};
         }
 
-        return null;
+        else {
+            return null;
+        }
     }
 }
