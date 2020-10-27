@@ -23,8 +23,8 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import javax.transaction.Transactional;
 import java.util.Date;
 import java.util.List;
-import java.util.Random;
 
+import static com.perscholas.case_study.sunshine_shop.constant.UserImplConstant.*;
 import static com.perscholas.case_study.sunshine_shop.enumeration.Role.ROLE_Cashier;
 
 @Service
@@ -48,29 +48,28 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findUserByUserEmail(email);
         if (user == null) {
-            LOGGER.error("User not found by email:" + email);
-            throw new UsernameNotFoundException("User not found by email:" + email);
+            LOGGER.error(USER_NOT_FOUND_BY_EMAIL + email);
+            throw new UsernameNotFoundException(USER_NOT_FOUND_BY_EMAIL + email);
         } else {
             user.setLastLoginDateDisplay((user.getLastLoginDate()));
             user.setLastLoginDate(new Date());
             userRepository.save(user);
             UserPrincipal userPrincipal = new UserPrincipal(user);
-            LOGGER.info("find user by email" + email);
+            LOGGER.info(FIND_USER_BY_EMAIL + email);
             return userPrincipal;
         }
     }
 
     @Override
-    public User register(String firstName, String lastName, String username, String email) throws UserNotFoundException, UserNameExistException, EmailExistException {
-        validateUsernameAndEmail(StringUtils.EMPTY, username, email);
+    public User register(String userLastName, String userFirstName, String username, String userEmail) throws UserNotFoundException, UserNameExistException, EmailExistException {
+        validateUsernameAndEmail(StringUtils.EMPTY, username, userEmail);
         User user = new User();
-        user.setId(generateUserId());
         String password = generatePassword();
         String encodedPassword = encodePassword(password);
-        user.setUserFirstName(firstName);
-        user.setUserLastName(lastName);
+        user.setUserFirstName(userFirstName);
+        user.setUserLastName(userLastName);
         user.setUsername(username);
-        user.setUserEmail(email);
+        user.setUserEmail(userEmail);
         user.setJoinDate(new Date());
         // want password in database encoded
         user.setUserPassword(encodedPassword);
@@ -81,26 +80,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUser_profile_imageUrl(getTemperaryProfileImageUrl());
         userRepository.save(user);
         LOGGER.info("New user password: " + password);
-        return null;
+        return user;
     }
 
     @Override
     public List<User> getUsers() {
-        return null;
+        return userRepository.findAll();
     }
 
     @Override
     public User findUserByUserEmail(String email) {
-        return null;
+        return userRepository.findUserByUserEmail(email);
     }
 
     @Override
     public User findUserByUserName(String name) {
-        return null;
+        return userRepository.findUserByUsername(name);
     }
 
     private String getTemperaryProfileImageUrl() {
-        return ServletUriComponentsBuilder.fromCurrentContextPath().path("/user/image/Profile/temp").toUriString();
+        return ServletUriComponentsBuilder.fromCurrentContextPath().path(DEFAULT_USER_IMAGE_PATH).toUriString();
     }
 
     private String encodePassword(String password) {
@@ -111,37 +110,29 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return RandomStringUtils.randomAlphabetic(10);
     }
 
-    private Long generateUserId() {
-        Random random = new Random();
-        Long num = (long) random.nextInt(10000);
-        return num;
-    }
-
     private User validateUsernameAndEmail(String currentUsername, String newUsername, String newEmail) throws UserNotFoundException, UserNameExistException, EmailExistException {
+        User userByNewUsername = findUserByUserName(newUsername);
+        User userByNewUserEmail = findUserByUserEmail(newEmail);
+
         if (StringUtils.isNotBlank(currentUsername)) {
             User currentUser = findUserByUserName(currentUsername);
             if (currentUser == null) {
-                throw new UserNotFoundException("No user found by username" + currentUsername);
+                throw new UserNotFoundException(NO_USER_FOUND_BY_USERNAME + currentUsername);
             }
-            User userByUsername = findUserByUserName(newUsername);
-            if (userByUsername != null && !currentUser.getId().equals(userByUsername.getId())) {
-                throw new UserNameExistException("User Name alrealdy exists");
+            if (userByNewUsername != null && !currentUser.getId().equals(userByNewUsername.getId())) {
+                throw new UserNameExistException(USERNAME_ALREALDY_EXISTS);
             }
 
-            User userByUserEmail = findUserByUserEmail(newEmail);
-            if (userByUserEmail != null && !currentUser.getId().equals(userByUsername.getId())) {
-                throw new EmailExistException("Email alrealdy exists");
+            if (userByNewUserEmail != null && !currentUser.getId().equals(userByNewUsername.getId())) {
+                throw new EmailExistException(EMAIL_ALREALDY_EXISTS);
             }
             return currentUser;
         } else {
-            User userByUserName = findUserByUserName(newUsername);
-            if (userByUserName != null) {
-                throw new UserNameExistException("User Name alrealdy exists");
+            if (userByNewUsername != null) {
+                throw new UserNameExistException(USERNAME_ALREALDY_EXISTS);
             }
-
-            User userByUserEmail = findUserByUserEmail(newEmail);
-            if (userByUserEmail != null) {
-                throw new EmailExistException("Email alrealdy exists");
+            if (userByNewUserEmail != null) {
+                throw new EmailExistException(EMAIL_ALREALDY_EXISTS);
             }
             return null;
         }

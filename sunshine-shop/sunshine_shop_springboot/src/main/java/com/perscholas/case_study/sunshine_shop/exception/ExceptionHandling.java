@@ -72,12 +72,12 @@ public class ExceptionHandling implements ErrorController {
     }
 
     @ExceptionHandler(UserNameExistException.class)
-    public ResponseEntity<HttpResponse> userNameExistException (EmailExistException exception) {
+    public ResponseEntity<HttpResponse> userNameExistException (UserNameExistException exception) {
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
     }
 
     @ExceptionHandler(UserNameNotFoundException.class)
-    public ResponseEntity<HttpResponse> userNamelNotFoundException (EmailNotFoundException exception) {
+    public ResponseEntity<HttpResponse> userNamelNotFoundException (UserNameNotFoundException exception) {
         return createHttpResponse(BAD_REQUEST, exception.getMessage());
     }
 
