@@ -6,6 +6,7 @@ import com.perscholas.case_study.sunshine_shop.entity.UserPrincipal;
 import com.perscholas.case_study.sunshine_shop.exception.EmailExistException;
 import com.perscholas.case_study.sunshine_shop.exception.UserNameExistException;
 import com.perscholas.case_study.sunshine_shop.exception.UserNotFoundException;
+import com.perscholas.case_study.sunshine_shop.service.LoginAttemptService;
 import com.perscholas.case_study.sunshine_shop.service.UserService;
 import org.apache.commons.lang3.RandomStringUtils;
 import org.apache.commons.lang3.StringUtils;
@@ -37,13 +38,16 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     private Logger LOGGER = LoggerFactory.getLogger(getClass());
     private UserRepository userRepository;
     private BCryptPasswordEncoder bCryptPasswordEncoder;
+    private LoginAttemptService loginAttemptService;
 
     @Autowired
-    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder) {
+    public UserServiceImpl(UserRepository userRepository, BCryptPasswordEncoder passwordEncoder, LoginAttemptService loginAttemptService) {
         this.userRepository = userRepository;
         this.bCryptPasswordEncoder = passwordEncoder;
+        this.loginAttemptService = loginAttemptService;
     }
 
+    // check if the user email is already in the system
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
         User user = userRepository.findUserByUserEmail(email);
@@ -51,12 +55,26 @@ public class UserServiceImpl implements UserService, UserDetailsService {
             LOGGER.error(USER_NOT_FOUND_BY_EMAIL + email);
             throw new UsernameNotFoundException(USER_NOT_FOUND_BY_EMAIL + email);
         } else {
+            validateLoginAttempt(user);
             user.setLastLoginDateDisplay((user.getLastLoginDate()));
             user.setLastLoginDate(new Date());
             userRepository.save(user);
             UserPrincipal userPrincipal = new UserPrincipal(user);
             LOGGER.info(FIND_USER_BY_EMAIL + email);
             return userPrincipal;
+        }
+    }
+
+    private void validateLoginAttempt(User user) {
+        if (user.isNonLocked()) {
+            if(loginAttemptService.hasExceededMaxAttempts(user.getUserEmail())) {
+                user.setNonLocked(false);
+            } else {
+                user.setNonLocked(true);
+            }
+
+        } else {
+            loginAttemptService.evictUserFromLoginAttemptCache(user.getUsername());
         }
     }
 
