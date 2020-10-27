@@ -121,7 +121,8 @@ CREATE TABLE `orderitem`  (
 -- ----------------------------
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
-    `id` bigint(20) NOT NULL,
+    `id` bigint(20) NOT NULL AUTO_INCREMENT,
+    `user_name` varchar(255) NOT NULL,
     `user_active` bit(1) NOT NULL,
     `user_authorities` tinyblob DEFAULT NULL,
     `user_is_non_locked` bit(1) NOT NULL,

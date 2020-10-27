@@ -15,6 +15,9 @@ public class User implements Serializable {
     @Column(name = "id", nullable = false, updatable = false)
     private Long id;
 
+    @Column(name = "user_name")
+    private String username;
+
     @Column(name = "user_email")
     private String userEmail;
 
@@ -40,7 +43,7 @@ public class User implements Serializable {
     private Date joinDate;
 
     @Column(name = "user_roles")
-    private String[] roles;
+    private String role;
 
     @Column(name = "user_authorities")
     private String[] authorities;
@@ -54,8 +57,9 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(Long id, String userEmail, String userPassword, String userFirstName, String userLastName, String user_profile_imageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String[] roles, String[] authorities, boolean active, boolean isNonLocked) {
+    public User(Long id, String username, String userEmail, String userPassword, String userFirstName, String userLastName, String user_profile_imageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean active, boolean isNonLocked) {
         this.id = id;
+        this.username = username;
         this.userEmail = userEmail;
         this.userPassword = userPassword;
         this.userFirstName = userFirstName;
@@ -64,7 +68,7 @@ public class User implements Serializable {
         this.lastLoginDate = lastLoginDate;
         this.lastLoginDateDisplay = lastLoginDateDisplay;
         this.joinDate = joinDate;
-        this.roles = roles;
+        this.role = role;
         this.authorities = authorities;
         this.active = active;
         this.isNonLocked = isNonLocked;
@@ -76,6 +80,14 @@ public class User implements Serializable {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getUserEmail() {
@@ -142,12 +154,12 @@ public class User implements Serializable {
         this.joinDate = joinDate;
     }
 
-    public String[] getRoles() {
-        return roles;
+    public String getRole() {
+        return role;
     }
 
-    public void setRoles(String[] roles) {
-        this.roles = roles;
+    public void setRole(String role) {
+        this.role = role;
     }
 
     public String[] getAuthorities() {
