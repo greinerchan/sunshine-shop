@@ -5,11 +5,12 @@ import com.perscholas.case_study.sunshine_shop.exception.EmailExistException;
 import com.perscholas.case_study.sunshine_shop.exception.UserNameExistException;
 import com.perscholas.case_study.sunshine_shop.exception.UserNotFoundException;
 
+import javax.mail.MessagingException;
 import java.util.List;
 
 public interface UserService {
 
-    User register(String userFirstName, String userLastName, String username, String userEmail) throws UserNotFoundException, UserNameExistException, EmailExistException;
+    User register(String userFirstName, String userLastName, String username, String userEmail) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException;
 
     List<User> getUsers();
 
