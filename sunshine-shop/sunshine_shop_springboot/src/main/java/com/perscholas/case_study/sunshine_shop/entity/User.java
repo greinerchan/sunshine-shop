@@ -31,7 +31,7 @@ public class User implements Serializable {
     private String userLastName;
 
     @Column(name = "user_profile_image_url")
-    private String user_profile_imageUrl;
+    private String userProfileImageUrl;
 
     @Column(name = "user_last_login_date")
     private Date lastLoginDate;
@@ -64,7 +64,7 @@ public class User implements Serializable {
         this.userPassword = userPassword;
         this.userFirstName = userFirstName;
         this.userLastName = userLastName;
-        this.user_profile_imageUrl = user_profile_imageUrl;
+        this.userProfileImageUrl = user_profile_imageUrl;
         this.lastLoginDate = lastLoginDate;
         this.lastLoginDateDisplay = lastLoginDateDisplay;
         this.joinDate = joinDate;
@@ -122,12 +122,12 @@ public class User implements Serializable {
         this.userLastName = userLastName;
     }
 
-    public String getUser_profile_imageUrl() {
-        return user_profile_imageUrl;
+    public String getUserProfileImageUrl() {
+        return userProfileImageUrl;
     }
 
-    public void setUser_profile_imageUrl(String user_profile_imageUrl) {
-        this.user_profile_imageUrl = user_profile_imageUrl;
+    public void setUserProfileImageUrl(String user_profile_imageUrl) {
+        this.userProfileImageUrl = user_profile_imageUrl;
     }
 
     public Date getLastLoginDate() {

@@ -1,29 +1,35 @@
 package com.perscholas.case_study.sunshine_shop.resource;
 
+import com.perscholas.case_study.sunshine_shop.entity.HttpResponse;
 import com.perscholas.case_study.sunshine_shop.entity.User;
 import com.perscholas.case_study.sunshine_shop.entity.UserPrincipal;
-import com.perscholas.case_study.sunshine_shop.exception.EmailExistException;
-import com.perscholas.case_study.sunshine_shop.exception.ExceptionHandling;
-import com.perscholas.case_study.sunshine_shop.exception.UserNameExistException;
-import com.perscholas.case_study.sunshine_shop.exception.UserNotFoundException;
+import com.perscholas.case_study.sunshine_shop.exception.*;
 import com.perscholas.case_study.sunshine_shop.service.UserService;
 import com.perscholas.case_study.sunshine_shop.utility.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
+import java.io.IOException;
+import java.util.List;
 
 import static com.perscholas.case_study.sunshine_shop.constant.SecurityConstant.JWT_TOKEN_HEADER;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
+import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping(path = {"/", "/user"})
 public class UserResource extends ExceptionHandling {
 
+    public static final String Email_Sent = "An email with new password was sent to: ";
+    public static final String USER_DELETED_SUCCESSFULLY = "User deleted successfully";
     private UserService userService;
     private AuthenticationManager authenticationManager;
     private JWTTokenProvider jwtTokenProvider;
@@ -42,7 +48,7 @@ public class UserResource extends ExceptionHandling {
         User loginUser = userService.findUserByUserEmail(user.getUserEmail());
         UserPrincipal userPrincipal = new UserPrincipal(loginUser);
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
-        return new ResponseEntity<>(loginUser, jwtHeader ,HttpStatus.OK);
+        return new ResponseEntity<>(loginUser, jwtHeader , OK);
     }
 
 
@@ -50,7 +56,69 @@ public class UserResource extends ExceptionHandling {
     public ResponseEntity<User> register(@RequestBody User user) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException {
         //return "application works";
         User newUser = userService.register(user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getUserEmail());
-        return new ResponseEntity<>(newUser, HttpStatus.OK);
+        return new ResponseEntity<>(newUser, OK);
+    }
+
+    @PostMapping("/add")
+    public ResponseEntity<User> addNewUser(@RequestParam("firstName") String firstName,
+                                           @RequestParam("lastName") String lastName,
+                                           @RequestParam("username") String username,
+                                           @RequestParam("email") String email,
+                                           @RequestParam("role") String role,
+                                           @RequestParam("isActive") String isActive,
+                                           @RequestParam("isNonLocked") String isNonLocked,
+                                           // not required
+                                           @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
+        User newUser = userService.addNewUser(firstName, lastName, username, email ,role,
+                Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive), profileImage);
+        return new ResponseEntity<>(newUser, OK);
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<User> update(    @RequestParam("currentUsername") String currentUsername,
+                                           @RequestParam("firstName") String firstName,
+                                           @RequestParam("lastName") String lastName,
+                                           @RequestParam("username") String username,
+                                           @RequestParam("email") String email,
+                                           @RequestParam("role") String role,
+                                           @RequestParam("isActive") String isActive,
+                                           @RequestParam("isNonLocked") String isNonLocked,
+                                           // not required
+                                           @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
+        User updatedUser = userService.updateUser(currentUsername, firstName, lastName, username, email ,role,
+                Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive), profileImage);
+        // responseentity is everything you need to send request back, status and body
+        return new ResponseEntity<>(updatedUser, OK);
+    }
+
+    @GetMapping("/find/{username}")
+    private ResponseEntity<User> getUser(@PathVariable("username") String username) {
+        User user = userService.findUserByUserName(username);
+        return new ResponseEntity<>(user, OK);
+    }
+
+    @GetMapping("/list")
+    private ResponseEntity<List<User>> getAllUsers() {
+        List<User> users = userService.getUsers();
+        return new ResponseEntity<>(users, OK);
+    }
+
+    @GetMapping("/resetPassword/{email}")
+    private ResponseEntity<HttpResponse> resetPassword(@PathVariable("email") String email, @PathVariable("password") String password) throws EmailNotFoundException, MessagingException {
+        userService.resetPassword(email, password);
+        return response(OK, Email_Sent + email);
+    }
+
+    @DeleteMapping("/delete/{id}")
+    //@EnableGlobalMethodSecurity(prePostEnabled = true)  make it happen, can add security in method level
+    @PreAuthorize("hasAnyAuthority('user:delete')")
+    public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") long id) {
+        userService.deleteUser(id);
+        return response(NO_CONTENT, USER_DELETED_SUCCESSFULLY);
+    }
+    private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
+        return new ResponseEntity<>(new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(),
+                message.toUpperCase()), httpStatus);
     }
 
     private HttpHeaders getJwtHeader(UserPrincipal userPrincipal) {
@@ -62,5 +130,15 @@ public class UserResource extends ExceptionHandling {
     private void authenticate(String userEmail, String userPassword) {
         authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(userEmail, userPassword));
 
+    }
+
+    @PostMapping("/updateProfileImage")
+    public ResponseEntity<User> updateProfileImage(
+                                           @RequestParam("username") String username,
+                                           // not required
+                                           @RequestParam(value = "profileImage") MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
+        User user = userService.updateProfileImage(username, profileImage);
+        // responseentity is everything you need to send request back, status and body
+        return new ResponseEntity<>(user, OK);
     }
 }
