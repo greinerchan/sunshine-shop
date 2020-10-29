@@ -16,6 +16,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import javax.mail.MessagingException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -58,6 +59,11 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(loginUser, jwtHeader , OK);
     }
 
+    @GetMapping("/find/{username}")
+    public ResponseEntity<User> getUser(@PathVariable("username") String username) {
+        User user = userService.findUserByUserName(username);
+        return new ResponseEntity<>(user, OK);
+    }
 
     @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException {
@@ -98,11 +104,6 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(updatedUser, OK);
     }
 
-    @GetMapping("/find/{username}")
-    private ResponseEntity<User> getUser(@PathVariable("username") String username) {
-        User user = userService.findUserByUserName(username);
-        return new ResponseEntity<>(user, OK);
-    }
 
     @GetMapping("/list")
     private ResponseEntity<List<User>> getAllUsers() {
