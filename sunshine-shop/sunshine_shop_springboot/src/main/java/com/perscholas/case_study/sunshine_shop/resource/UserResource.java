@@ -17,12 +17,19 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.util.List;
 
+import static com.perscholas.case_study.sunshine_shop.constant.FileConstant.*;
 import static com.perscholas.case_study.sunshine_shop.constant.SecurityConstant.JWT_TOKEN_HEADER;
 import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 
 @RestController
 @RequestMapping(path = {"/", "/user"})
@@ -103,8 +110,8 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(users, OK);
     }
 
-    @GetMapping("/resetPassword/{email}")
-    private ResponseEntity<HttpResponse> resetPassword(@PathVariable("email") String email, @PathVariable("password") String password) throws EmailNotFoundException, MessagingException {
+    @PostMapping("/resetPassword")
+    private ResponseEntity<HttpResponse> resetPassword(@RequestParam("email") String email, @RequestParam("password") String password) throws EmailNotFoundException, MessagingException {
         userService.resetPassword(email, password);
         return response(OK, Email_Sent + email);
     }
@@ -140,5 +147,28 @@ public class UserResource extends ExceptionHandling {
         User user = userService.updateProfileImage(username, profileImage);
         // responseentity is everything you need to send request back, status and body
         return new ResponseEntity<>(user, OK);
+    }
+
+    @GetMapping(path = "/image/{username}/{fileName}", produces = IMAGE_JPEG_VALUE)
+    public byte[] getProfileImage(@PathVariable("username") String username, @PathVariable("fileName") long fileName) throws IOException {
+        return Files.readAllBytes(Paths.get(USER_FOLDER + username + FORWARD_SLASH + fileName));
+    }                             // user.home   + "/supporatal/user/rick/rick.jpg"
+
+
+
+    @GetMapping(path = "/image/profile/{username}", produces = IMAGE_JPEG_VALUE)
+    public byte[] getTempProfileImage(@PathVariable("username") String username) throws IOException {
+        URL url = new URL(TEMP_PROFILE_IMAGE_BASE_URL + username);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try (InputStream inputStream = url.openStream()) {
+            int bytesRead;
+            // each time read 1024 bytes
+            byte[] chunk = new byte[1024];
+            // read util no more
+            while((bytesRead = inputStream.read(chunk)) > 0) {
+                byteArrayOutputStream.write(chunk, 0, bytesRead);
+            }
+        }
+        return byteArrayOutputStream.toByteArray();
     }
 }

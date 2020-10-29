@@ -36,7 +36,7 @@ import java.util.List;
 
 import static com.perscholas.case_study.sunshine_shop.constant.FileConstant.*;
 import static com.perscholas.case_study.sunshine_shop.constant.UserImplConstant.*;
-import static com.perscholas.case_study.sunshine_shop.enumeration.Role.ROLE_Cashier;
+import static com.perscholas.case_study.sunshine_shop.enumeration.Role.ROLE_CASHIER;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.logging.log4j.util.Strings.EMPTY;
 
@@ -108,8 +108,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUserPassword(encodedPassword);
         user.setActive(true);
         user.setNonLocked(true);
-        user.setRole(ROLE_Cashier.name());
-        user.setAuthorities(ROLE_Cashier.getAuthorities());
+        user.setRole(ROLE_CASHIER.name());
+        user.setAuthorities(ROLE_CASHIER.getAuthorities());
         user.setUserProfileImageUrl(getTemperaryProfileImageUrl(username));
         userRepository.save(user);
         emailService.sendNewPasswordEmail(userFirstName, password, userEmail);
@@ -180,6 +180,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername, String newEmail, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
         User currentUser = validateUsernameAndEmail(currentUsername, newUsername, newEmail);
+        System.out.println("current user is" + currentUser.getUsername());
         currentUser.setUserFirstName(newFirstName);
         currentUser.setUserLastName(newLastName);
         currentUser.setUsername(newUsername);
@@ -241,7 +242,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
                 throw new UserNameExistException(USERNAME_ALREALDY_EXISTS);
             }
 
-            if (userByNewUserEmail != null && !currentUser.getId().equals(userByNewUsername.getId())) {
+            if (userByNewUserEmail != null && !currentUser.getId().equals(userByNewUserEmail.getId())) {
                 throw new EmailExistException(EMAIL_ALREALDY_EXISTS);
             }
             return currentUser;
