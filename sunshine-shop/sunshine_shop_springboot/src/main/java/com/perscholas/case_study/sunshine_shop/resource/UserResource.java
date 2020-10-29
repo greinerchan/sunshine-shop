@@ -106,7 +106,7 @@ public class UserResource extends ExceptionHandling {
 
 
     @GetMapping("/list")
-    private ResponseEntity<List<User>> getAllUsers() {
+    public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, OK);
     }
