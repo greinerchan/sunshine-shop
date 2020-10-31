@@ -8,12 +8,14 @@ import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 
+
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-login-admin',
+  templateUrl: './login-admin.component.html',
+  styleUrls: ['./login-admin.component.css']
 })
-export class LoginComponent implements OnInit, OnDestroy {
+export class LoginAdminComponent implements OnInit, OnDestroy {
+
 
   private subscriptions: Subscription[] = [];
   constructor(private router:Router, private authenticationService: AuthenticationService, private notificationService:NotificationService ) { }
@@ -32,7 +34,6 @@ export class LoginComponent implements OnInit, OnDestroy {
   }
   
   public onLogin(user:User): void {
-    console.log(user);
     this.subscriptions.push(this.authenticationService.login(user).subscribe(
       (response: HttpResponse<User>) => {
         const token = response.headers.get(HeaderType.JWT_TOKEN);
@@ -42,16 +43,18 @@ export class LoginComponent implements OnInit, OnDestroy {
       },
       (errorResponse: HttpErrorResponse) => {
         console.log(errorResponse);
-        this.sendErrorNotification(NotificationType.ERROR,errorResponse.error.mesagge);
+        this.sendErrorNotification(NotificationType.ERROR,errorResponse.error.message);
       }
     )
     );
   }
   private sendErrorNotification(notificationType: NotificationType, message: string): void {
+    console.log(message);
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {
-      this.notificationService.notify(notificationType, 'AN ERROR OCCURED. PLEASE TRY AGAIN');
+      this.notificationService.notify(notificationType, 'Something wrong happened. Please try again.');
     }
   }
+
 }

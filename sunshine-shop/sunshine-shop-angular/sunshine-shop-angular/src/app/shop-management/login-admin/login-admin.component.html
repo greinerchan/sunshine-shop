@@ -13,9 +13,9 @@
     </div>
 
     <!-- Login Form -->
-    <form ngForm #loginForm (ngSubmit)="onLogin(loginForm.value)">
-      <input type="text" id="login" class="fadeIn second" name="username" placeholder="email"  ngModel #userEmailInput ngModel required>
-      <input type="password" id="password" class="fadeIn third" name="login" placeholder="password" ngModel #passwordInput ngModel required>
+    <form #loginForm="ngForm" (ngSubmit)="onLogin(loginForm.value)">
+      <input type="text" id="login" class="fadeIn second" name="userEmail" placeholder="email"  ngModel #userEmailInput = "ngModel" required>
+      <input type="password" id="password" class="fadeIn third" name="userPassword" placeholder="password" ngModel #userPasswordInput = "ngModel" required>
       <input type="submit" class="fadeIn fourth" value="Log In">
     </form>
 

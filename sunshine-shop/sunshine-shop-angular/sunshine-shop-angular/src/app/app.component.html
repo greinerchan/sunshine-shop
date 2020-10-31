@@ -1,9 +1,10 @@
-<!-- 
-<div *ngIf="path.includes('/admin'); else elseBlock">
-    <router-outlet></router-outlet>
-</div> -->
 
-<!-- <ng-template #elseBlock> -->
+<div *ngIf="path.includes('/admin'); else elseBlock">
+    <notifier-container></notifier-container>
+    <router-outlet></router-outlet>
+</div>
+
+<ng-template #elseBlock>
 <app-header></app-header>
 <div *ngIf="path === '/category'; else elseBlock">
     <div [ngClass]="{'disabled':true}">
@@ -14,5 +15,5 @@
 <router-outlet></router-outlet>
 <app-footer></app-footer>
 
-<!-- </ng-template> -->
+</ng-template>
 

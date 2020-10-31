@@ -16,10 +16,9 @@ import { CheckoutFormComponent } from "./layout/home/checkout-form/checkout-form
 
 // for admin
 //import { LoginComponent as LoginComponentAdmin } from "./management/login/login.component";
-import { LoginComponent as LoginComponentAdmin } from "./management/login/login.component";
-import { RegisterComponent as RegisterComponentAdmin } from "./management/register/register.component";
-import { UserComponent as UserComponentAdmin } from "./management/user/user.component";
-
+import { LoginAdminComponent} from "./shop-management/login-admin/login-admin.component";
+import { RegisterAdminComponent } from "./shop-management/register-admin/register-admin.component";
+import { UserAdminComponent } from "./shop-management/user-admin/user-admin.component";
 
 const routes: Routes = [
   // if path matches, show those component
@@ -32,9 +31,9 @@ const routes: Routes = [
   { path: "checkout-form", component: CheckoutFormComponent },
 
   // routes for admin function
-  { path: "admin/login", component: LoginComponentAdmin },
-  { path: "admin/register", component: RegisterComponentAdmin},
-  { path: "admin/management", component: UserComponentAdmin },
+  { path: "admin/login", component: LoginAdminComponent },
+  { path: "admin/register", component: RegisterAdminComponent},
+  { path: "admin/management", component: UserAdminComponent },
   { path: "admin", redirectTo: 'admin/login', pathMatch: 'full'},
 
   // for category funtion routes

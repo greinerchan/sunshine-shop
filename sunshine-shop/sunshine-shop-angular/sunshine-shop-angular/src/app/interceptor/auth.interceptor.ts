@@ -11,21 +11,20 @@ import { AuthenticationService } from '../services/authentication.service';
 @Injectable()
 export class AuthInterceptor implements HttpInterceptor {
 
-  constructor(authenticationService: AuthenticationService) {}
+  constructor(public authenticationService: AuthenticationService) {}
 
-  // check
-  authenticationService: AuthenticationService;
+
 
   intercept(httpRequest: HttpRequest<any>, httpHandler: HttpHandler): Observable<HttpEvent<any>> {
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/login`)){
+    if (httpRequest.url.includes(`${this.authenticationService.host}/admin/login`)){
       return httpHandler.handle(httpRequest); // do nothing just let the request pass
     }
 
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/register`)){
+    if (httpRequest.url.includes(`${this.authenticationService.host}/admin/register`)){
       return httpHandler.handle(httpRequest); // do nothing just let the request pass
     }
 
-    if (httpRequest.url.includes(`${this.authenticationService.host}/user/resetpassword`)){
+    if (httpRequest.url.includes(`${this.authenticationService.host}/admin/resetpassword`)){
       return httpHandler.handle(httpRequest); // do nothing just let the request pass
     }
 

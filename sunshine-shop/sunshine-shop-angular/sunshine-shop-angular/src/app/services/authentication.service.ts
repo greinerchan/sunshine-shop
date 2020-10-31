@@ -10,7 +10,7 @@ import { JwtHelperService } from "@auth0/angular-jwt";
   providedIn: 'root'
 })
 export class AuthenticationService {
-  public host: string = environment.apiUrl;
+  public host = environment.apiUrl;
   private token: string;
   private loggedInUsername: string;
   private jwtHelper = new JwtHelperService();
@@ -19,11 +19,11 @@ export class AuthenticationService {
 
   //{observe: `response`} when get response back, default return response body. but now we want to whole response, inluding header, token
   public login(user: User): Observable<HttpResponse<User> | HttpErrorResponse> {
-    return this.http.post<User>('{$this.host}/admin/login', user, {observe: 'response'})
+    return this.http.post<User>(`${this.host}/admin/login`, user, {observe: 'response'})
   }
 
   public register(user: User): Observable<User> {
-    return this.http.post<User>('{$this.host}/admin/register', user);
+    return this.http.post<User>(`${this.host}/admin/register`, user);
   }
 
   public logout(): void {

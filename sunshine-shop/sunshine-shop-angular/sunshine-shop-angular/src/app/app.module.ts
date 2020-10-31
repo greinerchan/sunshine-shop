@@ -19,8 +19,8 @@ import { AuthInterceptor } from './interceptor/auth.interceptor';
 import { AuthenticationGuard } from './guard/authentication.guard';
 import { NotificationModule } from './notification.module';
 import { NotificationService } from './services/notification.service';
-import { FormsModule,ReactiveFormsModule } from '@angular/forms';
-import { LoginComponent } from "./management/login/login.component";
+//import { FormsModule } from '@angular/forms';
+import { ShopManagementModule } from "./shop-management/shop-management.module";
 
 @NgModule({
   declarations: [AppComponent],
@@ -29,10 +29,11 @@ import { LoginComponent } from "./management/login/login.component";
     LayoutModule,
     RoutesModule,
     BrowserModule,
+    ShopManagementModule,
     HttpClientModule,
-    FormsModule,
+    //FormsModule,
     NgbModule,
-    ReactiveFormsModule,
+    //ReactiveFormsModule,
     NotificationModule,
     MDBBootstrapModule.forRoot(),
     BrowserAnimationsModule],

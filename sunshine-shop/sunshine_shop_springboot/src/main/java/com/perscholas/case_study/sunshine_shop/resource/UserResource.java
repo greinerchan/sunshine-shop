@@ -33,7 +33,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 
 @RestController
-@RequestMapping(path = {"/", "/user"})
+@RequestMapping(path = {"/", "/admin"})
 public class UserResource extends ExceptionHandling {
 
     public static final String Email_Sent = "An email with new password was sent to: ";
@@ -50,7 +50,7 @@ public class UserResource extends ExceptionHandling {
     }
 
 
-    @PostMapping("/login")
+    @PostMapping("/admin/login")
     public ResponseEntity<User> login(@RequestBody User user) throws UserNotFoundException, UserNameExistException, EmailExistException {
         authenticate(user.getUserEmail(), user.getUserPassword());
         User loginUser = userService.findUserByUserEmail(user.getUserEmail());
@@ -59,20 +59,20 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(loginUser, jwtHeader , OK);
     }
 
-    @GetMapping("/find/{username}")
+    @GetMapping("/admin/find/{username}")
     public ResponseEntity<User> getUser(@PathVariable("username") String username) {
         User user = userService.findUserByUserName(username);
         return new ResponseEntity<>(user, OK);
     }
 
-    @PostMapping("/register")
+    @PostMapping("/admin/register")
     public ResponseEntity<User> register(@RequestBody User user) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException {
         //return "application works";
         User newUser = userService.register(user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getUserEmail());
         return new ResponseEntity<>(newUser, OK);
     }
 
-    @PostMapping("/add")
+    @PostMapping("/admin/add")
     public ResponseEntity<User> addNewUser(@RequestParam("firstName") String firstName,
                                            @RequestParam("lastName") String lastName,
                                            @RequestParam("username") String username,
@@ -87,7 +87,7 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(newUser, OK);
     }
 
-    @PostMapping("/update")
+    @PostMapping("/admin/update")
     public ResponseEntity<User> update(    @RequestParam("currentUsername") String currentUsername,
                                            @RequestParam("firstName") String firstName,
                                            @RequestParam("lastName") String lastName,
@@ -105,19 +105,19 @@ public class UserResource extends ExceptionHandling {
     }
 
 
-    @GetMapping("/list")
+    @GetMapping("/admin/list")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, OK);
     }
 
-    @PostMapping("/resetPassword")
+    @PostMapping("/admin/resetPassword")
     private ResponseEntity<HttpResponse> resetPassword(@RequestParam("email") String email, @RequestParam("password") String password) throws EmailNotFoundException, MessagingException {
         userService.resetPassword(email, password);
         return response(OK, Email_Sent + email);
     }
 
-    @DeleteMapping("/delete/{id}")
+    @DeleteMapping("/admin/delete/{id}")
     //@EnableGlobalMethodSecurity(prePostEnabled = true)  make it happen, can add security in method level
     @PreAuthorize("hasAnyAuthority('user:delete')")
     public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") long id) {
@@ -140,7 +140,7 @@ public class UserResource extends ExceptionHandling {
 
     }
 
-    @PostMapping("/updateProfileImage")
+    @PostMapping("/admin/updateProfileImage")
     public ResponseEntity<User> updateProfileImage(
                                            @RequestParam("username") String username,
                                            // not required
