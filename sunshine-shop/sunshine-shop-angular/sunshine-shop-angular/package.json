@@ -30,6 +30,7 @@
     "@types/chart.js": "^2.7.40",
     "@types/jquery": "^3.5.2",
     "angular-bootstrap-md": "^10.0.0",
+    "angular-notifier": "^6.0.1",
     "animate.css": "~3.7.2",
     "bootstrap": "^4.5.2",
     "chart.js": "^2.7.2",

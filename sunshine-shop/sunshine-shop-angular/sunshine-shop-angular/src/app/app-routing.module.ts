@@ -14,16 +14,28 @@ import { ProductDetailComponent } from './layout/home/product-detail/product-det
 import { CartDetailComponent } from "./layout/home/cart-detail/cart-detail.component";
 import { CheckoutFormComponent } from "./layout/home/checkout-form/checkout-form.component";
 
+// for admin
+//import { LoginComponent as LoginComponentAdmin } from "./management/login/login.component";
+import { LoginComponent as LoginComponentAdmin } from "./management/login/login.component";
+import { RegisterComponent as RegisterComponentAdmin } from "./management/register/register.component";
+import { UserComponent as UserComponentAdmin } from "./management/user/user.component";
+
 
 const routes: Routes = [
   // if path matches, show those component
   { path: "", component: HomeComponent, pathMatch: "full" },
   { path: "home", component: HomeComponent },
-  { path: "login", component: LoginComponent },
+  //{ path: "login", component: LoginComponent },
   { path: "register", component: SignUpComponent },
   { path: "cart", component: CartComponent },
   { path: "cart-detail", component: CartDetailComponent },
   { path: "checkout-form", component: CheckoutFormComponent },
+
+  // routes for admin function
+  { path: "admin/login", component: LoginComponentAdmin },
+  { path: "admin/register", component: RegisterComponentAdmin},
+  { path: "admin/management", component: UserComponentAdmin },
+  { path: "admin", redirectTo: 'admin/login', pathMatch: 'full'},
 
   // for category funtion routes
   { path: "search/:keyword", component: ProductListComponent},
@@ -35,7 +47,9 @@ const routes: Routes = [
   { path: "**", redirectTo:"/home", pathMatch: "full"},
 
   { path: "onsale", component: OnSaleComponent },
-  { path: "online-shop", component: OnlineOnlyComponent }
+  { path: "online-shop", component: OnlineOnlyComponent },
+
+
 ];
 
 @NgModule({

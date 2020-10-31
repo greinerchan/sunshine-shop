@@ -18,12 +18,12 @@ export class AuthenticationService {
   constructor(private http:HttpClient) { }
 
   //{observe: `response`} when get response back, default return response body. but now we want to whole response, inluding header, token
-  public login(user: User): Observable<HttpResponse<any> | HttpErrorResponse> {
-    return this.http.post<HttpResponse<any> | HttpErrorResponse>('{$this.host}/user/login', user, {observe: `response`})
+  public login(user: User): Observable<HttpResponse<User> | HttpErrorResponse> {
+    return this.http.post<User>('{$this.host}/admin/login', user, {observe: 'response'})
   }
 
-  public register(user: User): Observable<User | HttpErrorResponse> {
-    return this.http.post<User | HttpErrorResponse>('{$this.host}/user/register', user);
+  public register(user: User): Observable<User> {
+    return this.http.post<User>('{$this.host}/admin/register', user);
   }
 
   public logout(): void {
@@ -55,11 +55,11 @@ export class AuthenticationService {
     return this.token;
   }
 
-  public isLoggedIn(): boolean {
+  public isUserLoggedIn(): boolean {
     this.loadToken();
-    if (this.token != null || this.token !== '') {
+    if (this.token != null && this.token !== '') {
       if(this.jwtHelper.decodeToken(this.token).sub != null || '') {
-        if (this.jwtHelper.isTokenExpired(this.token)) {
+        if (!this.jwtHelper.isTokenExpired(this.token)) {
           this.loggedInUsername = this.jwtHelper.decodeToken(this.token).sub;
           return true;
         }
