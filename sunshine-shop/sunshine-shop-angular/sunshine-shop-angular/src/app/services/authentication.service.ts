@@ -26,6 +26,10 @@ export class AuthenticationService {
     return this.http.post<User>(`${this.host}/admin/register`, user);
   }
 
+  // public forgetPassword(user: User): Observable<User> {
+  //   return this.http.post<User>(`${this.host}/admin/forgot`, user);
+  // }
+
   public logout(): void {
     this.token = null;
     this.loggedInUsername = null;

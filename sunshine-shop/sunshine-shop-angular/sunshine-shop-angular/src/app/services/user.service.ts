@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { environment } from "../../environments/environment";
 import { HttpClient, HttpErrorResponse, HttpEvent, HttpResponse } from "@angular/common/http";
-import { Observable } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { User } from '../common/user';
 import { CustomHttpResponse } from '../common/custom-http-response';
 
@@ -11,27 +11,30 @@ import { CustomHttpResponse } from '../common/custom-http-response';
 })
 export class UserService {
   private host = environment.apiUrl;
-
   constructor(private httpClient: HttpClient) { }
 
-  public getUser(): Observable<User[] | HttpErrorResponse> {
-    return this.httpClient.get<User[]>(`${this.host}/user/list`);
+  public getUser(): Observable<User[]> {
+    return this.httpClient.get<User[]>(`${this.host}/admin/list`);
   }
 
   public addUser(formData: FormData): Observable<User | HttpErrorResponse> {
-    return this.httpClient.post<User>(`${this.host}/user/add`, formData);
+    return this.httpClient.post<User>(`${this.host}/admin/add`, formData);
   }
 
   public updateUser(formData: FormData): Observable<User | HttpErrorResponse> {
-    return this.httpClient.post<User>(`${this.host}/user/update`, formData);
+    return this.httpClient.post<User>(`${this.host}/admin/update`, formData);
   }
 
   public resetPassword(formData: FormData): Observable<User | HttpErrorResponse> {
-    return this.httpClient.post<User>(`${this.host}/user/resetpassword`, formData);
+    return this.httpClient.post<User>(`${this.host}/admin/resetpassword`, formData);
+  }
+
+  public forgetPassword(formData: FormData): Observable<User | HttpErrorResponse> {
+    return this.httpClient.post<User>(`${this.host}/admin/forgetpassword`, formData);
   }
 
   public updateProfileImage(formData: FormData): Observable<HttpEvent<User> | HttpErrorResponse> {
-    return this.httpClient.post<User>(`${this.host}/user/updateProfileImage`, formData, {reportProgress: true, observe:'events'});
+    return this.httpClient.post<User>(`${this.host}/admin/updateProfileImage`, formData, {reportProgress: true, observe:'events'});
   }
 
   public deleteUser(userId: number): Observable<CustomHttpResponse | HttpErrorResponse> {

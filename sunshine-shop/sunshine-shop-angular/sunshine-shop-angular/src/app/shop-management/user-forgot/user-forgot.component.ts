@@ -7,16 +7,17 @@ import { HeaderType } from 'src/app/enum/header-type.enum';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
-  selector: 'app-register-admin',
-  templateUrl: './register-admin.component.html',
-  styleUrls: ['./register-admin.component.css']
+  selector: 'app-user-forgot',
+  templateUrl: './user-forgot.component.html',
+  styleUrls: ['./user-forgot.component.css']
 })
-export class RegisterAdminComponent implements OnInit, OnDestroy {
+export class UserForgotComponent implements OnInit,OnDestroy {
 
   private subscriptions: Subscription[] = [];
-  constructor(private router:Router, private authenticationService: AuthenticationService, private notificationService:NotificationService ) { }
+  constructor(private router:Router, private authenticationService: AuthenticationService, private notificationService:NotificationService, private userService: UserService ) { }
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
@@ -29,20 +30,21 @@ export class RegisterAdminComponent implements OnInit, OnDestroy {
     } 
   }
   
-  public onResgister(user:User): void {
-    this.subscriptions.push(this.authenticationService.register(user).subscribe(
-      (response: User) => {
-        this.sendNotification(NotificationType.SUCCESS,`Congrats, you have created a new account for:  ${response.userEmail}. Please login to your mail box to retrieve your password`);
+  // public onForget(user:User): void {
+  //   this.subscriptions.push(this.userService.forgetPassword(user).subscribe(
+  //     (response: User) => {
+  //       this.sendNotification(NotificationType.SUCCESS,`Congrats, you have reset your account for:  ${response.userEmail}. Please login to your mail box to retrieve your password`);
 
-      },
-      (errorResponse: HttpErrorResponse) => {
-        console.log(errorResponse);
-        this.sendNotification(NotificationType.ERROR,errorResponse.error.message);
-      }
-    )
-    );
-  }
+  //     },
+  //     (errorResponse: HttpErrorResponse) => {
+  //       console.log(errorResponse);
+  //       this.sendNotification(NotificationType.ERROR,errorResponse.error.message);
+  //     }
+  //   )
+  //   );
+  // }
   private sendNotification(notificationType: NotificationType, message: string): void {
+    console.log(message);
     if (message) {
       this.notificationService.notify(notificationType, message);
     } else {

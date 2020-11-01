@@ -1,1 +1,35 @@
-<p>register-admin works!</p>
+<link href="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<script src="//maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+<!------ Include the above in your HEAD tag ---------->
+
+<div class="wrapper fadeInDown">
+  <div id="formContent">
+    <!-- Tabs Titles -->
+
+    <!-- Icon -->
+    <div class="fadeIn first">
+      <h1>Sunshine Shop Management System</h1>
+    </div>
+
+    <!-- Register Form -->
+    <form #registerForm="ngForm" (ngSubmit)="onResgister(registerForm.value)">
+      <input type="text" class="fadeIn second" name="userFirstName" placeholder="First Name"  ngModel #userFirstNameInput = "ngModel" required>
+      <div class="help-block" *ngIf = "userFirstNameInput.invalid && userFirstNameInput.touched" style="color: red;">Please Enter your first name</div>
+      <input type="text" class="fadeIn third" name="userLastName" placeholder="Last Name" ngModel #userLastNameInput = "ngModel" required>
+      <div class="help-block" *ngIf = "userLastNameInput.invalid && userLastNameInput.touched" style="color: red;">Please Enter your last name</div>
+      <input type="text" class="fadeIn second" name="userEmail" placeholder="email"  ngModel #userEmailInput = "ngModel" required>
+      <div class="help-block" *ngIf = "userEmailInput.invalid && userEmailInput.touched" style="color: red;">Please Enter your email</div>
+      <input type="text" class="fadeIn third" name="username" placeholder="Username" ngModel #usernameInput = "ngModel" required>
+      <div class="help-block" *ngIf = "usernameInput.invalid && usernameInput.touched" style="color: red;">Please Enter your user name</div>
+      <input type="submit" class="fadeIn fourth" value="Register">
+    </form>
+
+    <!-- Remind Passowrd -->
+    <div id="formFooter">
+      <a routerLink="/admin/login" routerLinkActive="active" class="underlineHover">Alrealdy have a account? Login in</a>
+    </div>
+
+  </div>
+</div>
+

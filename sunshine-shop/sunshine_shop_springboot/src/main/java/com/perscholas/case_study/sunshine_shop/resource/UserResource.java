@@ -72,6 +72,13 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(newUser, OK);
     }
 
+    @PostMapping("/admin/forgetpassword")
+    public ResponseEntity<HttpResponse> forgot(@RequestParam("userEmail") String email) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException, EmailNotFoundException {
+        User user = userService.forgetPassword(email);
+        // responseentity is everything you need to send request back, status and body
+        return response(OK, Email_Sent + email);
+    }
+
     @PostMapping("/admin/add")
     public ResponseEntity<User> addNewUser(@RequestParam("firstName") String firstName,
                                            @RequestParam("lastName") String lastName,

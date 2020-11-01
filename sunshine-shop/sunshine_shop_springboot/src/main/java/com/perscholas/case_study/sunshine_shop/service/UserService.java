@@ -20,6 +20,7 @@ public interface UserService {
     User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException;
     User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername, String newEmail, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException;
     void deleteUser(long id);
+    User forgetPassword(String email) throws MessagingException, EmailNotFoundException;
     void resetPassword(String email, String password) throws EmailNotFoundException, MessagingException;
     User updateProfileImage(String username, MultipartFile profileImage) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException;
 }
