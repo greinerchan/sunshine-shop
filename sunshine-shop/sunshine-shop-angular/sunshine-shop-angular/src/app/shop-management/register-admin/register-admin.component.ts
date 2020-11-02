@@ -24,9 +24,6 @@ export class RegisterAdminComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
 
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/admin/management');
-    } 
   }
   
   public onResgister(user:User): void {

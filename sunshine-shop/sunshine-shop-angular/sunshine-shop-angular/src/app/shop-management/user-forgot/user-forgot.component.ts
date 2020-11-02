@@ -8,6 +8,8 @@ import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
+import { NgForm } from '@angular/forms';
+import { CustomHttpResponse } from 'src/app/common/custom-http-response';
 
 @Component({
   selector: 'app-user-forgot',
@@ -19,15 +21,15 @@ export class UserForgotComponent implements OnInit,OnDestroy {
   private subscriptions: Subscription[] = [];
   constructor(private router:Router, private authenticationService: AuthenticationService, private notificationService:NotificationService, private userService: UserService ) { }
 
+  public refreshing: boolean;
+
+  private currentUsername: string;
+
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
   }
 
   ngOnInit(): void {
-
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/admin/management');
-    } 
   }
   
   // public onForget(user:User): void {
@@ -43,6 +45,24 @@ export class UserForgotComponent implements OnInit,OnDestroy {
   //   )
   //   );
   // }
+
+  public onResetPassword(emailForm: NgForm): void {
+    this.refreshing = true;
+    const emailAddress = emailForm.value['reset-password-email'];
+    this.subscriptions.push(
+      this.userService.forgetPassword(emailAddress).subscribe(
+        (response: CustomHttpResponse) => {
+          this.sendNotification(NotificationType.SUCCESS, response.message);
+        },
+        (error: HttpErrorResponse) => {
+          this.sendNotification(NotificationType.WARNING, error.error.message);
+        },
+        // finally
+        () => emailForm.reset()
+      )
+    );
+  }
+  
   private sendNotification(notificationType: NotificationType, message: string): void {
     console.log(message);
     if (message) {

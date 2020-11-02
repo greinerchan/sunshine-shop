@@ -67,10 +67,10 @@
         </thead>
         <tbody *ngFor="let appUser of users">
           <tr class="text-center">
-            <td (click)="onSelectUser(appUser)">{{appUser?.userId}}</td>
-            <td (click)="onSelectUser(appUser)">{{appUser?.email}}</td>
-            <td (click)="onSelectUser(appUser)">{{appUser?.firstName}}</td>
-            <td (click)="onSelectUser(appUser)">{{appUser?.lastName}}</td>
+            <td (click)="onSelectUser(appUser)">{{appUser?.id}}</td>
+            <td (click)="onSelectUser(appUser)">{{appUser?.userEmail}}</td>
+            <td (click)="onSelectUser(appUser)">{{appUser?.userFirstName}}</td>
+            <td (click)="onSelectUser(appUser)">{{appUser?.userLastName}}</td>
             <td (click)="onSelectUser(appUser)">{{appUser?.username}}</td>
             <td (click)="onSelectUser(appUser)">
               <span [hidden]="!appUser?.active" class="badge badge-success">Active</span>
@@ -79,7 +79,7 @@
             <td class="">
               <div class="btn-group">
                 <button class="btn btn-outline-info" (click)="onEditUser(appUser)"><i class="fas fa-edit"></i></button>
-                <button [hidden]="!isAdmin" class="btn btn-outline-danger" (click)="onDeleteUder(appUser?.username)"><i class="fas fa-trash"></i></button>
+                <button [hidden]="!isAdmin" class="btn btn-outline-danger" (click)="onDeleteUder(appUser?.id)"><i class="fas fa-trash"></i></button>
               </div>
             </td>
           </tr>
@@ -137,16 +137,10 @@
                         </div>
                         <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
                           <div class="text-center text-sm-left mb-2 mb-sm-0">
-                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user?.firstName}} {{user?.lastName}}</h4>
+                            <h4 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user?.userFirstName}} {{user?.userLastName}}</h4>
                             <p class="mb-0">{{user?.username}}</p>
                             <div *ngIf="user?.lastLoginDateDisplay !== null" class="text-muted"><small>Last login:
                                 {{user?.lastLoginDateDisplay | date:'medium'}}</small></div>
-                            <div class="mt-2">
-                              <button (click)="updateProfileImage()" class="btn btn-primary" type="button">
-                                <i class="fa fa-fw fa-camera"></i>
-                                <span>Change Photo</span>
-                              </button>
-                            </div>
                           </div>
                           <div class="text-center text-sm-right">
                             <div class="text-muted"><small>Joined {{user?.joinDate | date:'mediumDate'}}</small></div>
@@ -163,14 +157,14 @@
                                   <div class="col">
                                     <div class="form-group">
                                       <label>First Name</label>
-                                      <input type="text" name="firstName" required [(ngModel)]="user.firstName"
+                                      <input type="text" name="firstName" required [(ngModel)]="user.userFirstName"
                                         class="form-control">
                                     </div>
                                   </div>
                                   <div class="col">
                                     <div class="form-group">
                                       <label>Last Name</label>
-                                      <input type="text" name="lastName" required [(ngModel)]="user.lastName"
+                                      <input type="text" name="lastName" required [(ngModel)]="user.userLastName"
                                         class="form-control">
                                     </div>
                                   </div>
@@ -188,7 +182,7 @@
                                   <div class="col">
                                     <div class="form-group">
                                       <label>Email</label>
-                                      <input type="text" name="email" required [(ngModel)]="user.email"
+                                      <input type="text" name="email" required [(ngModel)]="user.userEmail"
                                         class="form-control">
                                     </div>
                                   </div>
@@ -221,7 +215,7 @@
                                       </div>
                                       <div class="custom-control custom-checkbox">
                                         <input name="notLocked" type="checkbox"
-                                          [(ngModel)]="user.notLocked" class="custom-control-input">
+                                          [(ngModel)]="user.isNonLocked" class="custom-control-input">
                                         <label class="custom-control-label">Unlocked</label>
                                       </div>
                                     </div>
@@ -275,8 +269,8 @@
       <div class="modal-dialog" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title text-center" id="exampleModalLongTitle">{{selectedUser?.firstName}}
-              {{selectedUser?.lastName}}
+            <h5 class="modal-title text-center" id="exampleModalLongTitle">{{selectedUser?.userFirstName}}
+              {{selectedUser?.userLastName}}
             </h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
@@ -288,16 +282,11 @@
                 <div class="card-body">
                   <div class="row">
                     <div class="col-12 col-sm-auto">
-                      <div class="mx-auto" style="width: 120px;">
-                        <div class="d-flex justify-content-center align-items-center rounded">
-                          <img class="rounded" height="120" width="120" src="{{selectedUser?.profileImageUrl}}" alt="{{selectedUser?.firstName}}">
-                        </div>
-                      </div>
                     </div>
                     <div class="col d-flex flex-column flex-sm-row justify-content-between">
                       <div class="text-center text-sm-left mb-sm-0">
-                        <h6 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{selectedUser?.firstName}}
-                          {{selectedUser?.lastName}}</h6>
+                        <h6 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{selectedUser?.userFirstName}}
+                          {{selectedUser?.userLastName}}</h6>
                         <p class="mb-1">{{selectedUser?.username}}</p>
                         <div class="">Status:
                           <span [hidden]="!selectedUser?.active" class="badge badge-success">Active</span>
@@ -314,21 +303,21 @@
                 </div>
                 <ul class="list-group list-group-flush">
                   <li class="list-group-item"></li>
-                  <li class="list-group-item"><i class="fa fa-id-badge float-right"></i>{{selectedUser?.userId}}
+                  <li class="list-group-item"><i class="fa fa-id-badge float-right"></i>{{selectedUser?.id}}
                   </li>
-                  <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{selectedUser?.email}}
+                  <li class="list-group-item"><i class="fa fa-envelope float-right"></i>{{selectedUser?.userEmail}}
                   </li>
                   <li class="list-group-item"><i class="fas fa-shield-alt float-right"></i>{{selectedUser?.role.substring(5)}}
                   <li *ngIf="selectedUser?.lastLoginDateDisplay" class="list-group-item"><i
                       class="fas fa-sign-in-alt float-right"></i>{{selectedUser?.lastLoginDateDisplay | date: 'medium'}}
                   </li>
                   <li class="list-group-item">
-                    <span [hidden]="selectedUser?.notLocked">
+                    <span [hidden]="selectedUser?.isNonLocked">
                       <i class="fa fa-lock float-right" style="color: red;">
                       </i>
                       Account Locked
                     </span>
-                    <span [hidden]="!selectedUser?.notLocked">
+                    <span [hidden]="!selectedUser?.isNonLocked">
                       <i class="fa fa-unlock float-right" style="color: green;">
                       </i>
                       Account Unlocked
@@ -378,29 +367,15 @@
                 <div *ngIf="isAdmin" class="form-group">
                   <label for="authority">Role</label>
                   <select name="role" required ngModel="ROLE_USER" class="form-control">
-                    <option value="ROLE_USER">USER</option>
-                    <option value="ROLE_HR">HR</option>
-                    <option value="ROLE_MANAGER">MANAGER</option>
-                    <option value="ROLE_ADMIN">ADMIN</option>
-                    <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                    <option value="ROLE_CUSTOMER">CUSTOMER</option>
+                    <option value="ROLE_CASHIER">CASHIER</option>
+                    <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
+                    <option value="ROLE_GENERAL_MANAGER">GENERAL_MANAGER</option>
                   </select>
                 </div>
                 <div *ngIf="!isAdmin" class="form-group">
                   <label for="authority">Role</label>
                   <input type="text" name="role" required ngModel="USER" readonly class="form-control">
-                </div>
-                <div class="input-group mb-2">
-                  <div class="input-group-prepend">
-                    <span class="input-group-text">Profile Picture </span>
-                  </div>
-                  <div class="custom-file">
-                    <input type="file" accept="image/*" name="profileImage"
-                    (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0])"
-                      class="custom-file-input">
-                    <label class="custom-file-label"><span [hidden]="!fileName">{{ fileName }}</span>
-                      <span [hidden]="fileName">Choose File</span>
-                    </label>
-                  </div>
                 </div>
                 <fieldset class="form-group">
                   <div class="form-check">
@@ -434,8 +409,8 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title text-center">Edit {{editUser?.firstName}}
-          {{editUser?.lastName}} <small [hidden]="isAdminOrManager">
+        <h5 class="modal-title text-center">Edit {{editUser?.userFirstName}}
+          {{editUser?.userLastName}} <small [hidden]="isAdminOrManager">
             (read only)
           </small></h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
@@ -448,44 +423,36 @@
             <div class="form-group">
               <label for="firstName">First Name</label>
               <input type="text" name="firstName" [disabled]="!isAdminOrManager" required
-                [(ngModel)]="editUser.firstName" class="form-control">
+                [(ngModel)]="editUser.userFirstName" class="form-control">
             </div>
             <div class="form-group">
               <label for="lastName">Last Name</label>
               <input type="text" name="lastName" [disabled]="!isAdminOrManager" required
-                [(ngModel)]="editUser.lastName" class="form-control">
+                [(ngModel)]="editUser.userLastName" class="form-control">
             </div>
             <div class="form-group">
               <label for="username">Username</label>
               <input type="text" name="username" [disabled]="!isAdminOrManager" required
                 [(ngModel)]="editUser.username" class="form-control">
+                <!-- banana in box, two way binding, something in template will automatically upate the actual component or viceversa  -->
             </div>
             <div class="form-group">
               <label for="email">Email</label>
-              <input type="email" name="email" [disabled]="!isAdminOrManager" required [(ngModel)]="editUser.email"
+              <input type="email" name="email" [disabled]="!isAdminOrManager" required [(ngModel)]="editUser.userEmail"
                 class="form-control">
             </div>
             <div class="form-group">
               <label for="authority">Role <small [hidden]="isAdmin">(read only)</small></label>
                 <select name="role" [disabled]="!isAdmin" required [(ngModel)]="editUser.role" class="form-control">
-                  <option value="ROLE_USER">USER</option>
-                  <option value="ROLE_HR">HR</option>
-                  <option value="ROLE_MANAGER">MANAGER</option>
-                  <option value="ROLE_ADMIN">ADMIN</option>
-                  <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                  <option value="ROLE_CUSTOMER">CUSTOMER</option>
+                  <option value="ROLE_CASHIER">CASHIER</option>
+                  <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
+                  <option value="ROLE_GENERAL_MANAGER">GENERAL_MANAGER</option>
                 </select>
             </div>
             <div class="input-group mb-2">
               <div class="input-group-prepend">
                 <span class="input-group-text">Profile Picture </span>
-              </div>
-              <div class="custom-file">
-                <input type="file" accept="image/*" [disabled]="!isAdminOrManager" name="profileImage"
-                  (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0])"
-                  class="custom-file-input">
-                <label class="custom-file-label"><span [hidden]="!fileName">{{fileName}}</span>
-                  <span [hidden]="fileName">Choose File</span>
-                </label>
               </div>
             </div>
             <fieldset class="form-group">
@@ -498,7 +465,7 @@
               </div>
               <div class="form-check disabled">
                 <label class="form-check-label">
-                  <input name="locked" type="checkbox" [disabled]="!isManager" [(ngModel)]="editUser.notLocked"
+                  <input name="locked" type="checkbox" [disabled]="!isManager" [(ngModel)]="editUser.isNonLocked"
                     class="form-check-input">
                   Unlocked <small [hidden]="isManager">(read only)</small>
                 </label>
@@ -521,8 +488,8 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
 <div class="modal-dialog" role="document">
   <div class="modal-content">
     <div class="modal-header">
-      <h5 class="modal-title text-center">Edit {{editUser?.firstName}}
-        {{editUser?.lastName}}</h5>
+      <h5 class="modal-title text-center">Edit {{editUser?.userFirstName}}
+        {{editUser?.userLastName}}</h5>
       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         <span aria-hidden="true">&times;</span>
       </button>
@@ -533,12 +500,12 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           <div class="form-group">
             <label for="firstName">First Name</label>
             <input type="text" name="firstName" required
-              [(ngModel)]="editUser.firstName" class="form-control">
+              [(ngModel)]="editUser.userFirstName" class="form-control">
           </div>
           <div class="form-group">
             <label for="lastName">Last Name</label>
             <input type="text" name="lastName" required
-              [(ngModel)]="editUser.lastName" class="form-control">
+              [(ngModel)]="editUser.userLastName" class="form-control">
           </div>
           <div class="form-group">
             <label for="username">Username</label>
@@ -547,31 +514,17 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
           </div>
           <div class="form-group">
             <label for="email">Email</label>
-            <input type="email" name="email" required [(ngModel)]="editUser.email"
+            <input type="email" name="email" required [(ngModel)]="editUser.userEmail"
               class="form-control">
           </div>
           <div class="form-group">
             <label for="authority">Role</label>
               <select name="role" required [(ngModel)]="editUser.role" class="form-control">
-                <option value="ROLE_USER">USER</option>
-                <option value="ROLE_HR">HR</option>
-                <option value="ROLE_MANAGER">MANAGER</option>
-                <option value="ROLE_ADMIN">ADMIN</option>
-                <option value="ROLE_SUPER_ADMIN">SUPER ADMIN</option>
+                <option value="ROLE_CUSTOMER">CUSTOMER</option>
+                <option value="ROLE_CASHIER">CASHIER</option>
+                <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
+                <option value="ROLE_GENERAL_MANAGER">GENERAL_MANAGER</option>
               </select>
-          </div>
-          <div class="input-group mb-2">
-            <div class="input-group-prepend">
-              <span class="input-group-text">Profile Picture </span>
-            </div>
-            <div class="custom-file">
-              <input type="file" accept="image/*" name="profileImage"
-                (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0])"
-                class="custom-file-input">
-              <label class="custom-file-label"><span [hidden]="!fileName">{{fileName}}</span>
-                <span [hidden]="fileName">Choose File</span>
-              </label>
-            </div>
           </div>
           <fieldset class="form-group">
             <div class="form-check">
@@ -583,7 +536,7 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
             </div>
             <div class="form-check disabled">
               <label class="form-check-label">
-                <input name="locked" type="checkbox" [(ngModel)]="editUser.notLocked"
+                <input name="locked" type="checkbox" [(ngModel)]="editUser.isNonLocked"
                   class="form-check-input">
                 Unlocked
               </label>
@@ -599,12 +552,5 @@ role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   </div>
 </div>
 </div>
-
-    <!-- profile image change form -->
-  <form enctype="multipart/form-data" style="display:none;">
-      <input type="file"
-        (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0]); onUpdateProfileImage()"
-       name="profile-image-input" id="profile-image-input" placeholder="file" accept="image/*" />
-  </form>
 
   </div>

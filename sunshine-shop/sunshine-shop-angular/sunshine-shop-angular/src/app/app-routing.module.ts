@@ -34,7 +34,7 @@ const routes: Routes = [
   // routes for admin function
   { path: "admin/login", component: LoginAdminComponent },
   { path: "admin/register", component: RegisterAdminComponent},
-  { path: "admin/forgot", component: UserForgotComponent},
+  { path: "admin/forgetPassword", component: UserForgotComponent},
   { path: "admin/management", component: UserAdminComponent },
   { path: "admin", redirectTo: 'admin/login', pathMatch: 'full'},
 

@@ -25,20 +25,20 @@ export class UserService {
     return this.httpClient.post<User>(`${this.host}/admin/update`, formData);
   }
 
-  public resetPassword(formData: FormData): Observable<User | HttpErrorResponse> {
-    return this.httpClient.post<User>(`${this.host}/admin/resetpassword`, formData);
+  public resetPassword(formData: FormData): Observable<CustomHttpResponse> {
+    return this.httpClient.post<CustomHttpResponse>(`${this.host}/admin/resetpassword`, formData);
   }
 
-  public forgetPassword(formData: FormData): Observable<User | HttpErrorResponse> {
-    return this.httpClient.post<User>(`${this.host}/admin/forgetpassword`, formData);
+  public forgetPassword(email: string): Observable<CustomHttpResponse> {
+    return this.httpClient.get<CustomHttpResponse>(`${this.host}/admin/forgetpassword/${email}`);
   }
 
   public updateProfileImage(formData: FormData): Observable<HttpEvent<User> | HttpErrorResponse> {
     return this.httpClient.post<User>(`${this.host}/admin/updateProfileImage`, formData, {reportProgress: true, observe:'events'});
   }
 
-  public deleteUser(userId: number): Observable<CustomHttpResponse | HttpErrorResponse> {
-    return this.httpClient.delete<CustomHttpResponse>(`${this.host}/user/delete/${userId}`);
+  public deleteUser(id: number): Observable<CustomHttpResponse> {
+    return this.httpClient.delete<CustomHttpResponse>(`${this.host}/user/delete/${id}`);
   }
 
   public addUsersToLocalCache(users: User[]): void {

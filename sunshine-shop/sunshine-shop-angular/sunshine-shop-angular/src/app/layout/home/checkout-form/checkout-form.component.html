@@ -114,21 +114,24 @@
                                 </div>
                             </div>
 
+
+
                             <div class="row">
-                                <div class="col-md-2"><label>City</label></div>
+                                <div class="col-md-2"><label>Country</label></div>
                                 <div class="col-md-9">
                                     <div class="input-space">
-                                        <select formControlName="city">
-                                            <option *ngFor="let city of shippingAddressCities" [ngValue]="city">
-                                                {{city.name}}
+                                        <select formControlName="country" (change)="getStates('shippingAddress')">
+                                            <option *ngFor="let country of countries" [ngValue]="country">
+                                                {{country.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)"
+                                        <div *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)"
                                             class="alert alert-danger mt-1">
-                                            <div *ngIf="shippingAddressCity.errors.required">
-                                                Please enter your city
+                                            <div *ngIf="shippingAddressCountry.errors.required">
+                                                Please enter your country
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -153,22 +156,20 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-2"><label>Country</label></div>
+                                <div class="col-md-2"><label>City</label></div>
                                 <div class="col-md-9">
                                     <div class="input-space">
-                                        <select formControlName="country" (change)="getStates('shippingAddress')">
-                                            <option *ngFor="let country of countries" [ngValue]="country">
-                                                {{country.name}}
+                                        <select formControlName="city">
+                                            <option *ngFor="let city of shippingAddressCities" [ngValue]="city">
+                                                {{city.name}}
                                             </option>
                                         </select>
-
-                                        <div *ngIf="shippingAddressCountry.invalid && (shippingAddressCountry.dirty || shippingAddressCountry.touched)"
+                                        <div *ngIf="shippingAddressCity.invalid && (shippingAddressCity.dirty || shippingAddressCity.touched)"
                                             class="alert alert-danger mt-1">
-                                            <div *ngIf="shippingAddressCountry.errors.required">
-                                                Please enter your country
+                                            <div *ngIf="shippingAddressCity.errors.required">
+                                                Please enter your city
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
@@ -224,20 +225,21 @@
                             </div>
 
                             <div class="row">
-                                <div class="col-md-2"><label>City</label></div>
+                                <div class="col-md-2"><label>Country</label></div>
                                 <div class="col-md-9">
                                     <div class="input-space">
-                                        <select formControlName="city">
-                                            <option *ngFor="let city of billingAddressCities" [ngValue]="city">
-                                                {{city.name}}
+                                        <select formControlName="country" (change)="getStates('billingAddress')">
+                                            <option *ngFor="let country of countries" [ngValue]="country">
+                                                {{country.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="billingAddressCity.invalid && (billingAddressCity.dirty || billingAddressCity.touched)"
+                                        <div *ngIf="billingAddressCountry.invalid && (billingAddressCountry.dirty || billingAddressCountry.touched)"
                                             class="alert alert-danger mt-1">
-                                            <div *ngIf="billingAddressCity.errors.required">
-                                                Please enter your city
+                                            <div *ngIf="billingAddressCountry.errors.required">
+                                                Please enter your country
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -261,25 +263,30 @@
                                 </div>
                             </div>
 
+                            
                             <div class="row">
-                                <div class="col-md-2"><label>Country</label></div>
+                                <div class="col-md-2"><label>City</label></div>
                                 <div class="col-md-9">
                                     <div class="input-space">
-                                        <select formControlName="country" (change)="getStates('billingAddress')">
-                                            <option *ngFor="let country of countries" [ngValue]="country">
-                                                {{country.name}}
+                                        <select formControlName="city">
+                                            <option *ngFor="let city of billingAddressCities" [ngValue]="city">
+                                                {{city.name}}
                                             </option>
                                         </select>
-                                        <div *ngIf="billingAddressCountry.invalid && (billingAddressCountry.dirty || billingAddressCountry.touched)"
+                                        <div *ngIf="billingAddressCity.invalid && (billingAddressCity.dirty || billingAddressCity.touched)"
                                             class="alert alert-danger mt-1">
-                                            <div *ngIf="billingAddressCountry.errors.required">
-                                                Please enter your country
+                                            <div *ngIf="billingAddressCity.errors.required">
+                                                Please enter your city
                                             </div>
                                         </div>
-
                                     </div>
                                 </div>
                             </div>
+
+ 
+
+
+
 
                         </div>
 

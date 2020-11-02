@@ -101,13 +101,12 @@ export class ProductService {
 
   getBestSellProducts() {
     const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductBestSell?isBestSell=1`;
-
     return this.getProducts(searchRecommendCategoryUrl);
   }
 
   searchProducts(keyword: string): Observable<Product[]> {
-    const searchRecommendCategoryUrl = `${this.productUrl}/search/findByProductNameContaining?keyword=${keyword}`;
-    return this.getProducts(searchRecommendCategoryUrl);
+    const searchProduct = `${this.productUrl}/search/findByProductNameContaining?keyword=${keyword}`;
+    return this.getProducts(searchProduct);
   }
 
   private getProducts(searchRecommendCategoryUrl: string): Observable<Product[]> {

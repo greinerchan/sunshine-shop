@@ -25,12 +25,6 @@ export class LoginAdminComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-
-    if (this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/admin/management');
-    } else {
-      this.router.navigateByUrl('/admin/login');
-    }
   }
   
   public onLogin(user:User): void {

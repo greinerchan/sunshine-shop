@@ -16,7 +16,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
-
 import javax.mail.MessagingException;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -28,7 +27,6 @@ import java.util.List;
 
 import static com.perscholas.case_study.sunshine_shop.constant.FileConstant.*;
 import static com.perscholas.case_study.sunshine_shop.constant.SecurityConstant.JWT_TOKEN_HEADER;
-import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 
@@ -72,12 +70,13 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(newUser, OK);
     }
 
-    @PostMapping("/admin/forgetpassword")
-    public ResponseEntity<HttpResponse> forgot(@RequestParam("userEmail") String email) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException, EmailNotFoundException {
-        User user = userService.forgetPassword(email);
+    @GetMapping("/admin/forgetpassword/{userEmail}")
+    public ResponseEntity<HttpResponse> forgot(@PathVariable("userEmail") String email) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException, EmailNotFoundException {
+        userService.forgetPassword(email);
         // responseentity is everything you need to send request back, status and body
         return response(OK, Email_Sent + email);
     }
+
 
     @PostMapping("/admin/add")
     public ResponseEntity<User> addNewUser(@RequestParam("firstName") String firstName,
@@ -124,12 +123,13 @@ public class UserResource extends ExceptionHandling {
         return response(OK, Email_Sent + email);
     }
 
+
     @DeleteMapping("/admin/delete/{id}")
     //@EnableGlobalMethodSecurity(prePostEnabled = true)  make it happen, can add security in method level
     @PreAuthorize("hasAnyAuthority('user:delete')")
     public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") long id) {
         userService.deleteUser(id);
-        return response(NO_CONTENT, USER_DELETED_SUCCESSFULLY);
+        return response(OK, USER_DELETED_SUCCESSFULLY);
     }
     private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
         return new ResponseEntity<>(new HttpResponse(httpStatus.value(), httpStatus, httpStatus.getReasonPhrase().toUpperCase(),

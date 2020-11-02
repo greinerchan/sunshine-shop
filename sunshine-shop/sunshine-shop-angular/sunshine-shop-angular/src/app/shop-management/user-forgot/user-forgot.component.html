@@ -13,10 +13,10 @@
     </div>
 
     <!-- forgot Form -->
-    <!-- <form #forgetForm="ngForm" (ngSubmit)="onForget(forgetForm.value)">
-      <input type="text" id="login" class="fadeIn second" name="userEmail" placeholder="email you want reset"  ngModel #userEmailInput = "ngModel" required>
+    <form #forgetForm="ngForm" (ngSubmit)="onResetPassword(forgetForm)">
+      <input type="email" id="login" class="fadeIn second" name="reset-password-email" placeholder="email you want reset"  ngModel #userEmailInput = "ngModel" required>
       <input type="submit" class="fadeIn fourth" value="Reset Password">
-    </form> -->
+    </form>
 
     <!-- Remind Passowrd -->
     <div id="formFooter">
