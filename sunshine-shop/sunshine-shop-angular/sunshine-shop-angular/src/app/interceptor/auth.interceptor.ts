@@ -32,14 +32,14 @@ export class AuthInterceptor implements HttpInterceptor {
       return httpHandler.handle(httpRequest); // do nothing just let the request pass
     }
 
-    if (httpRequest.url.includes(`${this.authenticationService.host}/admin`)){
-      return httpHandler.handle(httpRequest); // do nothing just let the request pass
-    }
+    // if (httpRequest.url.includes(`${this.authenticationService.host}/admin/management`)){
+    //   return httpHandler.handle(httpRequest); // do nothing just let the request pass
+    // }
 
     // get token from local storage
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();
-    const request = httpRequest.clone({ setHeaders: { Authorization: `Bearer ${token}`}});
+    const request = httpRequest.clone({ setHeaders: { Authorization: `Bearer${token}`}});
     return httpHandler.handle(request);
   }
 }

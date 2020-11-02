@@ -40,9 +40,9 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     this.getUsers(true);
   }
 
-  public changeTitle(title: string): void {
-    this.titleSubject.next(title);
-  }
+  // public changeTitle(title: string): void {
+  //   this.titleSubject.next(title);
+  // }
 
   public getUsers(showNotification: boolean): void {
     this.refreshing = true;

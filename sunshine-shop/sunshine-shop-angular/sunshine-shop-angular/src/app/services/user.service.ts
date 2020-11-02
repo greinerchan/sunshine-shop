@@ -17,11 +17,11 @@ export class UserService {
     return this.httpClient.get<User[]>(`${this.host}/admin/list`);
   }
 
-  public addUser(formData: FormData): Observable<User | HttpErrorResponse> {
+  public addUser(formData: FormData): Observable<User> {
     return this.httpClient.post<User>(`${this.host}/admin/add`, formData);
   }
 
-  public updateUser(formData: FormData): Observable<User | HttpErrorResponse> {
+  public updateUser(formData: FormData): Observable<User> {
     return this.httpClient.post<User>(`${this.host}/admin/update`, formData);
   }
 
@@ -38,7 +38,7 @@ export class UserService {
   }
 
   public deleteUser(id: number): Observable<CustomHttpResponse> {
-    return this.httpClient.delete<CustomHttpResponse>(`${this.host}/user/delete/${id}`);
+    return this.httpClient.delete<CustomHttpResponse>(`${this.host}/admin/delete/${id}`);
   }
 
   public addUsersToLocalCache(users: User[]): void {
