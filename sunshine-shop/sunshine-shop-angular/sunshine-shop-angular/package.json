@@ -39,6 +39,7 @@
     "ngx-owl-carousel-o": "^4.0.0",
     "rxjs": "~6.6.0",
     "save": "^2.4.0",
+    "subsink": "^1.0.1",
     "tslib": "^2.0.2",
     "zone.js": "~0.10.2"
   },

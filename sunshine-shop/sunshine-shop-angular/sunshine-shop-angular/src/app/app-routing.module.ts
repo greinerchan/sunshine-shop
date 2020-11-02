@@ -20,6 +20,7 @@ import { LoginAdminComponent} from "./shop-management/login-admin/login-admin.co
 import { RegisterAdminComponent } from "./shop-management/register-admin/register-admin.component";
 import { UserAdminComponent } from "./shop-management/user-admin/user-admin.component";
 import { UserForgotComponent } from "./shop-management/user-forgot/user-forgot.component";
+import { AuthenticationGuard } from './guard/authentication.guard';
 
 const routes: Routes = [
   // if path matches, show those component
@@ -35,7 +36,7 @@ const routes: Routes = [
   { path: "admin/login", component: LoginAdminComponent },
   { path: "admin/register", component: RegisterAdminComponent},
   { path: "admin/forgetPassword", component: UserForgotComponent},
-  { path: "admin/management", component: UserAdminComponent },
+  { path: "admin/management", component: UserAdminComponent, canActivate: [AuthenticationGuard] }, //activate this route unless it is authenticated
   { path: "admin", redirectTo: 'admin/login', pathMatch: 'full'},
 
   // for category funtion routes

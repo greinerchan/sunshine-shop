@@ -13,7 +13,7 @@
     </div>
 
     <!-- Register Form -->
-    <form #registerForm="ngForm" (ngSubmit)="onResgister(registerForm.value)">
+    <form #registerForm="ngForm" (ngSubmit)="onResgister(registerForm.value); registerForm.reset()">
       <input type="text" class="fadeIn second" name="userFirstName" placeholder="First Name"  ngModel #userFirstNameInput = "ngModel" required>
       <div class="help-block" *ngIf = "userFirstNameInput.invalid && userFirstNameInput.touched" style="color: red;">Please Enter your first name</div>
       <input type="text" class="fadeIn third" name="userLastName" placeholder="Last Name" ngModel #userLastNameInput = "ngModel" required>

@@ -36,7 +36,7 @@ import java.util.List;
 
 import static com.perscholas.case_study.sunshine_shop.constant.FileConstant.*;
 import static com.perscholas.case_study.sunshine_shop.constant.UserImplConstant.*;
-import static com.perscholas.case_study.sunshine_shop.enumeration.Role.ROLE_CASHIER;
+import static com.perscholas.case_study.sunshine_shop.enumeration.Role.ROLE_CUSTOMER;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.logging.log4j.util.Strings.EMPTY;
 
@@ -94,7 +94,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User register(String userLastName, String userFirstName, String username, String userEmail) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException {
+    public User register(String userFirstName, String userLastName, String username, String userEmail) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException {
         validateUsernameAndEmail(StringUtils.EMPTY, username, userEmail);
         User user = new User();
         String password = generatePassword();
@@ -108,8 +108,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUserPassword(encodedPassword);
         user.setActive(true);
         user.setNonLocked(true);
-        user.setRole(ROLE_CASHIER.name());
-        user.setAuthorities(ROLE_CASHIER.getAuthorities());
+        user.setRole(ROLE_CUSTOMER.name());
+        user.setAuthorities(ROLE_CUSTOMER.getAuthorities());
         user.setUserProfileImageUrl(getTemperaryProfileImageUrl(username));
         userRepository.save(user);
         emailService.sendNewPasswordEmail(userFirstName, password, userEmail);

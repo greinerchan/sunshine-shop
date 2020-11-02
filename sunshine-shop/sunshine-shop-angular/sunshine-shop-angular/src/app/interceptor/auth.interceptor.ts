@@ -32,6 +32,10 @@ export class AuthInterceptor implements HttpInterceptor {
       return httpHandler.handle(httpRequest); // do nothing just let the request pass
     }
 
+    if (httpRequest.url.includes(`${this.authenticationService.host}/admin`)){
+      return httpHandler.handle(httpRequest); // do nothing just let the request pass
+    }
+
     // get token from local storage
     this.authenticationService.loadToken();
     const token = this.authenticationService.getToken();

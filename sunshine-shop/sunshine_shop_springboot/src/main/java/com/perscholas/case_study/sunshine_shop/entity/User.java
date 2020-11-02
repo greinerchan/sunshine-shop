@@ -1,5 +1,6 @@
 package com.perscholas.case_study.sunshine_shop.entity;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 import javax.persistence.*;
@@ -21,6 +22,7 @@ public class User implements Serializable {
     @Column(name = "user_email")
     private String userEmail;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     @Column(name = "user_password")
     private String userPassword;
 

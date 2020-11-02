@@ -1,22 +1,24 @@
 import { HttpErrorResponse } from '@angular/common/http';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/common/custom-http-response';
 import { User } from 'src/app/common/user';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
+import { Role } from 'src/app/enum/role.enum';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
 import { UserService } from 'src/app/services/user.service';
+import { SubSink } from 'subsink';
 
 @Component({
   selector: 'app-user-admin',
   templateUrl: './user-admin.component.html',
   styleUrls: ['./user-admin.component.css']
 })
-export class UserAdminComponent implements OnInit {
-
+export class UserAdminComponent implements OnInit, OnDestroy {
+  private subs = new SubSink();
   private titleSubject = new BehaviorSubject<string>('Users');
   public titleAction$ = this.titleSubject.asObservable();
   public users: User[];
@@ -34,9 +36,7 @@ export class UserAdminComponent implements OnInit {
     private userService: UserService, private notificationService: NotificationService) {}
 
   ngOnInit(): void {
-    if (!this.authenticationService.isUserLoggedIn()) {
-      this.router.navigateByUrl('/admin/login');
-    } 
+    this.user = this.authenticationService.getUserFromLocalCache();
     this.getUsers(true);
   }
 
@@ -62,6 +62,7 @@ export class UserAdminComponent implements OnInit {
         }
       )
     );
+    
   }
 
   public onSelectUser(selectedUser: User): void {
@@ -159,8 +160,50 @@ export class UserAdminComponent implements OnInit {
     );
   }
 
+  public onUpdateCurrentUser(user: User): void {
+    this.refreshing = true;
+    this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
+    const formData = this.userService.createUserFormData(this.currentUsername, user);
+    this.subscriptions.push(
+      this.userService.updateUser(formData).subscribe(
+        (response: User) => {
+          this.authenticationService.addUserToLocalCache(response);
+          this.getUsers(false);
+          this.fileName = null;
+          this.profileImage = null;
+          this.sendNotification(NotificationType.SUCCESS, `${response.userFirstName} ${response.userLastName} updated successfully`);
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+          this.refreshing = false;
+          this.profileImage = null;
+        }
+      )
+      );
+  }
+
+  public onLogOut(): void {
+    this.authenticationService.logout();
+    this.router.navigate(['/admin/login']);
+    this.sendNotification(NotificationType.SUCCESS, `You've been successfully logged out`);
+  }
+
+  public get isAdmin(): boolean {
+    return this.getUserRole() === Role.GENERAL_MANAGER || this.getUserRole() === Role.MANAGER;
+  }
+
+  public get isManager(): boolean {
+    return this.getUserRole() == Role.GENERAL_MANAGER;
+  }
 
 
+  private getUserRole(): string {
+    return this.authenticationService.getUserFromLocalCache().role;
+  }
+
+  ngOnDestroy(): void {
+    this.subscriptions.forEach(sub => sub.unsubscribe());
+  }
 
   public createUserFormDate(loggedInUsername: string, user: User, profileImage: File): FormData {
     const formData = new FormData();
