@@ -100,8 +100,8 @@ public class UserResource extends ExceptionHandling {
                                            @RequestParam("username") String username,
                                            @RequestParam("userEmail") String email,
                                            @RequestParam("role") String role,
-                                           @RequestParam("active") String isActive,
-                                           @RequestParam("isNonLocked") String isNonLocked,
+                                           @RequestParam(value = "active", required = false) String isActive,
+                                           @RequestParam(value = "isNonLocked", required = false) String isNonLocked,
                                            // not required
                                            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
         User updatedUser = userService.updateUser(currentUsername, firstName, lastName, username, email ,role,

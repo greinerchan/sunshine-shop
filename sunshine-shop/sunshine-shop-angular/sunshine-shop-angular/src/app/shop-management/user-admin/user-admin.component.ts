@@ -37,6 +37,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
+    console.log(this.user);
     this.getUsers(true);
   }
 
@@ -51,7 +52,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         (response: User[]) => {
           this.userService.addUsersToLocalCache(response);
           this.users = response;
-          console.log("sdfsdfsdf" +this.users.toString);
           this.refreshing = false;
           if (showNotification) {
             this.sendNotification(NotificationType.SUCCESS, `${response.length} Content loaded successfully.`);
@@ -159,9 +159,8 @@ export class UserAdminComponent implements OnInit, OnDestroy {
   }
 
   public onUpdateCurrentUser(user: User): void {
-    this.refreshing = true;
     this.currentUsername = this.authenticationService.getUserFromLocalCache().username;
-    const formData = this.userService.createUserFormData(this.currentUsername, user);
+    const formData = this.userService.createUserFormDataInfo(this.currentUsername, user);
     this.subscriptions.push(
       this.userService.updateUser(formData).subscribe(
         (response: User) => {
@@ -173,7 +172,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         },
         (errorResponse: HttpErrorResponse) => {
           this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
-          this.refreshing = false;
           this.profileImage = null;
         }
       )

@@ -218,6 +218,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUserPassword(encodePassword(password));
         userRepository.save(user);
         emailService.sendNewPasswordEmail(user.getUserFirstName(), password, user.getUserEmail());
+        loginAttemptService.evictUserFromLoginAttemptCache(user.getUserEmail());
         return user;
     }
 
