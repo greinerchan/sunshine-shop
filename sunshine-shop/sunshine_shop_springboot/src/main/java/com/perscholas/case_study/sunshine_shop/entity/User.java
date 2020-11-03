@@ -54,12 +54,12 @@ public class User implements Serializable {
     private boolean active;
 
     @Column(name = "user_is_non_locked")
-    private boolean isNonLocked;
+    private boolean nonLocked;
 
     public User() {
     }
 
-    public User(Long id, String username, String userEmail, String userPassword, String userFirstName, String userLastName, String user_profile_imageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean active, boolean isNonLocked) {
+    public User(Long id, String username, String userEmail, String userPassword, String userFirstName, String userLastName, String user_profile_imageUrl, Date lastLoginDate, Date lastLoginDateDisplay, Date joinDate, String role, String[] authorities, boolean active, boolean nonLocked) {
         this.id = id;
         this.username = username;
         this.userEmail = userEmail;
@@ -73,7 +73,7 @@ public class User implements Serializable {
         this.role = role;
         this.authorities = authorities;
         this.active = active;
-        this.isNonLocked = isNonLocked;
+        this.nonLocked = nonLocked;
     }
 
     public Long getId() {
@@ -181,10 +181,10 @@ public class User implements Serializable {
     }
 
     public boolean isNonLocked() {
-        return isNonLocked;
+        return nonLocked;
     }
 
     public void setNonLocked(boolean nonLocked) {
-        isNonLocked = nonLocked;
+        this.nonLocked = nonLocked;
     }
 }
