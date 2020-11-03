@@ -20,6 +20,7 @@ export class RegisterAdminComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.subscriptions.forEach(sub => sub.unsubscribe());
+    
   }
 
   ngOnInit(): void {

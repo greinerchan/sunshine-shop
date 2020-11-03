@@ -39,16 +39,23 @@ td {
 }
 
 
-.btn {
+.btn2 {
     background: #FF6534;
-    border-color: #FF6534;
     background-color: #FF6534;
     /* padding: 15px 10em; */
     text-decoration: none;
+    border: none;
 }
 
 .btn {
     color: white;
+}
+
+.btn-info {
+    background: #FF6534;
+    border: none;
+    background-color: #FF6534;
+    text-decoration: none;
 }
 
 .nav-item{
@@ -67,4 +74,8 @@ td {
 
 .nav-pills {
     color: #fff;
+}
+
+.btn-group {
+    float: left;
 }

@@ -36,7 +36,7 @@ import java.util.List;
 
 import static com.perscholas.case_study.sunshine_shop.constant.FileConstant.*;
 import static com.perscholas.case_study.sunshine_shop.constant.UserImplConstant.*;
-import static com.perscholas.case_study.sunshine_shop.enumeration.Role.ROLE_CUSTOMER;
+import static com.perscholas.case_study.sunshine_shop.enumeration.Role.*;
 import static java.nio.file.StandardCopyOption.REPLACE_EXISTING;
 import static org.apache.logging.log4j.util.Strings.EMPTY;
 
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
+    public User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonLocked, boolean isActive) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
         validateUsernameAndEmail(EMPTY, username, email);
         User user = new User();
         String password = generatePassword();
@@ -149,7 +149,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setAuthorities(getRoleEnumName(role).getAuthorities());
         user.setUserProfileImageUrl(getTemperaryProfileImageUrl(username));
         userRepository.save(user);
-        saveProfileImage(user, profileImage);
         return user;
     }
 
@@ -178,9 +177,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername, String newEmail, String role, boolean isNonLocked, boolean isActive, MultipartFile profileImage) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
+    public User updateUser(String currentUsername, String newFirstName, String newLastName, String newUsername, String newEmail, String role, boolean isNonLocked, boolean isActive) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
         User currentUser = validateUsernameAndEmail(currentUsername, newUsername, newEmail);
-        System.out.println("current user is" + currentUser.getUsername());
+        System.out.println("current user is" + currentUser.getUserEmail());
         currentUser.setUserFirstName(newFirstName);
         currentUser.setUserLastName(newLastName);
         currentUser.setUsername(newUsername);
@@ -190,7 +189,6 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         currentUser.setRole(getRoleEnumName(role).name());
         currentUser.setAuthorities(getRoleEnumName(role).getAuthorities());
         userRepository.save(currentUser);
-        saveProfileImage(currentUser, profileImage);
         return currentUser;
     }
 

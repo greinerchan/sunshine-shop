@@ -51,6 +51,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
         (response: User[]) => {
           this.userService.addUsersToLocalCache(response);
           this.users = response;
+          console.log("sdfsdfsdf" +this.users.toString);
           this.refreshing = false;
           if (showNotification) {
             this.sendNotification(NotificationType.SUCCESS, `${response.length} Content loaded successfully.`);
@@ -116,9 +117,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
       }
     }
     this.users = results;
-    if (results.length === 0 || !searchTerm) {
-      this.users = this.userService.getUsersFromLocalCache();
-    }
   }
 
   public onEditUser(editUser: User): void {
@@ -193,7 +191,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
   }
 
   public get isManager(): boolean {
-    return this.getUserRole() == Role.GENERAL_MANAGER;
+    return this.getUserRole() === Role.GENERAL_MANAGER;
   }
 
 
@@ -215,7 +213,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     formData.append('role', user.role);
     formData.append('profileImage', profileImage);
     formData.append('isActive', JSON.stringify(user.active));
-    formData.append('isNonLocked', JSON.stringify(user.isNonLocked));
+    formData.append('isNonLocked', JSON.stringify(user.nonLocked));
     return formData;
   }
 }

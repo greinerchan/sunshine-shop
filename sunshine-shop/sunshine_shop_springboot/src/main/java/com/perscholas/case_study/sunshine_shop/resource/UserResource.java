@@ -89,27 +89,26 @@ public class UserResource extends ExceptionHandling {
                                            // not required
                                            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
         User newUser = userService.addNewUser(firstName, lastName, username, email ,role,
-                Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive), profileImage);
+                Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive));
         return new ResponseEntity<>(newUser, OK);
     }
 
     @PostMapping("/admin/update")
     public ResponseEntity<User> update(    @RequestParam("currentUsername") String currentUsername,
-                                           @RequestParam("firstName") String firstName,
-                                           @RequestParam("lastName") String lastName,
+                                           @RequestParam("userFirstName") String firstName,
+                                           @RequestParam("userLastName") String lastName,
                                            @RequestParam("username") String username,
-                                           @RequestParam("email") String email,
+                                           @RequestParam("userEmail") String email,
                                            @RequestParam("role") String role,
-                                           @RequestParam("isActive") String isActive,
+                                           @RequestParam("active") String isActive,
                                            @RequestParam("isNonLocked") String isNonLocked,
                                            // not required
                                            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
         User updatedUser = userService.updateUser(currentUsername, firstName, lastName, username, email ,role,
-                Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive), profileImage);
+                Boolean.parseBoolean(isNonLocked), Boolean.parseBoolean(isActive));
         // responseentity is everything you need to send request back, status and body
         return new ResponseEntity<>(updatedUser, OK);
     }
-
 
     @GetMapping("/admin/list")
     public ResponseEntity<List<User>> getAllUsers() {
