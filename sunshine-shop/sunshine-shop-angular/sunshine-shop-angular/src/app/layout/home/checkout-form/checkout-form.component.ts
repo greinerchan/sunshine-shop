@@ -33,6 +33,9 @@ export class CheckoutFormComponent implements OnInit {
   constructor(private formBuilder: FormBuilder, private checkoutform: CheckoutformService) { }
 
   ngOnInit(): void {
+    this.totalPrice = +localStorage.getItem("totalPrice");
+    this.totalQuanity = +localStorage.getItem("totalQuanity");
+
     this.checkoutFormGroup = this.formBuilder.group({
       customer: this.formBuilder.group({
         firstName: new FormControl('', [Validators.required, Validators.minLength(1), MyValidators.spaceCheck]),

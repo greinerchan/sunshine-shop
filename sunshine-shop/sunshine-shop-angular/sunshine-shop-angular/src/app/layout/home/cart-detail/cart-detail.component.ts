@@ -16,6 +16,7 @@ export class CartDetailComponent implements OnInit {
 
   ngOnInit(): void {
     this.listCartItems();
+    localStorage.totalPrice = this.totalPrice;
   }
   listCartItems() {
     this.cartItems = this.cartService.cartItems;
@@ -28,6 +29,7 @@ export class CartDetailComponent implements OnInit {
       data => this.totalQuantity = data
     );
 
+    localStorage.totalQuanity = this.totalQuantity;
     this.cartService.computeTotal();
   }
 
