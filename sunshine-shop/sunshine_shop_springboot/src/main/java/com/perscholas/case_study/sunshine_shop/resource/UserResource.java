@@ -31,7 +31,7 @@ import static org.springframework.http.HttpStatus.OK;
 import static org.springframework.http.MediaType.IMAGE_JPEG_VALUE;
 
 @RestController
-@RequestMapping(path = {"/", "/admin"})
+@RequestMapping(path = {"/admin"})
 public class UserResource extends ExceptionHandling {
 
     public static final String Email_Sent = "An email with new password was sent to: ";
@@ -48,7 +48,7 @@ public class UserResource extends ExceptionHandling {
     }
 
 
-    @PostMapping("/admin/login")
+    @PostMapping("/login")
     public ResponseEntity<User> login(@RequestBody User user) throws UserNotFoundException, UserNameExistException, EmailExistException {
         authenticate(user.getUserEmail(), user.getUserPassword());
         User loginUser = userService.findUserByUserEmail(user.getUserEmail());
@@ -57,20 +57,20 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(loginUser, jwtHeader , OK);
     }
 
-    @GetMapping("/admin/find/{username}")
+    @GetMapping("/find/{username}")
     public ResponseEntity<User> getUser(@PathVariable("username") String username) {
         User user = userService.findUserByUserName(username);
         return new ResponseEntity<>(user, OK);
     }
 
-    @PostMapping("/admin/register")
+    @PostMapping("/register")
     public ResponseEntity<User> register(@RequestBody User user) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException {
         //return "application works";
         User newUser = userService.register(user.getUserFirstName(), user.getUserLastName(), user.getUsername(), user.getUserEmail());
         return new ResponseEntity<>(newUser, OK);
     }
 
-    @GetMapping("/admin/forgetpassword/{userEmail}")
+    @GetMapping("/forgetpassword/{userEmail}")
     public ResponseEntity<HttpResponse> forgot(@PathVariable("userEmail") String email) throws UserNotFoundException, UserNameExistException, EmailExistException, MessagingException, EmailNotFoundException {
         userService.forgetPassword(email);
         // responseentity is everything you need to send request back, status and body
@@ -78,7 +78,7 @@ public class UserResource extends ExceptionHandling {
     }
 
 
-    @PostMapping("/admin/add")
+    @PostMapping("/add")
     public ResponseEntity<User> addNewUser(@RequestParam("userFirstName") String firstName,
                                            @RequestParam("userLastName") String lastName,
                                            @RequestParam("username") String username,
@@ -93,7 +93,7 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(newUser, OK);
     }
 
-    @PostMapping("/admin/update")
+    @PostMapping("/update")
     public ResponseEntity<User> update(    @RequestParam("currentUsername") String currentUsername,
                                            @RequestParam("userFirstName") String firstName,
                                            @RequestParam("userLastName") String lastName,
@@ -101,7 +101,7 @@ public class UserResource extends ExceptionHandling {
                                            @RequestParam("userEmail") String email,
                                            @RequestParam("role") String role,
                                            @RequestParam(value = "active", required = false) String isActive,
-                                           @RequestParam(value = "isNonLocked", required = false) String isNonLocked,
+                                           @RequestParam(value = "nonLocked", required = false) String isNonLocked,
                                            // not required
                                            @RequestParam(value = "profileImage", required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UserNameExistException {
         User updatedUser = userService.updateUser(currentUsername, firstName, lastName, username, email ,role,
@@ -110,20 +110,20 @@ public class UserResource extends ExceptionHandling {
         return new ResponseEntity<>(updatedUser, OK);
     }
 
-    @GetMapping("/admin/list")
+    @GetMapping("/list")
     public ResponseEntity<List<User>> getAllUsers() {
         List<User> users = userService.getUsers();
         return new ResponseEntity<>(users, OK);
     }
 
-    @PostMapping("/admin/resetPassword")
+    @PostMapping("/resetPassword")
     private ResponseEntity<HttpResponse> resetPassword(@RequestParam("email") String email, @RequestParam("password") String password) throws EmailNotFoundException, MessagingException {
         userService.resetPassword(email, password);
         return response(OK, Email_Sent + email);
     }
 
 
-    @DeleteMapping("/admin/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     //@EnableGlobalMethodSecurity(prePostEnabled = true)  make it happen, can add security in method level
     @PreAuthorize("hasAnyAuthority('user:delete')")
     public ResponseEntity<HttpResponse> deleteUser(@PathVariable("id") long id) {
@@ -146,7 +146,7 @@ public class UserResource extends ExceptionHandling {
 
     }
 
-    @PostMapping("/admin/updateProfileImage")
+    @PostMapping("/updateProfileImage")
     public ResponseEntity<User> updateProfileImage(
                                            @RequestParam("username") String username,
                                            // not required
