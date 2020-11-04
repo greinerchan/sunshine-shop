@@ -6,6 +6,7 @@ import { Product } from '../common/product';
 import { CategoryComponent } from '../routes/navbar/category/category.component';
 import { ProductCategory } from '../common/product-category';
 import { ProductSubCategory } from '../common/product-sub-category';
+import { CustomHttpResponse } from '../common/custom-http-response';
 
 @Injectable({
   providedIn: 'root'
@@ -21,8 +22,6 @@ export class ProductService {
 
   getProductListPaginate(page: number, pageSize: number, categoryId: number): Observable<GetResponseProduct> {
     const searchCategoryUrl = `${this.productUrl}/search/FindAllWithDescriptionQuery?id=${categoryId}` + `&page=${page}&size=${pageSize}`;
- 
-    console.log(searchCategoryUrl);
     return this.httpClient.get<GetResponseProduct>(searchCategoryUrl);
   }
 
@@ -109,6 +108,18 @@ export class ProductService {
     return this.getProducts(searchProduct);
   }
 
+
+  // for management partal
+
+  getAllProducts(): Observable<Product[]> {
+    const allProducts = `${this.productUrl}`;
+    return this.getProducts(allProducts);
+  }
+
+  public addProductsToLocalCache(products: Product[]): void {
+    localStorage.setItem(`products`, JSON.stringify(products));
+  }
+
   private getProducts(searchRecommendCategoryUrl: string): Observable<Product[]> {
     return this.httpClient.get<GetResponseProduct>(searchRecommendCategoryUrl).pipe(
       map(response => response._embedded.products)
@@ -118,6 +129,16 @@ export class ProductService {
   getProduct(productId: number): Observable<Product> {
     const productUrl = `${this.productUrl}/${productId}`;
     return this.httpClient.get<Product>(productUrl);
+  }
+
+  getProducAllPaginate(page: number, pageSize: number): Observable<GetResponseProduct> {
+    const allProducts = `${this.productUrl}?&page=${page}&size=${pageSize}`;
+    console.log(allProducts);
+    return this.httpClient.get<GetResponseProduct>(allProducts);
+  }
+
+  deleteProduct(id: number): Observable<CustomHttpResponse> {
+    return this.httpClient.delete<CustomHttpResponse>(`${this.productUrl}/delete/${id}`);
   }
 
 }

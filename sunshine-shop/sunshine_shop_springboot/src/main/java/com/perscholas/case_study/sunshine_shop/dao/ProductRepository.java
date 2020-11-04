@@ -23,6 +23,8 @@ public interface ProductRepository extends JpaRepository<Product, Long> {
 
     Page<Product> findByProductBestSell(@RequestParam("isBestSell") Boolean isBestSell, Pageable pageable);
 
+//    Page<Product> findAll(Pageable pageable);
+
 }
 
 

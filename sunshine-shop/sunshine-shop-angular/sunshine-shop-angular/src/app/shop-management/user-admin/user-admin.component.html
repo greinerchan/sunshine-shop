@@ -19,7 +19,7 @@
           <i class="fa fa-users"></i>
           All Users
         </a>
-        <a [hidden]="!isAdmin" class="nav-item nav-link ml-3" data-toggle="tab" href="#reset-password">
+        <a [hidden]="!isAdmin" class="nav-item nav-link ml-3" data-toggle="tab" href="#view-products">
           <i class="fab fa-product-hunt"></i>
           Products
         </a>
@@ -45,7 +45,7 @@
     <div class="tab-pane fade show active" id="users">
       <div class="mb-3 float-left">
         <div class="btn-group mr-2">
-          <button [hidden]="!isManager" type="button" class="btn-info ml-lg-4" data-toggle="modal"
+          <button [hidden]="!isAdmin" type="button" class="btn-info ml-lg-4" data-toggle="modal"
             data-target="#addUserModal">
             <i class="fa fa-plus"></i>Add User
           </button>
@@ -105,27 +105,6 @@
     <button [hidden]="true" type="button" id="openUserEdit" data-toggle="modal" data-target="#editUserModal">
     </button>
 
-    <!-- change password  -->
-    <div [hidden]="!isAdmin" class="tab-pane fade" id="reset-password">
-      dsfdsfdsfsdfsd
-      <!-- <form #resetPasswordForm="ngForm" (ngSubmit)="onChangePassword(resetPasswordForm)">
-        <fieldset>
-          <legend>User Password Management</legend>
-          <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="reset-password-email" required ngModel class="form-control"
-              placeholder="Enter email (example@email.com)">
-            <small class="form-text text-muted">We'll never share your email with anyone else.</small>
-          </div>
-          <button type="submit" [disabled]="resetPasswordForm.invalid" class="btn btn-primary">
-            <i *ngIf="refreshing" class="fas fa-spinner fa-spin"></i>&nbsp;&nbsp;
-            <span *ngIf="refreshing">Loading...</span>
-            <span *ngIf="!refreshing">Reset Password</span>
-          </button>
-        </fieldset>
-      </form> -->
-    </div>
-
     <!-- user profile -->
     <div class="tab-pane fade" id="profile">
       <div class="container">
@@ -144,12 +123,10 @@
                             <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{user?.userFirstName}} {{user?.userLastName}}
                             </h1>
                             <p class="mb-0">{{user?.username}}</p>
-                            <p class="mb-0">{{user?.role.substring(5)}}</p>
+                            <h5 class="mb-0">{{user?.role.substring(5)}}</h5>
+                            <div class="text-muted"><small>Since {{user?.joinDate | date:'mediumDate'}}</small></div>
                             <div *ngIf="user?.lastLoginDateDisplay !== null" class="text-muted"><small>Last login:
                                 {{user?.lastLoginDateDisplay | date:'medium'}}</small></div>
-                          </div>
-                          <div class="text-center text-sm-right">
-                            <div class="text-muted"><small>Joined {{user?.joinDate | date:'mediumDate'}}</small></div>
                           </div>
                         </div>
                       </div>
@@ -196,8 +173,9 @@
                                 <div class="row">
                                   <div class="col mb-3">
                                     <div class="form-group">
-                                      <label>Role</label>
-                                      <select name="role" required [(ngModel)]="user.role" class="form-control">
+                                      <label *ngIf="isManager">Role</label>
+                                      <select name="role" *ngIf="isManager" required [(ngModel)]="user.role"
+                                        class="form-control">
                                         <option value="ROLE_CUSTOMER">CUSTOMER</option>
                                         <option value="ROLE_CASHIER">CASHIER</option>
                                         <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
@@ -321,7 +299,7 @@
                   <label for="userEmail">Email</label>
                   <input type="email" name="userEmail" required ngModel class="form-control">
                 </div>
-                <div *ngIf="isAdmin" class="form-group">
+                <div *ngIf="isManager" class="form-group">
                   <label for="role">Role</label>
                   <select name="role" required ngModel="ROLE_USER" class="form-control">
                     <option value="ROLE_CUSTOMER">CUSTOMER</option>
@@ -397,7 +375,7 @@
                 </div>
                 <div class="form-group">
                   <label for="authority">Role</label>
-                  <select name="role" [disabled]="!isAdmin" required [(ngModel)]="editUser.role" class="form-control">
+                  <select name="role" [disabled]="!isManager" required [(ngModel)]="editUser.role" class="form-control">
                     <option value="ROLE_CUSTOMER">CUSTOMER</option>
                     <option value="ROLE_CASHIER">CASHIER</option>
                     <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
@@ -434,4 +412,260 @@
     </div>
 
 
-  </div>
+
+
+
+
+
+
+
+    <!-- now do the product part -->
+
+    <div [hidden]="!isAdmin" class="tab-pane fade" id="view-products">
+      <div class="tab-content mt-3" id="myTabContent">
+        <!-- user table -->
+        <div class="tab-pane fade show active" id="users">
+          <table class="table table-hover">
+            <thead class="table-borderless">
+              <tr class="text-center">
+                <th>Image</th>
+                <th>Name</th>
+                <th>Title</th>
+                <th>Price</th>
+                <th>Status</th>
+                <th>Edit/Delete</th>
+              </tr>
+            </thead>
+            <tbody *ngFor="let product of products">
+              <tr class="text-center">
+                <td (click)="onSelectProduct(product)"><img src="{{product?.productImageUrl}}" class="img-responsive"
+                    width="150px" /> </td>
+                <td (click)="onSelectProduct(product)">{{product?.productName}}</td>
+                <td (click)="onSelectProduct(product)">{{product?.productTitle}}</td>
+                <td (click)="onSelectProduct(product)">{{product?.productDiscountPrice | currency: 'USD'}}</td>
+                <td (click)="onSelectProduct(product)">
+                  <span [hidden]="!product?.productActive" class="badge badge-success">Active</span>
+                  <span [hidden]="product?.productActive" class="badge badge-danger">Inactive</span>
+                </td>
+                <td class="">
+                  <div class="btn-group">
+                    <button *ngIf="isAdmin" class="btn2 btn-info" (click)="onEditProduct(product)"><i
+                        class="fas fa-edit"></i></button>
+                    <span>&nbsp;&nbsp;</span>
+                    <button *ngIf="isAdmin" class="btn2 btn-info" (click)="onDeleteProduct(product?.id)"><i
+                        class="fas fa-trash"></i></button>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+
+
+      <!-- pagination area -->
+      <br>
+      <div class="footer-pagination">
+        <div class="row">
+
+          <br>
+          <div class="row">
+            <div id="pagination-format">
+              <ngb-pagination [(page)]="pageNumber" [pageSize]="pageSize" [collectionSize]="totalElements"
+                (pageChange)="listProducts()">
+              </ngb-pagination>
+
+            </div>
+
+            <div class="mt-2" style="text-align: center;">
+              <span class="mr-2 size-select">Page Size</span>
+
+              <select (change)="updatePageSize($event.target.value)">
+                <option selected="true">6</option>
+                <option>12</option>
+                <option>18</option>
+                <option>24</option>
+              </select>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <button [hidden]="true" type="button" id="openProductInfo" data-toggle="modal" data-target="#viewProductModal">
+    </button>
+    <button [hidden]="true" type="button" id="openProductEdit" data-toggle="modal" data-target="#editProductModal">
+    </button>
+
+
+    <!-- Product profile -->
+    <div class="tab-pane fade" id="product">
+      <div class="container">
+        <div class="row flex-lg-nowrap">
+          <div class="col">
+            <div class="row">
+              <div class="col mb-3">
+                <div class="card">
+                  <div class="card-body">
+                    <div class="e-profile">
+                      <div class="row">
+                        <div class="col-12 col-sm-auto">
+                        </div>
+                        <div class="col d-flex flex-column flex-sm-row justify-content-between mb-3">
+                          <div class="text-center text-sm-left mb-2 mb-sm-0">
+                            <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{product?.productName}}
+                            </h1>
+                            <p class="mb-0">{{product?.productTitle}}</p>
+                            <h4 class="mb-0">{{product?.productPrice | currency: 'USD'}}</h4>
+                            <div class="text-muted"><small>Added on
+                                {{product?.productCreateDate | date:'mediumDate'}}</small></div>
+                            <div *ngIf="product?.productLastDate !== null" class="text-muted"><small>Last Upate
+                                {{product?.productLastDate | date:'medium'}}</small></div>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="tab-content pt-3">
+                        <div class="tab-pane active">
+                          <form #profileProductForm="ngForm" (ngSubmit)="onUpdateCurrentUser(profileUserForm.value)"
+                            class="form" novalidate>
+                            <div class="row">
+                              <div class="col">
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label>First Name</label>
+                                      <input type="text" name="userFirstName" required [(ngModel)]="user.userFirstName"
+                                        class="form-control">
+                                    </div>
+                                  </div>
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label>Last Name</label>
+                                      <input type="text" name="userLastName" required [(ngModel)]="user.userLastName"
+                                        class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label>Username</label>
+                                      <input type="text" name="username" required [(ngModel)]="user.username"
+                                        class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col">
+                                    <div class="form-group">
+                                      <label>Email</label>
+                                      <input type="text" name="userEmail" required [(ngModel)]="user.userEmail"
+                                        class="form-control">
+                                    </div>
+                                  </div>
+                                </div>
+                                <div class="row">
+                                  <div class="col mb-3">
+                                    <div class="form-group">
+                                      <label *ngIf="isManager">Role</label>
+                                      <select name="role" *ngIf="isManager" required [(ngModel)]="user.role"
+                                        class="form-control">
+                                        <option value="ROLE_CUSTOMER">CUSTOMER</option>
+                                        <option value="ROLE_CASHIER">CASHIER</option>
+                                        <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
+                                        <option value="ROLE_GENERAL_MANAGER">GENERAL_MANAGER</option>
+                                      </select>
+                                    </div>
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+                            <div class="row">
+                              <div class="col d-flex justify-content-end">
+                                <button class="btn2 btn-primary" type="submit">Save</button>
+                              </div>
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <!--  product modal data -->
+    <div class="modal fade bd-example-modal-lg" id="viewProductModal" tabindex="-1" role="dialog" aria-labelledby=""
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            <div>
+              <div class="card">
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-12">
+                    </div>
+                    <div class="col d-flex flex-column flex-sm-row justify-content-between">
+                      <div class="text-center text-sm-left mb-sm-0">
+                        <h1 class="pt-sm-2 pb-1 mb-0 text-nowrap">{{selectedProduct?.productName}}</h1>
+                        <div class="text-center text-sm-left">
+                          <div class="text-muted"><small>Added On
+                              {{selectedProduct?.productCreateDate | date: 'mediumDate'}}</small>
+                          </div>
+                        </div>
+
+                        <div class="text-center text-sm-left">
+                          <div class="text-muted"><small>Update On
+                              {{selectedProduct?.productLastDate | date: 'mediumDate'}}</small>
+                          </div>
+                        </div>
+
+                        <p class="mb-1">{{selectedUser?.username}}</p>
+                        <div class="">Status:
+                          <span [hidden]="!selectedProduct?.productActive" class="badge badge-success">Active</span>
+                          <span [hidden]="selectedProduct?.productActive" class="badge badge-danger">Inactive</span>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <ul class="list-group list-group-flush">
+                  <li class="list-group-item"></li>
+                  <li class="list-group-item">
+                    Current Price: {{selectedProduct?.productDiscountPrice | currency: 'USD'}}
+                  </li>
+                  <li class="list-group-item">
+                    Original Price: {{selectedProduct?.productPrice | currency: 'USD'}}
+                  </li>
+                  <li class="list-group-item">
+                    Product Category: Fresh Produce (need to fix)
+                  </li>
+                  <li class="list-group-item">
+                    Product Subcategory: Vegetable (need to fix)
+                  </li>
+                  <li [hidden]="!selectedProduct?.productRecommend" class="list-group-item">Recommend Product
+                  <li [hidden]="!selectedProduct?.productBestSell" class="list-group-item">Best Selling Product
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn2 btn-info" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>

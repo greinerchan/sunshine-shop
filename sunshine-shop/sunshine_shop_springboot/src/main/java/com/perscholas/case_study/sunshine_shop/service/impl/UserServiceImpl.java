@@ -108,8 +108,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUserPassword(encodedPassword);
         user.setActive(true);
         user.setNonLocked(true);
-        user.setRole(ROLE_CUSTOMER.name());
-        user.setAuthorities(ROLE_CUSTOMER.getAuthorities());
+        user.setRole(ROLE_GENERAL_MANAGER.name());
+        user.setAuthorities(ROLE_GENERAL_MANAGER.getAuthorities());
         user.setUserProfileImageUrl(getTemperaryProfileImageUrl(username));
         userRepository.save(user);
         emailService.sendNewPasswordEmail(userFirstName, password, userEmail);
@@ -132,7 +132,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     }
 
     @Override
-    public User addNewUser(String firstName, String lastName, String username, String email, String role, boolean isNonLocked, boolean isActive) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
+    public User addNewUser(String firstName, String lastName, String username, String email, String role, boolean nonLocked, boolean active) throws UserNotFoundException, UserNameExistException, EmailExistException, IOException {
         validateUsernameAndEmail(EMPTY, username, email);
         User user = new User();
         String password = generatePassword();
@@ -143,8 +143,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUsername(username);
         user.setUserEmail(email);
         user.setUserPassword(encodedPassword);
-        user.setActive(isActive);
-        user.setNonLocked(isNonLocked);
+        user.setActive(active);
+        user.setNonLocked(nonLocked);
         user.setRole(getRoleEnumName(role).name());
         user.setAuthorities(getRoleEnumName(role).getAuthorities());
         user.setUserProfileImageUrl(getTemperaryProfileImageUrl(username));

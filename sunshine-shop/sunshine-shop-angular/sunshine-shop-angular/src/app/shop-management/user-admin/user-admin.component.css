@@ -79,3 +79,9 @@ td {
 .btn-group {
     float: left;
 }
+
+#pagination-format {
+    display: block;
+    margin-left: 28em;
+    margin-right: auto;
+  }

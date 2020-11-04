@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { LoginAdminComponent } from './login-admin/login-admin.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { RouterModule, RouterLink } from '@angular/router';
+import { NgbModule } from "@ng-bootstrap/ng-bootstrap";
 
 
 import { BrowserModule } from '@angular/platform-browser';
@@ -27,6 +28,7 @@ import { UserForgotComponent } from './user-forgot/user-forgot.component';
     HttpClientModule,
     RoutesModule,
     NotificationModule,
+    NgbModule,
     RouterModule
   ],
   providers: [AuthenticationService, NotificationService,AuthenticationGuard, UserService, {provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }],

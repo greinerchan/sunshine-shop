@@ -1,14 +1,17 @@
 import { HttpErrorResponse } from '@angular/common/http';
+import { Route } from '@angular/compiler/src/core';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { BehaviorSubject, Subscription } from 'rxjs';
 import { CustomHttpResponse } from 'src/app/common/custom-http-response';
+import { Product } from 'src/app/common/product';
 import { User } from 'src/app/common/user';
 import { NotificationType } from 'src/app/enum/notification-type.enum';
 import { Role } from 'src/app/enum/role.enum';
 import { AuthenticationService } from 'src/app/services/authentication.service';
 import { NotificationService } from 'src/app/services/notification.service';
+import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
 import { SubSink } from 'subsink';
 
@@ -19,8 +22,8 @@ import { SubSink } from 'subsink';
 })
 export class UserAdminComponent implements OnInit, OnDestroy {
   private subs = new SubSink();
-  private titleSubject = new BehaviorSubject<string>('Users');
-  public titleAction$ = this.titleSubject.asObservable();
+  // private titleSubject = new BehaviorSubject<string>('Users');
+  // public titleAction$ = this.titleSubject.asObservable();
   public users: User[];
   public user: User;
   public refreshing: boolean;
@@ -32,13 +35,27 @@ export class UserAdminComponent implements OnInit, OnDestroy {
   private currentUsername: string;
   //public fileStatus = new FileUploadStatus();
 
+  // for products
+  public product:Product;
+  public products: Product[];
+  public selectedProduct: Product;
+
+  // for pagination
+  currentCategoryId: number = 1;
+  previousCategoryId: number = 1; 
+  pageNumber: number = 1;
+  pageSize: number = 6;
+  totalElements: number = 0;
+
   constructor(private router: Router, private authenticationService: AuthenticationService,
-    private userService: UserService, private notificationService: NotificationService) {}
+    private userService: UserService, private productService: ProductService, private notificationService: NotificationService, private route: ActivatedRoute) {}
 
   ngOnInit(): void {
     this.user = this.authenticationService.getUserFromLocalCache();
-    console.log(this.user);
     this.getUsers(true);
+    this.route.paramMap.subscribe(() => {
+      this.listProducts();
+    })
   }
 
   // public changeTitle(title: string): void {
@@ -47,6 +64,11 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
   public getUsers(showNotification: boolean): void {
     this.refreshing = true;
+
+    this.route.paramMap.subscribe(() => {
+      this.listProducts();
+    })
+
     this.subscriptions.push(
       this.userService.getUser().subscribe(
         (response: User[]) => {
@@ -54,7 +76,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
           this.users = response;
           this.refreshing = false;
           if (showNotification) {
-            this.sendNotification(NotificationType.SUCCESS, `${response.length} Content loaded successfully.`);
+            this.sendNotification(NotificationType.SUCCESS,`Update Successfully.`);
           }
         },
         (errorResponse: HttpErrorResponse) => {
@@ -62,8 +84,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
           this.refreshing = false;
         }
       )
-    );
-    
+    ); 
   }
 
   public onSelectUser(selectedUser: User): void {
@@ -89,6 +110,7 @@ export class UserAdminComponent implements OnInit, OnDestroy {
 
   public onAddNewUser(userForm: NgForm): void {
     const formData = this.userService.createUserFormData(null, userForm.value);
+    console.log(userForm.value);
     this.subscriptions.push(
       this.userService.addUser(formData).subscribe(
         (response: User) => {
@@ -211,7 +233,91 @@ export class UserAdminComponent implements OnInit, OnDestroy {
     formData.append('role', user.role);
     formData.append('profileImage', profileImage);
     formData.append('isActive', JSON.stringify(user.active));
-    formData.append('isNonLocked', JSON.stringify(user.nonLocked));
+    formData.append('nonLocked', JSON.stringify(user.nonLocked));
     return formData;
   }
+
+
+
+
+
+
+
+
+
+  // Products operations
+  public getProducts(showNotification: boolean): void {
+    this.refreshing = true;
+    this.subscriptions.push(
+      this.productService.getAllProducts().subscribe(
+        (response: Product[]) => {
+          this.productService.addProductsToLocalCache(response);
+          this.products = response;
+          this.refreshing = false;
+          if (showNotification) {
+            this.sendNotification(NotificationType.SUCCESS,`Update Successfully.`);
+          }
+        },
+        (errorResponse: HttpErrorResponse) => {
+          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
+          this.refreshing = false;
+        }
+      )
+    ); 
+  }
+
+  //  for pagination
+
+
+  listProducts() {
+    this.productService.getProducAllPaginate(this.pageNumber - 1, 
+                                               this.pageSize)
+                                               .subscribe(this.processResult());
+  }
+
+  processResult() {
+    return data => { 
+      this.products = data._embedded.products;
+      this.pageNumber = data.page.number + 1;
+      this.pageSize = data.page.size;
+      this.totalElements = data.page.totalElements;
+    };
+  }
+
+  updatePageSize(pageSize:number) {
+    this.pageSize = pageSize;
+    this.pageNumber = 1;
+    this.listProducts();
+  } 
+
+  public onSelectProduct(product: Product): void {
+    this.selectedProduct = product;
+    this.clickButton('openProductInfo');
+  }
+
+  public onEditProduct(editUser: User): void {
+    this.editUser = editUser;
+    this.currentUsername = editUser.username;
+    this.clickButton('openProductEdit');
+  }
+
+  public onDeleteProduct(id: number): void {
+    this.subscriptions.push(
+      this.productService.deleteProduct(id).subscribe(
+        (response: CustomHttpResponse) => {
+          this.sendNotification(NotificationType.SUCCESS, response.message);
+        },
+        (error: HttpErrorResponse) => {
+          this.sendNotification(NotificationType.ERROR, error.error.message);
+        }
+      )
+    );
+  }
+
+
+
+
+
 }
+  
+
