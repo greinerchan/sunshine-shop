@@ -669,3 +669,78 @@
         </div>
       </div>
     </div>
+
+
+
+        <!-- modal edit product -->
+        <div class="modal draggable fade bd-example-modal-lg" id="editProductModal" tabindex="-1" role="dialog"
+        aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <div class="">
+                <form #editUserForm="ngForm">
+                  <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input type="text" name="firstName" [disabled]="!isAdmin" required [(ngModel)]="editUser.userLastName"
+                      class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input type="text" name="lastName" [disabled]="!isAdmin" required [(ngModel)]="editUser.userLastName"
+                      class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="username">Username</label>
+                    <input type="text" name="username" [disabled]="!isAdmin" required [(ngModel)]="editUser.username"
+                      class="form-control">
+                    <!-- banana in box, two way binding, something in template will automatically upate the actual component or viceversa  -->
+                  </div>
+                  <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" name="email" [disabled]="!isAdmin" required [(ngModel)]="editUser.userEmail"
+                      class="form-control">
+                  </div>
+                  <div class="form-group">
+                    <label for="authority">Role</label>
+                    <select name="role" [disabled]="!isManager" required [(ngModel)]="editUser.role" class="form-control">
+                      <option value="ROLE_CUSTOMER">CUSTOMER</option>
+                      <option value="ROLE_CASHIER">CASHIER</option>
+                      <option value="ROLE_SHOP_MANAGER">SHOP_MANAGER</option>
+                      <option value="ROLE_GENERAL_MANAGER">GENERAL_MANAGER</option>
+                    </select>
+                  </div>
+                  <fieldset class="form-group">
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input name="active" type="checkbox" [hidden]="!isAdmin" [(ngModel)]="editUser.active"
+                          class="form-check-input">
+                        <div [hidden]="!isAdmin">Acitve</div>
+                      </label>
+                    </div>
+                    <div class="form-check">
+                      <label class="form-check-label">
+                        <input name="locked" type="checkbox" [hidden]="!isAdmin" [(ngModel)]="editUser.nonLocked"
+                          class="form-check-input">
+                      </label>
+                      <div [hidden]="!isAdmin">Unlocked</div>
+                    </div>
+                  </fieldset>
+                </form>
+              </div>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn2 btn-info" data-dismiss="modal"
+                id="closeEditUserModalButton">Close</button>
+              <button type="button" (click)="onUpdateProduct()" [disabled]="editUserForm.invalid || !isAdmin"
+                class="btn2 btn-info">Save</button>
+            </div>
+          </div>
+        </div>
+      </div>
+

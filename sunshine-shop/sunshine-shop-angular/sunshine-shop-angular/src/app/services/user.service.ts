@@ -79,5 +79,18 @@ export class UserService {
     formData.append('isNonLocked', "true");
     return formData
   }
+
+  public createProductFormData(LoggedInUsername: string, user: User, profileImage: File) {
+    const formData = new FormData();
+    formData.append('currentUsername', LoggedInUsername);
+    formData.append('userFirstName', user.userFirstName);
+    formData.append('userLastName', user.userLastName);
+    formData.append('username', user.username);
+    formData.append('userEmail', user.userEmail);
+    formData.append('role', user.role);
+    formData.append('active', "true");
+    formData.append('isNonLocked', "true");
+    return formData
+  }
   
 }
