@@ -315,22 +315,6 @@ export class UserAdminComponent implements OnInit, OnDestroy {
   }
 
   public onUpdateProduct(): void {
-    const formData = this.userService.createProductFormData(this.currentUsername, this.editUser, this.profileImage);
-    this.subscriptions.push(
-      this.userService.updateUser(formData).subscribe(
-        (response: User) => {
-          this.clickButton('closeEditUserModalButton');
-          this.getUsers(false);
-          this.fileName = null;
-          this.profileImage = null;
-          this.sendNotification(NotificationType.SUCCESS, `${response.userFirstName} ${response.userLastName} updated successfully`);
-        },
-        (errorResponse: HttpErrorResponse) => {
-          this.sendNotification(NotificationType.ERROR, errorResponse.error.message);
-          this.profileImage = null;
-        }
-      )
-      );
   }
 
   

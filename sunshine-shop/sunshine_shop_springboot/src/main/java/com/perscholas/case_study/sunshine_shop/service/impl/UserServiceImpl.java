@@ -108,8 +108,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         user.setUserPassword(encodedPassword);
         user.setActive(true);
         user.setNonLocked(true);
-        user.setRole(ROLE_GENERAL_MANAGER.name());
-        user.setAuthorities(ROLE_GENERAL_MANAGER.getAuthorities());
+        user.setRole(ROLE_CUSTOMER.name());
+        user.setAuthorities(ROLE_CUSTOMER.getAuthorities());
         user.setUserProfileImageUrl(getTemperaryProfileImageUrl(username));
         userRepository.save(user);
         emailService.sendNewPasswordEmail(userFirstName, password, userEmail);

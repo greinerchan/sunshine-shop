@@ -76,7 +76,7 @@ export class UserService {
     formData.append('userEmail', user.userEmail);
     formData.append('role', user.role);
     formData.append('active', "true");
-    formData.append('isNonLocked', "true");
+    formData.append('nonLocked', "true");
     return formData
   }
 

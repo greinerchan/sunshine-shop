@@ -250,11 +250,11 @@
                       style="color: grey;"></i>{{selectedUser?.lastLoginDateDisplay | date: 'medium'}}
                   </li>
                   <li class="list-group-item">
-                    <span [hidden]="!selectedUser?.nonLocked">
+                    <span [hidden]="selectedUser?.nonLocked">
                       <i class="fas fa-lock float-right" style="color: red;"></i>
                       User Locked
                     </span>
-                    <span [hidden]="selectedUser?.nonLocked">
+                    <span [hidden]="!selectedUser?.nonLocked">
                       <i class="fas fa-unlock float-right" style="color: green;"></i>
                       User Unlocked
                     </span>
@@ -673,7 +673,7 @@
 
 
         <!-- modal edit product -->
-        <div class="modal draggable fade bd-example-modal-lg" id="editProductModal" tabindex="-1" role="dialog"
+      <div class="modal draggable fade bd-example-modal-lg" id="editProductModal" tabindex="-1" role="dialog"
         aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
@@ -684,7 +684,7 @@
             </div>
             <div class="modal-body">
               <div class="">
-                <form #editUserForm="ngForm">
+                <form #editProductForm="ngForm">
                   <div class="form-group">
                     <label for="firstName">First Name</label>
                     <input type="text" name="firstName" [disabled]="!isAdmin" required [(ngModel)]="editUser.userLastName"
@@ -715,29 +715,13 @@
                       <option value="ROLE_GENERAL_MANAGER">GENERAL_MANAGER</option>
                     </select>
                   </div>
-                  <fieldset class="form-group">
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input name="active" type="checkbox" [hidden]="!isAdmin" [(ngModel)]="editUser.active"
-                          class="form-check-input">
-                        <div [hidden]="!isAdmin">Acitve</div>
-                      </label>
-                    </div>
-                    <div class="form-check">
-                      <label class="form-check-label">
-                        <input name="locked" type="checkbox" [hidden]="!isAdmin" [(ngModel)]="editUser.nonLocked"
-                          class="form-check-input">
-                      </label>
-                      <div [hidden]="!isAdmin">Unlocked</div>
-                    </div>
-                  </fieldset>
                 </form>
               </div>
             </div>
             <div class="modal-footer">
               <button type="button" class="btn2 btn-info" data-dismiss="modal"
                 id="closeEditUserModalButton">Close</button>
-              <button type="button" (click)="onUpdateProduct()" [disabled]="editUserForm.invalid || !isAdmin"
+              <button type="button" (click)="onUpdateProduct()" [disabled]="editProductForm.invalid || !isAdmin"
                 class="btn2 btn-info">Save</button>
             </div>
           </div>
