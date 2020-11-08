@@ -718,6 +718,21 @@
                 </form>
               </div>
             </div>
+
+            <div class="input-group mb-2">
+              <div class="input-group-prepend">
+                <span class="input-group-text">Profile Picture </span>
+              </div>
+              <div class="custom-file">
+                <input type="file" accept="image/*" name="profileImage"
+                  (change)="onProfileImageChange($event.target.files[0].name, $event.target.files[0])"
+                  class="custom-file-input">
+                <label class="custom-file-label"><span [hidden]="!fileName">{{fileName}}</span>
+                  <span [hidden]="fileName">Choose File</span>
+                </label>
+              </div>
+            </div>
+            
             <div class="modal-footer">
               <button type="button" class="btn2 btn-info" data-dismiss="modal"
                 id="closeEditUserModalButton">Close</button>
